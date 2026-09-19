@@ -169,15 +169,21 @@ export default async function ProjectPage({
                 {projectDescription}
               </p>
               {project.link ? (
-                <Button asChild variant="outline" size="sm" className="mt-6">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {t("visitLive")}
-                    <ArrowUpRight size={15} strokeWidth={1.75} aria-hidden />
-                  </a>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-6"
+                  nativeButton={false}
+                  render={
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
+                >
+                  {t("visitLive")}
+                  <ArrowUpRight size={15} strokeWidth={1.75} aria-hidden />
                 </Button>
               ) : null}
             </div>
@@ -291,17 +297,21 @@ export default async function ProjectPage({
               {t("ctaTitle")}
             </h2>
             <div className="lg:col-span-4 lg:justify-self-end">
-              <Button size="lg" asChild>
-                <a
-                  href="https://cal.com/rizon.agency-cvbkll/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-umami-event={AnalyticsEvent.BookCall}
-                  data-umami-event-location="case-study"
-                >
-                  {t("ctaButton")}
-                  <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
-                </a>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={
+                  <a
+                    href="https://cal.com/rizon.agency-cvbkll/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-umami-event={AnalyticsEvent.BookCall}
+                    data-umami-event-location="case-study"
+                  />
+                }
+              >
+                {t("ctaButton")}
+                <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
               </Button>
             </div>
           </div>

@@ -21,11 +21,9 @@ export default async function BlogPostNotFound() {
           {t("postDescription")}
         </p>
         <div className="mt-8">
-          <Button asChild>
-            <Link href="/blog">
-              <ArrowLeft size={16} strokeWidth={1.75} aria-hidden />
-              {t("backToBlog")}
-            </Link>
+          <Button nativeButton={false} render={<Link href="/blog" />}>
+            <ArrowLeft size={16} strokeWidth={1.75} aria-hidden />
+            {t("backToBlog")}
           </Button>
         </div>
       </main>

@@ -74,12 +74,7 @@ const principleIcons: Record<PrincipleKey, LucideIcon> = {
 const principleKeys: PrincipleKey[] = ["small", "direct", "code"];
 
 type ProofKey =
-  | "focus"
-  | "specialists"
-  | "lti"
-  | "customLms"
-  | "ownership"
-  | "global";
+  "focus" | "specialists" | "lti" | "customLms" | "ownership" | "global";
 const proofKeys: ProofKey[] = [
   "focus",
   "specialists",
@@ -90,18 +85,7 @@ const proofKeys: ProofKey[] = [
 ];
 
 type CapabilityIndex =
-  | "0"
-  | "1"
-  | "2"
-  | "3"
-  | "4"
-  | "5"
-  | "6"
-  | "7"
-  | "8"
-  | "9"
-  | "10"
-  | "11";
+  "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11";
 const capabilityIndexes: CapabilityIndex[] = [
   "0",
   "1",
@@ -325,18 +309,19 @@ export default async function AboutPage({
               </p>
               <Button
                 size="lg"
-                asChild
                 className="mt-8 bg-background text-foreground hover:bg-background/90"
+                nativeButton={false}
+                render={
+                  <Link
+                    href="https://cal.com/rizon.agency-cvbkll/30min"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-umami-event={AnalyticsEvent.BookCall}
+                    data-umami-event-location="about"
+                  />
+                }
               >
-                <Link
-                  href="https://cal.com/rizon.agency-cvbkll/30min"
-                  target="_blank"
-                  rel="noreferrer"
-                  data-umami-event={AnalyticsEvent.BookCall}
-                  data-umami-event-location="about"
-                >
-                  {t("cta.button")} <ArrowRight size={16} aria-hidden />
-                </Link>
+                {t("cta.button")} <ArrowRight size={16} aria-hidden />
               </Button>
             </div>
           </div>

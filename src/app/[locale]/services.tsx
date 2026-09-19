@@ -11,10 +11,7 @@ import { Reveal } from "@/components/reveal";
 import { AnalyticsEvent } from "@/lib/analytics";
 
 type ServiceKey =
-  | "customLms"
-  | "schoolPortals"
-  | "corporateTraining"
-  | "upgrades";
+  "customLms" | "schoolPortals" | "corporateTraining" | "upgrades";
 
 type FeatureIndexKey = "0" | "1" | "2" | "3" | "4";
 
@@ -150,14 +147,18 @@ export const Services = () => {
             </ul>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button size="lg" asChild>
-                <Link
-                  href="/#contact"
-                  data-umami-event={AnalyticsEvent.ContactCta}
-                  data-umami-event-location="services-section"
-                >
-                  {t("cta")}
-                </Link>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={
+                  <Link
+                    href="/#contact"
+                    data-umami-event={AnalyticsEvent.ContactCta}
+                    data-umami-event-location="services-section"
+                  />
+                }
+              >
+                {t("cta")}
               </Button>
             </div>
           </div>

@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { AnalyticsEvent } from "@/lib/analytics";
 import heroImage from "@/assets/hero.jpg";
+import { Layers2Icon, PhoneIcon } from "lucide-react";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -24,114 +25,116 @@ export const Hero = () => {
         };
 
   return (
-    <section id="home" className="px-3 pt-3 sm:px-4 sm:pt-4 lg:px-4 lg:pt-4">
-      {/* Inset media card, with navigation and copy held to the site grid. */}
-      <div className="relative isolate flex h-[82vh] max-h-180 min-h-140 flex-col overflow-hidden rounded-2xl bg-background sm:rounded-3xl">
-        {/* Image only on sm+; mobile falls back to the solid dark card */}
-        <Image
-          src={heroImage}
-          alt=""
-          fill
-          priority
-          placeholder="blur"
-          sizes="100vw"
-          className="-z-10 object-cover"
-        />
-        {/* Dark overlay for legibility of the white nav + copy */}
-        <div aria-hidden className="absolute inset-0 -z-10 bg-black/55" />
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-linear-to-b from-black/60 via-black/25 to-black/60"
-        />
-
-        {/* Centered hero content, cleared below the overlaid navigation */}
-        <div className="container flex flex-1 flex-col items-center justify-center px-6 pt-28 pb-16 text-center sm:px-10 sm:pt-32 lg:px-16 cntr">
+    <section id="home" className="pt-16">
+      {/* Two-column hero: copy left, image right. */}
+      <div className="grid min-h-[calc(100dvh-4rem)] lg:grid-cols-[2fr_3fr]">
+        <div className="flex flex-col justify-center px-6 py-10 text-left sm:px-10 lg:px-16">
           <motion.h1
             {...fade(0.25)}
-            className="max-w-3xl text-[2rem] font-semibold leading-[1.08] tracking-tight text-balance text-white sm:max-w-2xl sm:text-5xl sm:leading-[1.05] md:max-w-3xl md:text-6xl lg:max-w-4xl lg:text-7xl lg:leading-[1.02]"
+            className="font-sans text-[clamp(2.25rem,4.5vw,5rem)] font-semibold leading-[1.05] tracking-tight text-balance"
           >
             {t("headline")}
           </motion.h1>
 
           <motion.p
             {...fade(0.5)}
-            className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-white/75"
+            className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground"
           >
             {t("sub")}
           </motion.p>
 
           <motion.div
             {...fade(0.62)}
-            className="mt-10 flex flex-wrap items-center justify-center gap-3"
+            className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <Button size="lg" asChild>
-              <Link
-                href="/#contact"
-                data-umami-event={AnalyticsEvent.ContactCta}
-                data-umami-event-location="hero"
-              >
-                {t("ctaContact")}
-              </Link>
-            </Button>
             <Button
               size="lg"
               variant="outline"
-              asChild
-              className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              nativeButton={false}
+              render={<Link href="/#work" />}
             >
-              <Link href="/#work">{t("ctaWork")}</Link>
+              {t("ctaWork")}
+
+              <Layers2Icon />
+            </Button>
+
+            <Button
+              size="lg"
+              nativeButton={false}
+              render={
+                <Link
+                  href="/#contact"
+                  data-umami-event={AnalyticsEvent.ContactCta}
+                  data-umami-event-location="hero"
+                />
+              }
+            >
+              {t("ctaContact")}
+              <PhoneIcon />
             </Button>
           </motion.div>
         </div>
-      </div>
 
-      {/* Stats row below the card */}
-      <motion.div {...fade(0.7)} className="container mt-10 cntr">
-        <dl className="grid grid-cols-1 border-border sm:grid-cols-3">
-          {[
-            {
-              value: (
-                <>
-                  <span className="text-primary">0</span>%
-                </>
-              ),
-              label: t("statFees"),
-            },
-            {
-              value: (
-                <>
-                  <span className="text-primary">100</span>%
-                </>
-              ),
-              label: t("statOwnership"),
-            },
-            {
-              value: (
-                <>
-                  {t("statLiveDay")} <span className="text-primary">1</span>
-                </>
-              ),
-              label: t("statLiveLabel"),
-            },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className={`py-8 sm:py-10 md:py-12 ${
-                i > 0
-                  ? "border-t border-border sm:border-t-0 sm:border-l sm:pl-6 md:pl-8"
-                  : "sm:pr-6 md:pr-8"
-              } ${i === 2 ? "sm:pr-0" : ""}`}
-            >
-              <dt className="text-4xl font-light tracking-tight sm:text-5xl md:text-7xl">
-                {stat.value}
-              </dt>
-              <dd className="mt-3 max-w-[18ch] text-[15px] leading-snug text-muted-foreground sm:mt-4">
-                {stat.label}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </motion.div>
+        <motion.div
+          {...fade(0.4)}
+          className="relative m-3 mt-0 mr-6 min-h-80 overflow-hidden rounded-2xl sm:m-4 sm:mt-0 sm:mr-10 sm:rounded-3xl lg:mr-16 lg:ml-0"
+        >
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            priority
+            placeholder="blur"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+          <motion.div
+            {...fade(0.7)}
+            className="absolute inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4"
+          >
+            <dl className="grid grid-cols-3 gap-2 sm:gap-3">
+              {[
+                {
+                  value: (
+                    <>
+                      <span className="text-primary">0</span>%
+                    </>
+                  ),
+                  label: t("statFees"),
+                },
+                {
+                  value: (
+                    <>
+                      <span className="text-primary">100</span>%
+                    </>
+                  ),
+                  label: t("statOwnership"),
+                },
+                {
+                  value: (
+                    <>
+                      {t("statLiveDay")} <span className="text-primary">1</span>
+                    </>
+                  ),
+                  label: t("statLiveLabel"),
+                },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl bg-background/85 p-3 backdrop-blur-md sm:rounded-2xl sm:p-5"
+                >
+                  <dt className="text-2xl font-light tracking-tight sm:text-3xl lg:text-4xl">
+                    {stat.value}
+                  </dt>
+                  <dd className="mt-2 text-xs leading-snug text-muted-foreground sm:text-[15px]">
+                    {stat.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

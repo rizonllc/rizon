@@ -39,16 +39,17 @@ export const Cta = () => {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button
                   size="lg"
-                  asChild
                   className="bg-background text-foreground hover:bg-background/90"
+                  nativeButton={false}
+                  render={
+                    <Link
+                      href="/#contact"
+                      data-umami-event={AnalyticsEvent.ContactCta}
+                      data-umami-event-location="cta-section"
+                    />
+                  }
                 >
-                  <Link
-                    href="/#contact"
-                    data-umami-event={AnalyticsEvent.ContactCta}
-                    data-umami-event-location="cta-section"
-                  >
-                    {t("button")}
-                  </Link>
+                  {t("button")}
                 </Button>
               </div>
             </div>

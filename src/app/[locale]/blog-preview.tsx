@@ -29,11 +29,14 @@ export const BlogPreview = () => {
             }
           />
           <div className="hidden md:block shrink-0">
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/blog">
-                {t("allPosts")}
-                <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden />
-              </Link>
+            <Button
+              variant="outline"
+              size="sm"
+              nativeButton={false}
+              render={<Link href="/blog" />}
+            >
+              {t("allPosts")}
+              <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden />
             </Button>
           </div>
         </div>
@@ -51,11 +54,14 @@ export const BlogPreview = () => {
       </RevealGroup>
 
       <div className="mt-8 md:hidden">
-        <Button variant="outline" size="sm" asChild>
-          <Link href="/blog">
-            {t("allPosts")}
-            <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden />
-          </Link>
+        <Button
+          variant="outline"
+          size="sm"
+          nativeButton={false}
+          render={<Link href="/blog" />}
+        >
+          {t("allPosts")}
+          <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden />
         </Button>
       </div>
     </section>

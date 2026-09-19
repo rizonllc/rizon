@@ -222,18 +222,19 @@ export default async function LmsAlternativesPage({
             </p>
             <Button
               size="lg"
-              asChild
               className="mt-8 bg-background text-foreground hover:bg-background/90"
+              nativeButton={false}
+              render={
+                <Link
+                  href="https://cal.com/rizon.agency-cvbkll/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-umami-event={AnalyticsEvent.BookCall}
+                  data-umami-event-location="lms-alternatives"
+                />
+              }
             >
-              <Link
-                href="https://cal.com/rizon.agency-cvbkll/30min"
-                target="_blank"
-                rel="noreferrer"
-                data-umami-event={AnalyticsEvent.BookCall}
-                data-umami-event-location="lms-alternatives"
-              >
-                {t("bottomCta.button")} <ArrowRight size={16} aria-hidden />
-              </Link>
+              {t("bottomCta.button")} <ArrowRight size={16} aria-hidden />
             </Button>
           </div>
         </section>

@@ -151,16 +151,21 @@ export default async function ServiceDetailPage({
             <p className="mt-7 max-w-3xl text-xl leading-relaxed text-muted-foreground text-pretty">
               {l(service.heroSub, locale as Locale)}
             </p>
-            <Button asChild size="lg" className="mt-9">
-              <Link
-                href="https://cal.com/rizon.agency-cvbkll/30min"
-                target="_blank"
-                rel="noreferrer"
-                data-umami-event={AnalyticsEvent.BookCall}
-                data-umami-event-location="service-hero"
-              >
-                {t("heroCta")} <ArrowRight size={16} aria-hidden />
-              </Link>
+            <Button
+              size="lg"
+              className="mt-9"
+              nativeButton={false}
+              render={
+                <Link
+                  href="https://cal.com/rizon.agency-cvbkll/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-umami-event={AnalyticsEvent.BookCall}
+                  data-umami-event-location="service-hero"
+                />
+              }
+            >
+              {t("heroCta")} <ArrowRight size={16} aria-hidden />
             </Button>
           </div>
         </section>
@@ -416,19 +421,20 @@ export default async function ServiceDetailPage({
               {t("bottomCta.description")}
             </p>
             <Button
-              asChild
               size="lg"
               className="mt-8 bg-background text-foreground hover:bg-background/90"
+              nativeButton={false}
+              render={
+                <Link
+                  href="https://cal.com/rizon.agency-cvbkll/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-umami-event={AnalyticsEvent.BookCall}
+                  data-umami-event-location="service-bottom"
+                />
+              }
             >
-              <Link
-                href="https://cal.com/rizon.agency-cvbkll/30min"
-                target="_blank"
-                rel="noreferrer"
-                data-umami-event={AnalyticsEvent.BookCall}
-                data-umami-event-location="service-bottom"
-              >
-                {t("bottomCta.button")} <ArrowRight size={16} aria-hidden />
-              </Link>
+              {t("bottomCta.button")} <ArrowRight size={16} aria-hidden />
             </Button>
           </div>
         </section>

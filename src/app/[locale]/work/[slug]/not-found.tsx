@@ -21,11 +21,9 @@ export default async function ProjectNotFound() {
           {t("projectDescription")}
         </p>
         <div className="mt-8">
-          <Button asChild>
-            <Link href="/#work">
-              <ArrowLeft size={16} strokeWidth={1.75} aria-hidden />
-              {t("backToWork")}
-            </Link>
+          <Button nativeButton={false} render={<Link href="/#work" />}>
+            <ArrowLeft size={16} strokeWidth={1.75} aria-hidden />
+            {t("backToWork")}
           </Button>
         </div>
       </main>

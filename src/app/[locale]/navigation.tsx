@@ -41,7 +41,7 @@ export const Navigation = () => {
   // Single scroll listener: frosted header + scroll-spy in one pass.
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24);
+      setScrolled(window.scrollY > 0);
 
       // Only run scroll-spy on the home page where sections live.
       if (pathname !== "/") return;
@@ -79,18 +79,20 @@ export const Navigation = () => {
       ? pathname.startsWith(link.href)
       : pathname === "/" && activeId === link.id;
 
-  // Transparent, white-on-image state while sitting over the hero card.
-  const overHero = pathname === "/" && !scrolled;
+  // The hero no longer sits behind the nav, so it never needs the white state.
+  const overHero = false;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-md"
-          : "border-b border-transparent"
-      } ${overHero ? "pt-3 sm:pt-5" : ""}`}
+      className={`fixed inset-x-0 top-0 z-50 border-b bg-background/85 backdrop-blur-md transition-colors duration-300 ${
+        scrolled ? "border-border" : "border-transparent"
+      }`}
     >
-      <div className="container cntr">
+      <div
+        className={
+          scrolled ? "container cntr" : "px-6 sm:px-10 lg:px-16"
+        }
+      >
         <div className="flex h-16 items-center justify-between gap-8">
           <Link
             href="/#home"
@@ -132,15 +134,19 @@ export const Navigation = () => {
 
           <div className="hidden items-center gap-3 md:flex">
             <LocaleSwitcher overHero={overHero} />
-            <Button asChild size="sm">
-              <Link
-                href="/#contact"
-                onClick={(e) => handleAnchorClick(e, "contact")}
-                data-umami-event={AnalyticsEvent.ContactCta}
-                data-umami-event-location="nav"
-              >
-                {t("bookACall")}
-              </Link>
+            <Button
+              size="sm"
+              nativeButton={false}
+              render={
+                <Link
+                  href="/#contact"
+                  onClick={(e) => handleAnchorClick(e, "contact")}
+                  data-umami-event={AnalyticsEvent.ContactCta}
+                  data-umami-event-location="nav"
+                />
+              }
+            >
+              {t("bookACall")}
             </Button>
           </div>
 

@@ -162,19 +162,28 @@ export default async function AlternativePage({
               {l(alternative.heroSub, locale as Locale)}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <Link
-                  href="https://cal.com/rizon.agency-cvbkll/30min"
-                  target="_blank"
-                  rel="noreferrer"
-                  data-umami-event={AnalyticsEvent.BookCall}
-                  data-umami-event-location="alternative-hero"
-                >
-                  {t("heroBookCall")} <ArrowRight size={16} aria-hidden />
-                </Link>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={
+                  <Link
+                    href="https://cal.com/rizon.agency-cvbkll/30min"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-umami-event={AnalyticsEvent.BookCall}
+                    data-umami-event-location="alternative-hero"
+                  />
+                }
+              >
+                {t("heroBookCall")} <ArrowRight size={16} aria-hidden />
               </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="#comparison">{t("heroSeeComparison")}</Link>
+              <Button
+                size="lg"
+                variant="outline"
+                nativeButton={false}
+                render={<Link href="#comparison" />}
+              >
+                {t("heroSeeComparison")}
               </Button>
             </div>
           </div>
@@ -339,11 +348,14 @@ export default async function AlternativePage({
             {relatedPosts.length > 0 && (
               <div className="mt-7 flex flex-wrap gap-3">
                 {relatedPosts.map((post) => (
-                  <Button key={post.slug} variant="outline" asChild>
-                    <Link href={`/blog/${post.slug}`}>
-                      {t("migration.readPrefix")}: {post.title}
-                      <ArrowRight size={15} aria-hidden />
-                    </Link>
+                  <Button
+                    key={post.slug}
+                    variant="outline"
+                    nativeButton={false}
+                    render={<Link href={`/blog/${post.slug}`} />}
+                  >
+                    {t("migration.readPrefix")}: {post.title}
+                    <ArrowRight size={15} aria-hidden />
                   </Button>
                 ))}
               </div>
@@ -390,19 +402,20 @@ export default async function AlternativePage({
                 {t("bottomCta.description")}
               </p>
               <Button
-                asChild
                 size="lg"
                 className="mt-8 bg-background text-foreground hover:bg-background/90"
+                nativeButton={false}
+                render={
+                  <Link
+                    href="https://cal.com/rizon.agency-cvbkll/30min"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-umami-event={AnalyticsEvent.BookCall}
+                    data-umami-event-location="alternative-bottom"
+                  />
+                }
               >
-                <Link
-                  href="https://cal.com/rizon.agency-cvbkll/30min"
-                  target="_blank"
-                  rel="noreferrer"
-                  data-umami-event={AnalyticsEvent.BookCall}
-                  data-umami-event-location="alternative-bottom"
-                >
-                  {t("bottomCta.button")} <ArrowRight size={16} aria-hidden />
-                </Link>
+                {t("bottomCta.button")} <ArrowRight size={16} aria-hidden />
               </Button>
             </div>
           </div>

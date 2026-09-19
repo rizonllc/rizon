@@ -201,31 +201,38 @@ export default async function ProductLabPage({
                 {l(product.heroSub, typedLocale)}
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <Button asChild>
-                  <a
-                    href={product.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {l(pageCopy.visitProduct, typedLocale).replace(
-                      "{name}",
-                      product.name,
-                    )}
-                    <ArrowUpRight
-                      data-icon="inline-end"
-                      strokeWidth={1.75}
-                      aria-hidden
+                <Button
+                  nativeButton={false}
+                  render={
+                    <a
+                      href={product.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     />
-                  </a>
+                  }
+                >
+                  {l(pageCopy.visitProduct, typedLocale).replace(
+                    "{name}",
+                    product.name,
+                  )}
+                  <ArrowUpRight
+                    data-icon="inline-end"
+                    strokeWidth={1.75}
+                    aria-hidden
+                  />
                 </Button>
-                <Button asChild variant="outline">
-                  <a
-                    href="https://cal.com/rizon.agency-cvbkll/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {l(pageCopy.discuss, typedLocale)}
-                  </a>
+                <Button
+                  variant="outline"
+                  nativeButton={false}
+                  render={
+                    <a
+                      href="https://cal.com/rizon.agency-cvbkll/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
+                >
+                  {l(pageCopy.discuss, typedLocale)}
                 </Button>
               </div>
             </div>

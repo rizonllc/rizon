@@ -57,16 +57,19 @@ export const Contact = () => {
             {t("bookCard.description")}
           </p>
           <div className="mt-7">
-            <Button asChild>
-              <Link
-                href={CAL_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-umami-event={AnalyticsEvent.BookCall}
-                data-umami-event-location="contact-section"
-              >
-                {t("bookCard.button")}
-              </Link>
+            <Button
+              nativeButton={false}
+              render={
+                <Link
+                  href={CAL_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-umami-event={AnalyticsEvent.BookCall}
+                  data-umami-event-location="contact-section"
+                />
+              }
+            >
+              {t("bookCard.button")}
             </Button>
           </div>
         </RevealItem>
@@ -82,10 +85,16 @@ export const Contact = () => {
             {t("emailCard.description")}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <Button asChild>
-              <Link href={MAILTO} data-umami-event={AnalyticsEvent.EmailClick}>
-                {t("emailCard.button")}
-              </Link>
+            <Button
+              nativeButton={false}
+              render={
+                <Link
+                  href={MAILTO}
+                  data-umami-event={AnalyticsEvent.EmailClick}
+                />
+              }
+            >
+              {t("emailCard.button")}
             </Button>
             <div className="inline-flex items-center gap-2 rounded-full border border-border py-1 pl-3.5 pr-1">
               <span className="select-all font-mono text-sm text-muted-foreground">

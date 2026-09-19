@@ -48,7 +48,9 @@ export const MobileNav = ({ activeId, overHero }: Props) => {
       setOpen(false);
       if (!link.isPage && pathname === "/") {
         e.preventDefault();
-        document.getElementById(link.id)?.scrollIntoView({ behavior: "instant" });
+        document
+          .getElementById(link.id)
+          ?.scrollIntoView({ behavior: "instant" });
         window.history.replaceState(null, "", `/#${link.id}`);
       }
     },
@@ -57,26 +59,29 @@ export const MobileNav = ({ activeId, overHero }: Props) => {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <button
-          type="button"
-          aria-label={t("openMenu")}
-          className={`flex size-9 items-center justify-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 md:hidden ${
-            overHero
-              ? "border-white/40 text-white hover:bg-white/10"
-              : "border-border text-foreground hover:bg-muted"
-          }`}
-        >
-          <Menu size={18} />
-        </button>
+      <SheetTrigger
+        type="button"
+        aria-label={t("openMenu")}
+        className={`flex size-9 items-center justify-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 md:hidden ${
+          overHero
+            ? "border-white/40 text-white hover:bg-white/10"
+            : "border-border text-foreground hover:bg-muted"
+        }`}
+      >
+        <Menu size={18} />
       </SheetTrigger>
 
       <SheetContent side="left" className="flex flex-col px-0">
         <SheetHeader className="border-b border-border px-6 pb-4">
-          <SheetTitle asChild>
-            <Link href="/#home" onClick={(e) => handleClick(e, linkDefs[0])}>
-              <LogoWithText size={80} className="text-primary" />
-            </Link>
+          <SheetTitle
+            render={
+              <Link
+                href="/#home"
+                onClick={(e) => handleClick(e, linkDefs[0])}
+              />
+            }
+          >
+            <LogoWithText size={80} className="text-primary" />
           </SheetTitle>
         </SheetHeader>
 
@@ -91,7 +96,13 @@ export const MobileNav = ({ activeId, overHero }: Props) => {
                 aria-current={active ? "page" : undefined}
                 className="group flex items-center justify-between border-b border-border py-4 text-[15px] font-medium transition-colors last:border-b-0"
               >
-                <span className={active ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"}>
+                <span
+                  className={
+                    active
+                      ? "text-foreground"
+                      : "text-muted-foreground group-hover:text-foreground"
+                  }
+                >
                   {t(link.key)}
                 </span>
                 <span
@@ -105,15 +116,21 @@ export const MobileNav = ({ activeId, overHero }: Props) => {
 
         <div className="mt-auto flex items-center gap-3 border-t border-border px-6 pt-4 pb-6">
           <LocaleSwitcher />
-          <Button asChild className="flex-1">
-            <Link
-              href="/#contact"
-              onClick={(e) => handleClick(e, { id: "contact", isPage: false })}
-              data-umami-event={AnalyticsEvent.ContactCta}
-              data-umami-event-location="mobile-nav"
-            >
-              {t("bookACall")}
-            </Link>
+          <Button
+            className="flex-1"
+            nativeButton={false}
+            render={
+              <Link
+                href="/#contact"
+                onClick={(e) =>
+                  handleClick(e, { id: "contact", isPage: false })
+                }
+                data-umami-event={AnalyticsEvent.ContactCta}
+                data-umami-event-location="mobile-nav"
+              />
+            }
+          >
+            {t("bookACall")}
           </Button>
         </div>
       </SheetContent>
