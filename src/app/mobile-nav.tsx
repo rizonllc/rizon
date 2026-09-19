@@ -120,10 +120,7 @@ export const MobileNav = ({ activeId, overHero }: Props) => {
             nativeButton={false}
             render={
               <Link
-                href="/#contact"
-                onClick={(e) =>
-                  handleClick(e, { id: "contact", isPage: false })
-                }
+                href="/contact"
                 data-umami-event={AnalyticsEvent.ContactCta}
                 data-umami-event-location="mobile-nav"
               />

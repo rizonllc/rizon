@@ -34,7 +34,7 @@ export const Hero = () => {
             nativeButton={false}
             render={
               <Link
-                href="/#contact"
+                href="/contact"
                 data-umami-event={AnalyticsEvent.ContactCta}
                 data-umami-event-location="hero"
               />

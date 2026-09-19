@@ -244,8 +244,7 @@ export const Navigation = () => {
               nativeButton={false}
               render={
                 <Link
-                  href="/#contact"
-                  onClick={(e) => handleAnchorClick(e, "contact")}
+                  href="/contact"
                   data-umami-event={AnalyticsEvent.ContactCta}
                   data-umami-event-location="nav"
                 />

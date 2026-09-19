@@ -43,7 +43,7 @@ export const Cta = () => {
                   nativeButton={false}
                   render={
                     <Link
-                      href="/#contact"
+                      href="/contact"
                       data-umami-event={AnalyticsEvent.ContactCta}
                       data-umami-event-location="cta-section"
                     />

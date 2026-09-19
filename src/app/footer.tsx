@@ -15,7 +15,7 @@ const navLinkDefs = [
   { key: "services", href: "/services" },
   { key: "about", href: "/about" },
   { key: "blog", href: "/blog" },
-  { key: "getInTouch", href: "/#contact" },
+  { key: "getInTouch", href: "/contact" },
 ] as const;
 
 const serviceLinks = [

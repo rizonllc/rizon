@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/", priority: 1, changeFrequency: "weekly" },
     { path: "/case-studies", priority: 0.8, changeFrequency: "monthly" as ChangeFreq },
     { path: "/services", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/contact", priority: 0.7, changeFrequency: "yearly" as ChangeFreq },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/lms-alternatives", priority: 0.8, changeFrequency: "monthly" },
     { path: "/legal", priority: 0.3, changeFrequency: "yearly" },
