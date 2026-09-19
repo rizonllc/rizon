@@ -42,7 +42,7 @@ export const ServiceLanding = async ({
   const tNav = await getTranslations({ locale, namespace: "nav" });
   const tDetail = await getTranslations({ locale, namespace: "serviceDetail" });
   const local = (v: Parameters<typeof l<string>>[0]) => l(v, locale);
-  const title = tNav(`serviceItems.${content.key}.title`);
+  const title = content.title ?? tNav(`serviceItems.${content.key}.title`);
   const path = `/services/${content.slug}`;
   const url = localizedUrl(path, locale);
 
@@ -54,6 +54,7 @@ export const ServiceLanding = async ({
   const faqs = content.faqs.map((f) => ({
     question: local(f.question),
     answer: local(f.answer),
+    link: f.link,
   }));
 
   const jsonLd = {
@@ -63,6 +64,7 @@ export const ServiceLanding = async ({
         "@type": "Service",
         "@id": `${url}#service`,
         name: title,
+        serviceType: title,
         description: local(content.metaDescription) || undefined,
         url,
         provider: { "@id": `${BASE_URL}/#org` },
@@ -169,7 +171,8 @@ export const ServiceLanding = async ({
               feature: ph(local(f.feature), `Feature ${i + 1}`),
               benefit: ph(local(f.benefit), `Benefit ${i + 1}`),
               icon: f.icon,
-              link: f.link,
+              titleHref: f.titleHref,
+              links: f.links,
             })),
           }}
         />
@@ -192,14 +195,16 @@ export const ServiceLanding = async ({
           allLabel={t("seeAllCases")}
           cases={content.proof.cases.flatMap((c) => {
             const p = getProjectBySlug(c.slug);
-            if (!p) return [];
-            const title = l(p.title, locale);
+            const title = c.title ?? (p && l(p.title, locale));
+            const image = c.image ?? p?.preview;
+            if (!title || !image) return [];
             return {
               href: c.href,
               title,
-              description: l(p.description, locale),
-              image: p.preview,
+              description: c.description ?? (p ? l(p.description, locale) : ""),
+              image,
               alt: `${title} screenshot`,
+              contain: c.contain,
             };
           })}
         />

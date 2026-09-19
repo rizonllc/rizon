@@ -10,7 +10,7 @@ export const IconCard = ({
   className,
 }: {
   icon: LucideIcon;
-  title: string;
+  title: ReactNode;
   children: ReactNode;
   className?: string;
 }) => (

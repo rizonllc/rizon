@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { ArrowRight, Check, Minus, Plus, type LucideIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { IconCard } from "@/components/icon-card";
@@ -20,25 +20,32 @@ const Copy = ({ h2, children }: { h2: string; children: ReactNode }) => (
   </>
 );
 
-// Splits `text` around `link.text` so a phrase inside a sentence becomes a link.
+// Turns each `links[i].text` phrase inside `text` into a link (in text order).
 const Linked = ({
   text,
-  link,
+  links = [],
 }: {
   text: string;
-  link?: { text: string; href: string };
+  links?: { text: string; href: string }[];
 }) => {
-  const i = link ? text.indexOf(link.text) : -1;
-  if (!link || i < 0) return <>{text}</>;
-  return (
-    <>
-      {text.slice(0, i)}
-      <Link href={link.href} className="text-primary underline underline-offset-4">
+  const out: ReactNode[] = [];
+  let rest = text;
+  for (const link of links) {
+    const i = rest.indexOf(link.text);
+    if (i < 0) continue;
+    out.push(rest.slice(0, i));
+    out.push(
+      <Link
+        key={link.href}
+        href={link.href}
+        className="text-primary underline underline-offset-4"
+      >
         {link.text}
-      </Link>
-      {text.slice(i + link.text.length)}
-    </>
-  );
+      </Link>,
+    );
+    rest = rest.slice(i + link.text.length);
+  }
+  return <>{out}{rest}</>;
 };
 
 type Block = { h2: string; body: string };
@@ -46,7 +53,8 @@ type Feature = {
   feature: string;
   benefit: string;
   icon?: LucideIcon;
-  link?: { text: string; href: string };
+  titleHref?: string;
+  links?: { text: string; href: string }[];
 };
 
 export const ProblemAgitateSolution = ({
@@ -85,8 +93,17 @@ export const ProblemAgitateSolution = ({
                 : undefined
             }
           >
-            <IconCard icon={icon ?? Check} title={f.feature}>
-              <Linked text={f.benefit} link={f.link} />
+            <IconCard icon={icon ?? Check} title={
+                f.titleHref ? (
+                  <Link href={f.titleHref} className="underline underline-offset-4">
+                    {f.feature}
+                  </Link>
+                ) : (
+                  f.feature
+                )
+              }
+            >
+              <Linked text={f.benefit} links={f.links} />
             </IconCard>
           </li>
         ))}
@@ -137,8 +154,9 @@ export type CaseCard = {
   href: string;
   title: string;
   description: string;
-  image: string;
+  image: string | StaticImageData;
   alt: string;
+  contain?: boolean;
 };
 
 export const CaseStudyCards = ({
@@ -151,7 +169,7 @@ export const CaseStudyCards = ({
   cases: CaseCard[];
   allHref: string;
   allLabel: string;
-}) => (
+}) => cases.length === 0 ? null : (
   <section className={sectionCls}>
     <h2 className={h2Cls}>{h2}</h2>
     <ul className="mt-10 grid gap-6 md:grid-cols-2">
@@ -166,7 +184,7 @@ export const CaseStudyCards = ({
                 fill
                 loading="lazy"
                 sizes="(min-width: 768px) 45vw, 100vw"
-                className="object-cover object-top"
+                className={c.contain ? "object-contain p-8" : "object-cover object-top"}
               />
             </div>
             <div className="p-6">
@@ -194,7 +212,11 @@ export const FAQAccordion = ({
   faqs,
 }: {
   h2: string;
-  faqs: { question: string; answer: string }[];
+  faqs: {
+    question: string;
+    answer: string;
+    link?: { text: string; href: string };
+  }[];
 }) => (
   <section className={sectionCls}>
     <h2 className={h2Cls}>{h2}</h2>
@@ -209,7 +231,7 @@ export const FAQAccordion = ({
             </span>
           </summary>
           <p className="max-w-3xl pb-8 leading-relaxed text-muted-foreground">
-            {f.answer}
+            <Linked text={f.answer} links={f.link && [f.link]} />
           </p>
         </details>
       ))}
