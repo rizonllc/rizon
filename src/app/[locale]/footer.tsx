@@ -16,6 +16,13 @@ const navLinkDefs = [
   { key: "getInTouch", href: "/#contact" },
 ] as const;
 
+const serviceLinks = [
+  { key: "moodlePlugin", slug: "moodle-plugin-development" },
+  { key: "canvasPlugin", slug: "canvas-plugin-development" },
+  { key: "ltiMigration", slug: "lti-1-1-to-1-3-migration" },
+  { key: "woocommerceMoodle", slug: "woocommerce-to-moodle" },
+] as const;
+
 const socials = [
   {
     name: "LinkedIn",
@@ -31,7 +38,7 @@ export const Footer = async () => {
     <footer className="mt-32 bg-primary text-primary-foreground md:mt-40">
       <div className="container cntr">
         <div className="grid grid-cols-1 gap-x-12 gap-y-12 py-16 lg:grid-cols-12 md:py-20">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <Link href="/" className="inline-block">
               <LogoWithText size={120} />
             </Link>
@@ -62,6 +69,24 @@ export const Footer = async () => {
                     link.key === "whyUsShort"
                       ? tFooter(link.key)
                       : tNav(link.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav className="lg:col-span-2" aria-label={tFooter("services")}>
+            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              {tFooter("services")}
+            </h2>
+            <ul className="mt-5 space-y-3">
+              {serviceLinks.map((link) => (
+                <li key={link.key}>
+                  <Link
+                    href={`/services/${link.slug}`}
+                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                  >
+                    {tFooter(`serviceLinks.${link.key}`)}
                   </Link>
                 </li>
               ))}
@@ -112,7 +137,7 @@ export const Footer = async () => {
             </ul>
           </nav>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-1">
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
               {tFooter("follow")}
             </h2>

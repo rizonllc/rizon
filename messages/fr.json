@@ -8,6 +8,17 @@
     "work": "Réalisations",
     "blog": "Blog",
     "bookACall": "Réserver un appel",
+    "servicesMenu": { "title": "Tout ce que nous construisons", "description": "Plateformes LMS sur mesure, plugins Moodle et Canvas, outils LTI et migrations. Découvrez la liste complète et notre façon de travailler.", "cta": "Voir tous les services" },
+    "serviceItems": {
+      "customLms": { "title": "Développement LMS sur mesure", "description": "Des plateformes d’apprentissage conçues autour de votre façon d’enseigner" },
+      "lti": { "title": "Développement LTI", "description": "Des outils LTI 1.3 qui s’intègrent à n’importe quel LMS" },
+      "moodle": { "title": "Développement Moodle", "description": "Plugins, thèmes et intégrations pour Moodle" },
+      "canvas": { "title": "Développement Canvas", "description": "Applications et intégrations sur mesure pour Canvas LMS" },
+      "moodlePlugin": { "title": "Développement de plugins Moodle", "description": "Blocs, activités et outils d’administration sur mesure pour Moodle" },
+      "canvasPlugin": { "title": "Développement de plugins Canvas", "description": "Applications et outils sur mesure qui étendent Canvas" },
+      "ltiMigration": { "title": "Migration LTI 1.1 vers 1.3", "description": "Migrer vos outils vers LTI 1.3 sans casser les lancements" },
+      "woocommerceMoodle": { "title": "WooCommerce vers Moodle", "description": "Vendre des cours Moodle depuis votre boutique WooCommerce" }
+    },
     "primary": "Principal",
     "mobile": "Mobile",
     "openMenu": "Ouvrir le menu",
@@ -17,6 +28,13 @@
     "tagline": "Agence de développement de LMS sur mesure. Nous construisons des plateformes d'apprentissage que les gens veulent vraiment utiliser.",
     "explore": "Explorer",
     "compare": "Comparer",
+    "services": "Services",
+    "serviceLinks": {
+      "moodlePlugin": "Développement de plugins Moodle",
+      "canvasPlugin": "Développement de plugins Canvas",
+      "ltiMigration": "Migration LTI 1.1 vers 1.3",
+      "woocommerceMoodle": "WooCommerce vers Moodle"
+    },
     "products": "Produits",
     "follow": "Suivre",
     "allAlternatives": "Toutes les alternatives",

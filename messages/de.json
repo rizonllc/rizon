@@ -8,6 +8,17 @@
     "work": "Projekte",
     "blog": "Blog",
     "bookACall": "Termin buchen",
+    "servicesMenu": { "title": "Alles, was wir bauen", "description": "Individuelle LMS-Plattformen, Moodle- und Canvas-Plugins, LTI-Tools und Migrationen. Sehen Sie die ganze Liste und unsere Arbeitsweise.", "cta": "Alle Leistungen ansehen" },
+    "serviceItems": {
+      "customLms": { "title": "Individuelle LMS-Entwicklung", "description": "Lernplattformen von Grund auf, passend zu Ihrer Lehre" },
+      "lti": { "title": "LTI-Entwicklung", "description": "LTI-1.3-Tools, die sich in jedes LMS einfügen" },
+      "moodle": { "title": "Moodle-Entwicklung", "description": "Plugins, Themes und Integrationen für Moodle" },
+      "canvas": { "title": "Canvas-Entwicklung", "description": "Individuelle Apps und Integrationen für Canvas LMS" },
+      "moodlePlugin": { "title": "Moodle-Plugin-Entwicklung", "description": "Individuelle Blöcke, Aktivitäten und Admin-Tools für Moodle" },
+      "canvasPlugin": { "title": "Canvas-Plugin-Entwicklung", "description": "Individuelle Apps und Tools, die Canvas erweitern" },
+      "ltiMigration": { "title": "LTI-1.1-auf-1.3-Migration", "description": "Bestehende Tools auf LTI 1.3 umstellen, ohne Launches zu brechen" },
+      "woocommerceMoodle": { "title": "WooCommerce zu Moodle", "description": "Moodle-Kurse über Ihren WooCommerce-Shop verkaufen" }
+    },
     "primary": "Hauptnavigation",
     "mobile": "Mobil",
     "openMenu": "Menü öffnen",
@@ -17,6 +28,13 @@
     "tagline": "Agentur für maßgeschneiderte LMS-Entwicklung. Wir bauen Lernplattformen, die Menschen wirklich nutzen wollen.",
     "explore": "Entdecken",
     "compare": "Vergleichen",
+    "services": "Leistungen",
+    "serviceLinks": {
+      "moodlePlugin": "Moodle-Plugin-Entwicklung",
+      "canvasPlugin": "Canvas-Plugin-Entwicklung",
+      "ltiMigration": "LTI-1.1-auf-1.3-Migration",
+      "woocommerceMoodle": "WooCommerce zu Moodle"
+    },
     "products": "Produkte",
     "follow": "Folgen",
     "allAlternatives": "Alle Alternativen",

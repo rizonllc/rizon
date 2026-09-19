@@ -8,6 +8,17 @@
     "work": "Work",
     "blog": "Blog",
     "bookACall": "Book a call",
+    "servicesMenu": { "title": "Everything we build", "description": "Custom LMS platforms, Moodle and Canvas plugins, LTI tools and migrations. See the full list and how we work.", "cta": "View all services" },
+    "serviceItems": {
+      "customLms": { "title": "Custom LMS Development", "description": "Learning platforms built from scratch around how you teach" },
+      "lti": { "title": "LTI Development", "description": "LTI 1.3 tools that plug into any LMS" },
+      "moodle": { "title": "Moodle Development", "description": "Plugins, themes and integrations for Moodle" },
+      "canvas": { "title": "Canvas Development", "description": "Custom apps and integrations for Canvas LMS" },
+      "moodlePlugin": { "title": "Moodle Plugin Development", "description": "Custom blocks, activities and admin tools for Moodle" },
+      "canvasPlugin": { "title": "Canvas Plugin Development", "description": "Custom apps and tools that extend Canvas" },
+      "ltiMigration": { "title": "LTI 1.1 to 1.3 Migration", "description": "Move existing tools to LTI 1.3 without breaking launches" },
+      "woocommerceMoodle": { "title": "WooCommerce to Moodle", "description": "Sell Moodle courses through your WooCommerce store" }
+    },
     "primary": "Primary",
     "mobile": "Mobile",
     "openMenu": "Open menu",
@@ -17,6 +28,13 @@
     "tagline": "Custom LMS development agency. Building learning platforms people actually want to use.",
     "explore": "Explore",
     "compare": "Compare",
+    "services": "Services",
+    "serviceLinks": {
+      "moodlePlugin": "Moodle Plugin Development",
+      "canvasPlugin": "Canvas Plugin Development",
+      "ltiMigration": "LTI 1.1 to 1.3 Migration",
+      "woocommerceMoodle": "WooCommerce to Moodle"
+    },
     "products": "Products",
     "follow": "Follow",
     "allAlternatives": "All alternatives",

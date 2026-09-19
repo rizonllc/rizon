@@ -8,6 +8,17 @@
     "work": "Trabajos",
     "blog": "Blog",
     "bookACall": "Reservar una llamada",
+    "servicesMenu": { "title": "Todo lo que construimos", "description": "Plataformas LMS a medida, plugins de Moodle y Canvas, herramientas LTI y migraciones. Consulta la lista completa y cómo trabajamos.", "cta": "Ver todos los servicios" },
+    "serviceItems": {
+      "customLms": { "title": "Desarrollo de LMS a medida", "description": "Plataformas de aprendizaje creadas desde cero según cómo enseñas" },
+      "lti": { "title": "Desarrollo LTI", "description": "Herramientas LTI 1.3 que se integran en cualquier LMS" },
+      "moodle": { "title": "Desarrollo para Moodle", "description": "Plugins, temas e integraciones para Moodle" },
+      "canvas": { "title": "Desarrollo para Canvas", "description": "Aplicaciones e integraciones a medida para Canvas LMS" },
+      "moodlePlugin": { "title": "Desarrollo de plugins Moodle", "description": "Bloques, actividades y herramientas de administración a medida para Moodle" },
+      "canvasPlugin": { "title": "Desarrollo de plugins Canvas", "description": "Aplicaciones y herramientas a medida que amplían Canvas" },
+      "ltiMigration": { "title": "Migración de LTI 1.1 a 1.3", "description": "Migra tus herramientas a LTI 1.3 sin romper los lanzamientos" },
+      "woocommerceMoodle": { "title": "WooCommerce a Moodle", "description": "Vende cursos de Moodle desde tu tienda WooCommerce" }
+    },
     "primary": "Principal",
     "mobile": "Móvil",
     "openMenu": "Abrir menú",
@@ -17,6 +28,13 @@
     "tagline": "Agencia de desarrollo de LMS a medida. Construimos plataformas de aprendizaje que la gente realmente quiere usar.",
     "explore": "Explorar",
     "compare": "Comparar",
+    "services": "Servicios",
+    "serviceLinks": {
+      "moodlePlugin": "Desarrollo de plugins Moodle",
+      "canvasPlugin": "Desarrollo de plugins Canvas",
+      "ltiMigration": "Migración de LTI 1.1 a 1.3",
+      "woocommerceMoodle": "WooCommerce a Moodle"
+    },
     "products": "Productos",
     "follow": "Seguir",
     "allAlternatives": "Todas las alternativas",
