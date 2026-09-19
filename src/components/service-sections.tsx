@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
-import Image, { type StaticImageData } from "next/image";
 import { ArrowRight, Check, Minus, Plus, type LucideIcon } from "lucide-react";
 import Link from "next/link";
+import {
+  CaseStudyCard,
+  type CaseStudyCardProps,
+} from "@/components/case-study-card";
 import { IconCard } from "@/components/icon-card";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 
@@ -21,7 +24,7 @@ const Copy = ({ h2, children }: { h2: string; children: ReactNode }) => (
 );
 
 // Turns each `links[i].text` phrase inside `text` into a link (in text order).
-const Linked = ({
+export const Linked = ({
   text,
   links = [],
 }: {
@@ -45,7 +48,12 @@ const Linked = ({
     );
     rest = rest.slice(i + link.text.length);
   }
-  return <>{out}{rest}</>;
+  return (
+    <>
+      {out}
+      {rest}
+    </>
+  );
 };
 
 type Block = { h2: string; body: string };
@@ -93,9 +101,14 @@ export const ProblemAgitateSolution = ({
                 : undefined
             }
           >
-            <IconCard icon={icon ?? Check} title={
+            <IconCard
+              icon={icon ?? Check}
+              title={
                 f.titleHref ? (
-                  <Link href={f.titleHref} className="underline underline-offset-4">
+                  <Link
+                    href={f.titleHref}
+                    className="underline underline-offset-4"
+                  >
                     {f.feature}
                   </Link>
                 ) : (
@@ -150,15 +163,6 @@ export const CostAEO = ({
   </section>
 );
 
-export type CaseCard = {
-  href: string;
-  title: string;
-  description: string;
-  image: string | StaticImageData;
-  alt: string;
-  contain?: boolean;
-};
-
 export const CaseStudyCards = ({
   h2,
   cases,
@@ -166,45 +170,26 @@ export const CaseStudyCards = ({
   allLabel,
 }: {
   h2: string;
-  cases: CaseCard[];
+  cases: CaseStudyCardProps[];
   allHref: string;
   allLabel: string;
-}) => cases.length === 0 ? null : (
-  <section className={sectionCls}>
-    <h2 className={h2Cls}>{h2}</h2>
-    <ul className="mt-10 grid gap-6 md:grid-cols-2">
-      {cases.map((c) => (
-        <li key={c.href} className="surface surface-hover overflow-hidden">
-          <Link href={c.href} className="block">
-            {/* Fixed aspect box: swapping the src never shifts layout. */}
-            <div className="relative aspect-[16/10] bg-muted">
-              <Image
-                src={c.image}
-                alt={c.alt}
-                fill
-                loading="lazy"
-                sizes="(min-width: 768px) 45vw, 100vw"
-                className={c.contain ? "object-contain p-8" : "object-cover object-top"}
-              />
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-primary">{c.title}</h3>
-              <p className="mt-2 line-clamp-3 text-muted-foreground">
-                {c.description}
-              </p>
-            </div>
-          </Link>
-        </li>
-      ))}
-    </ul>
-    <Link
-      href={allHref}
-      className="mt-6 inline-flex items-center gap-1.5 font-medium text-primary"
-    >
-      {allLabel} <ArrowRight size={16} aria-hidden />
-    </Link>
-  </section>
-);
+}) =>
+  cases.length === 0 ? null : (
+    <section className={sectionCls}>
+      <h2 className={h2Cls}>{h2}</h2>
+      <ul className="mt-10 grid gap-4 md:grid-cols-2">
+        {cases.map((c) => (
+          <CaseStudyCard key={c.slug} {...c} heading="h3" />
+        ))}
+      </ul>
+      <Link
+        href={allHref}
+        className="mt-6 inline-flex items-center gap-1.5 font-medium text-primary"
+      >
+        {allLabel} <ArrowRight size={16} aria-hidden />
+      </Link>
+    </section>
+  );
 
 // Native <details>: zero JS, answers stay in the server-rendered HTML.
 export const FAQAccordion = ({
@@ -251,8 +236,28 @@ export const CTABand = ({
   <section className={sectionCls}>
     <div className="rounded-3xl bg-primary p-10 text-primary-foreground md:p-14">
       <h2 className={h2Cls}>{h2}</h2>
-      <p className="mt-4 max-w-2xl text-lg text-primary-foreground/80">{line}</p>
+      <p className="mt-4 max-w-2xl text-lg text-primary-foreground/80">
+        {line}
+      </p>
       <div className="mt-8">{action}</div>
     </div>
+  </section>
+);
+
+// Fallback for services with no visible case study yet.
+export const RelatedWork = ({
+  href,
+  label,
+}: {
+  href: string;
+  label: string;
+}) => (
+  <section className={sectionCls}>
+    <Link
+      href={href}
+      className="inline-flex items-center gap-1.5 text-lg font-medium text-primary"
+    >
+      {label} <ArrowRight size={18} aria-hidden />
+    </Link>
   </section>
 );

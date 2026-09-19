@@ -8,7 +8,8 @@ import {
   type Crumb,
 } from "@/components/breadcrumb";
 import { Hero } from "@/components/hero";
-import { getProjectBySlug } from "@/lib/projects";
+import { caseCardProps } from "@/lib/case-studies-index";
+import { casesFor } from "@/lib/case-study-links";
 import { AnalyticsEvent } from "@/lib/analytics";
 import type { ServiceLanding as Content } from "@/lib/blank-services";
 import {
@@ -18,6 +19,7 @@ import {
   FAQAccordion,
   ProblemAgitateSolution,
   ProcessSteps,
+  RelatedWork,
 } from "@/components/service-sections";
 import { Logos } from "@/app/logos";
 import heroImage from "@/assets/hero.jpg";
@@ -28,11 +30,7 @@ const BOOK_URL = "https://cal.com/rizon.agency-cvbkll/30min";
 // Empty copy renders as a visible [placeholder] so the structure is reviewable.
 const ph = (value: string, label: string) => value || `[${label}]`;
 
-export const ServiceLanding = async ({
-  content,
-}: {
-  content: Content;
-}) => {
+export const ServiceLanding = async ({ content }: { content: Content }) => {
   const t = getT("serviceLanding");
   const tNav = getT("nav");
   const tDetail = getT("serviceDetail");
@@ -45,6 +43,10 @@ export const ServiceLanding = async ({
     { name: tDetail("breadcrumbs.services"), href: "/services" },
     { name: title, href: path },
   ];
+  // Proof cards come from the shared case study <-> service mapping.
+  const cases = casesFor(content.slug).flatMap(
+    (slug) => caseCardProps(slug) ?? [],
+  );
   const faqs = content.faqs.map((f) => ({
     question: f.question,
     answer: f.answer,
@@ -126,10 +128,7 @@ export const ServiceLanding = async ({
             ),
             label: st.label,
           }))}
-          sub={ph(
-            content.subhead,
-            "Subhead: one sentence, ownership first",
-          )}
+          sub={ph(content.subhead, "Subhead: one sentence, ownership first")}
           image={heroImage}
           imageAlt={content.heroAlt}
           tags={content.heroTags}
@@ -183,25 +182,16 @@ export const ServiceLanding = async ({
           answer={ph(content.cost.answer, "Answer-first, 40 to 60 words")}
           support={ph(content.cost.support, "What moves the price")}
         />
-        <CaseStudyCards
-          h2={ph(content.proof.h2, "Platforms we've built")}
-          allHref="/case-studies"
-          allLabel={t("seeAllCases")}
-          cases={content.proof.cases.flatMap((c) => {
-            const p = getProjectBySlug(c.slug);
-            const title = c.title ?? (p && p.title);
-            const image = c.image ?? p?.preview;
-            if (!title || !image) return [];
-            return {
-              href: c.href,
-              title,
-              description: c.description ?? (p ? p.description : ""),
-              image,
-              alt: `${title} screenshot`,
-              contain: c.contain,
-            };
-          })}
-        />
+        {cases.length > 0 ? (
+          <CaseStudyCards
+            h2={ph(content.proof.h2, "Platforms we've built")}
+            allHref="/case-studies"
+            allLabel={t("seeAllCases")}
+            cases={cases}
+          />
+        ) : (
+          <RelatedWork href="/case-studies" label="See related work" />
+        )}
         <FAQAccordion h2={ph(content.faqH2, "FAQ H2")} faqs={faqs} />
         <CTABand
           h2={ph(content.finalCta.h2, "Reassurance headline")}

@@ -1,5 +1,4 @@
 import { BadgeCheck, Blocks, Code, Palette, RefreshCw, Wrench, ClipboardList, Database, GraduationCap, Link2, LogIn, ShieldCheck, KeyRound, Phone, Plug, Rocket, Repeat, TrendingUp, Workflow, type LucideIcon } from "lucide-react";
-import type { StaticImageData } from "next/image";
 
 // Landing-page structure for the service pages. Every string is empty until the
 // copy is written; the template shows a [placeholder] for anything empty.
@@ -53,18 +52,7 @@ export type ServiceLanding = {
     answer: string; // 40-60 words
     support: string;
   };
-  proof: {
-    h2: string;
-    // Cards come from lib/projects by slug unless title/description/image are given.
-    cases: {
-      slug: string;
-      href: string;
-      title?: string;
-      description?: string;
-      image?: StaticImageData;
-      contain?: boolean; // logo-style image: fit instead of crop
-    }[];
-  };
+  proof: { h2: string }; // cards come from lib/case-study-links by service slug
   faqs: {
     question: string;
     answer: string;
@@ -92,7 +80,7 @@ const landing = (slug: string, key: ServiceKey): ServiceLanding => ({
   },
   howWeWork: { h2: "", steps: [] },
   cost: { h2: "", answer: "", support: "" },
-  proof: { h2: "", cases: [] },
+  proof: { h2: "" },
   faqs: [],
   faqH2: "",
   finalCta: { h2: "", line: "" },
@@ -159,13 +147,7 @@ const customLms: ServiceLanding = {
     support:
       "What moves the price: the number of user roles and dashboards, custom assessment types, integrations (payments, video, SSO, CRM), whether you're migrating data from an existing system, and how much custom design you want. A plugin or single integration sits at the low end; a full multi-role platform with analytics and live classes sits higher. You'll know your exact number before you commit.",
   },
-  proof: {
-    h2: "Platforms we've built",
-    cases: [
-      { slug: "kaiser-math-platform", href: "/case-studies/kaiser-math-platform" },
-      { slug: "ai-literacy-lxp", href: "/case-studies/ai-literacy-lxp" },
-    ],
-  },
+  proof: { h2: "Platforms we've built" },
   faqH2: "Custom LMS development, answered",
   faqs: [
     {
@@ -254,8 +236,7 @@ const lti: ServiceLanding = {
     support:
       "What moves the price: the number of target platforms (one LMS versus many), which LTI Advantage services you need (sign-on only, or grades and deep linking too), whether you're building a new tool or fixing an existing integration, and whether you're migrating from LTI 1.1. A single-platform sign-on sits at the low end; full multi-platform LTI Advantage sits higher.",
   },
-  // ponytail: no LTI case study page yet; the proof section is hidden while empty.
-  proof: { h2: "Integrations we've built", cases: [] },
+  proof: { h2: "Integrations we've built" },
   faqH2: "LTI integration, answered",
   faqs: [
     {
@@ -349,8 +330,7 @@ const moodle: ServiceLanding = {
     support:
       "What moves the price: whether you need a one-off plugin or ongoing development, how much custom design the theme involves, the number of integrations (payments, video, SSO, CRM, LTI tools), and whether you're upgrading or migrating an existing site. A focused fix sits at the low end; a full custom build with integrations sits higher.",
   },
-  // ponytail: no Moodle case study confirmed yet; the proof section is hidden while empty.
-  proof: { h2: "Moodle work we've done", cases: [] },
+  proof: { h2: "Moodle work we've done" },
   faqH2: "Moodle development, answered",
   faqs: [
     {
@@ -436,8 +416,7 @@ const canvas: ServiceLanding = {
     support:
       "What moves the price: whether you need a standard LTI launch or a full custom app, how much Canvas API work is involved (enrollment automation, data sync), which LTI Advantage services you use, and whether you're fixing an existing integration or building new. A single-instance LTI launch sits at the low end; a multi-instance app with API automation sits higher.",
   },
-  // ponytail: no Canvas case study confirmed yet; the proof section is hidden while empty.
-  proof: { h2: "Canvas work we've done", cases: [] },
+  proof: { h2: "Canvas work we've done" },
   faqH2: "Canvas LMS development, answered",
   faqs: [
     {
@@ -524,8 +503,7 @@ const moodlePlugin: ServiceLanding = {
     support:
       "What moves the price: the complexity of the feature, whether it integrates with payments, SSO, or external tools, how much custom interface it needs, and whether you want ongoing maintenance and support. A simple single-purpose plugin sits at the low end; a complex integrated one sits higher.",
   },
-  // ponytail: same unconfirmed Moodle projects as the main Moodle page; hidden while empty.
-  proof: { h2: "Moodle work we've done", cases: [] },
+  proof: { h2: "Moodle work we've done" },
   faqH2: "Custom Moodle plugin development, answered",
   faqs: [
     {
@@ -617,8 +595,7 @@ const canvasPlugin: ServiceLanding = {
     support:
       "What moves the price: whether you need a simple embedded tool or a full LTI app with grade passback, how much Canvas API work is involved (enrollment automation, data sync), and how many Canvas setups you support. A single focused tool sits at the low end; a full app with API integration sits higher.",
   },
-  // ponytail: same unconfirmed Canvas projects as the main Canvas page; hidden while empty.
-  proof: { h2: "Canvas work we've done", cases: [] },
+  proof: { h2: "Canvas work we've done" },
   faqH2: "Canvas plugin development, answered",
   faqs: [
     {
@@ -713,8 +690,7 @@ const ltiMigration: ServiceLanding = {
     support:
       "What moves the price: how many target platforms you support, which LTI Advantage services you need (sign-on, grade passback, deep linking), the complexity of your existing 1.1 integration, and whether the migration has to happen with zero downtime for live customers.",
   },
-  // ponytail: no LTI case study page yet; the proof section is hidden while empty.
-  proof: { h2: "LTI work we've done", cases: [] },
+  proof: { h2: "LTI work we've done" },
   faqH2: "LTI 1.1 to 1.3 migration, answered",
   faqs: [
     {
@@ -800,8 +776,7 @@ const woocommerceMoodle: ServiceLanding = {
     support:
       "What moves the price: whether a standard bridge fits or you need custom logic, how your products map to courses (simple, variable, or bundled), whether you need subscriptions or group enrollments, and how much ongoing maintenance you want. A basic one-product-one-course setup sits at the low end; complex mapping and custom rules sit higher.",
   },
-  // ponytail: same unconfirmed Moodle projects as the main Moodle page; hidden while empty.
-  proof: { h2: "Moodle work we've done", cases: [] },
+  proof: { h2: "Moodle work we've done" },
   faqH2: "WooCommerce to Moodle, answered",
   faqs: [
     {
