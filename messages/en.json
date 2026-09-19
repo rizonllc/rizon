@@ -250,6 +250,9 @@
     "titleHighlight": "building",
     "description": "A few platforms we have shipped recently. Real products, in production, doing real work."
   },
+  "logos": {
+    "title": "Trusted by teams running their own learning platforms"
+  },
   "trust": {
     "label": "Client feedback",
     "title": "The work has to hold up after the handoff.",

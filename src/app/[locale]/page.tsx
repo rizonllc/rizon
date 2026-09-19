@@ -7,6 +7,7 @@ import { Faq } from "./faq";
 import { Features } from "./features";
 import { Footer } from "./footer";
 import { Hero } from "./hero";
+import { Logos } from "./logos";
 import { HowWeWork } from "./how-we-work";
 import { Services } from "./services";
 import { WhyUs } from "./why-us";
@@ -144,6 +145,7 @@ export default async function Page({
       />
       <div>
         <Hero />
+        <Logos />
         <WhyUs />
         <HowWeWork />
         <Services />

@@ -250,6 +250,9 @@
     "titleHighlight": "construit",
     "description": "Quelques plateformes que nous avons livrées récemment. De vrais produits, en production, qui font du vrai travail."
   },
+  "logos": {
+    "title": "La confiance d’équipes qui gèrent leur propre plateforme"
+  },
   "trust": {
     "label": "Retours clients",
     "title": "Le travail doit tenir la route après la livraison.",

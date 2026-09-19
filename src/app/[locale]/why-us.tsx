@@ -51,7 +51,7 @@ export const WhyUs = () => {
             <RevealItem
               key={key}
               as="article"
-              className={`surface surface-hover flex flex-col p-7 md:p-8${
+              className={`bg-primary/5 rounded-lg flex flex-col p-7 md:p-8${
                 index === reasonKeys.length - 1 ? " md:col-span-2" : ""
               }`}
             >
@@ -63,7 +63,7 @@ export const WhyUs = () => {
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
-              <h3 className="mt-6 text-xl font-semibold tracking-tight">
+              <h3 className="mt-6 text-xl font-semibold tracking-tight text-primary">
                 {t(`reasons.${key}.title`)}
               </h3>
               <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">

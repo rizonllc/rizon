@@ -12,7 +12,7 @@ import { BlogCard } from "@/components/blog-card";
 export const BlogPreview = () => {
   const t = useTranslations("blogPreview");
   const locale = useLocale() as import("@/i18n/routing").Locale;
-  const preview = getPostsForLocale(locale).slice(0, 3);
+  const preview = getPostsForLocale(locale).slice(0, 4);
   return (
     <section id="blog" className="container mt-32 md:mt-40 cntr">
       <Reveal>
@@ -44,7 +44,7 @@ export const BlogPreview = () => {
 
       <RevealGroup
         stagger={0.12}
-        className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3"
+        className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {preview.map((post) => (
           <RevealItem key={post.slug} duration={0.6} y={20}>
