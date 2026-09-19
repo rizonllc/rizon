@@ -1,313 +1,197 @@
-import { getT } from "@/lib/t";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  ArrowRight,
-  CalendarDays,
-  MessagesSquare,
-  KeyRound,
-  Check,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Footer } from "../footer";
-import { notFound } from "next/navigation";
+import {
+  Breadcrumb,
+  breadcrumbJsonLd,
+  type Crumb,
+} from "@/components/breadcrumb";
+import { IconCard } from "@/components/icon-card";
+import { CTABand, h2Cls, sectionCls } from "@/components/service-sections";
+import { about as c } from "@/lib/about";
 import { AnalyticsEvent } from "@/lib/analytics";
+import { Footer } from "../footer";
+import { LogoStrip } from "../logos";
 
 const BASE_URL = "https://rizon.agency";
+const path = "/about";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = getT("seo.about");
-  const path = "/about";
-  return {
-    title: t("title"),
-    description: t("description"),
-    alternates: {
-      canonical: path,
-    },
-    openGraph: {
-      title: t("ogTitle"),
-      description: t("ogDescription"),
-      url: path,
-      siteName: "Rizon",
-      locale: "en_US",
-      type: "profile",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: t("twitterTitle"),
-      description: t("twitterDescription"),
-      creator: "@rizon_agency",
-    },
-  };
-}
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-1.5 text-sm font-medium text-primary">
-      <span className="size-1.5 rounded-full bg-primary" aria-hidden />
-      {children}
-    </span>
-  );
-}
-
-type PrincipleKey = "small" | "direct" | "code";
-
-const principleIcons: Record<PrincipleKey, LucideIcon> = {
-  small: CalendarDays,
-  direct: MessagesSquare,
-  code: KeyRound,
+export const metadata: Metadata = {
+  title: c.metaTitle,
+  description: c.metaDescription,
+  alternates: { canonical: path },
+  openGraph: {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    url: path,
+    siteName: "Rizon",
+    locale: "en_US",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: c.metaTitle,
+    description: c.metaDescription,
+    creator: "@rizon_agency",
+  },
 };
 
-const principleKeys: PrincipleKey[] = ["small", "direct", "code"];
-
-type ProofKey =
-  "focus" | "specialists" | "lti" | "customLms" | "ownership" | "global";
-const proofKeys: ProofKey[] = [
-  "focus",
-  "specialists",
-  "lti",
-  "customLms",
-  "ownership",
-  "global",
+const crumbs: Crumb[] = [
+  { name: "Home", href: "/" },
+  { name: "About", href: path },
 ];
 
-type CapabilityIndex =
-  "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11";
-const capabilityIndexes: CapabilityIndex[] = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    breadcrumbJsonLd(crumbs),
+    {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#org`,
+      name: "Rizon",
+      legalName: "Rizon LLC",
+      url: BASE_URL,
+      founder: { "@id": `${BASE_URL}/about#choaib` },
+      knowsAbout: [
+        "Custom LMS development",
+        "LTI integration and development",
+        "Moodle development",
+        "Canvas LMS development",
+        "LTI 1.1 to 1.3 migration",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${BASE_URL}/about#choaib`,
+      name: "Choaib Mouhrach",
+      alternateName: "Choaib",
+      jobTitle: "Founder",
+      description:
+        "Founder of Rizon and a software engineer who builds learning platforms and LMS integrations.",
+      url: `${BASE_URL}/about`,
+      image: `${BASE_URL}${c.who.photo.src}`,
+      knowsAbout: [
+        "Learning management systems",
+        "Custom LMS development",
+        "LTI",
+        "Moodle",
+        "Canvas",
+      ],
+      worksFor: { "@id": `${BASE_URL}/#org` },
+      sameAs: ["https://www.linkedin.com/in/choaib-mouhrach"],
+    },
+  ],
+};
 
-const heroTags = ["Custom LMS", "LTI", "Moodle", "Canvas", "Course platforms"];
-
-export default async function AboutPage() {
-  const t = getT("aboutPage");
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "AboutPage",
-        url: `${BASE_URL}/about`,
-        name: "About Rizon",
-        description:
-          "Rizon is a software studio focused exclusively on learning platforms, led by Choaib Mouhrach.",
-      },
-      {
-        "@type": "Person",
-        "@id": `${BASE_URL}/about#choaib`,
-        name: "Choaib Mouhrach",
-        jobTitle: "Founder & Learning Platform Engineer",
-        description:
-          "Founder of Rizon and a software engineer specializing in learning technology. Custom LMS, Moodle, Canvas, and LTI.",
-        url: `${BASE_URL}/about`,
-        image: `${BASE_URL}/choaib-mouhrach-pic.png`,
-        knowsAbout: [
-          "Learning Management Systems",
-          "Custom LMS development",
-          "LTI",
-          "Moodle",
-          "Canvas",
-        ],
-        worksFor: { "@id": `${BASE_URL}/#org` },
-        sameAs: ["https://www.linkedin.com/in/choaib-mouhrach"],
-      },
-    ],
-  };
+export default function AboutPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="pb-24 md:pb-32">
-        {/* Hero */}
-        <section className="container pt-28 md:pt-36 cntr">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <Eyebrow>{t("hero.eyebrow")}</Eyebrow>
-              <h1 className="mt-6 text-[2.7rem] font-semibold leading-[1.03] tracking-tight text-balance sm:text-6xl md:text-[4.1rem]">
-                {t("hero.titlePrefix")}{" "}
-                <span className="mark">{t("hero.titleHighlight")}</span>.
-              </h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                {t("hero.intro1")}
-              </p>
-              <p className="mt-5 max-w-xl leading-relaxed text-muted-foreground">
-                {t("hero.intro2")}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-2.5">
-                {heroTags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-border bg-card px-3.5 py-1.5 text-sm text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+      <main>
+        <section className="container cntr pt-24 md:pt-28">
+          <Breadcrumb items={crumbs} />
+          <h1 className="mt-10 max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-balance md:text-6xl">
+            {c.h1}
+          </h1>
+        </section>
+
+        <section className="container cntr mt-12 md:mt-16">
+          <h2 className={h2Cls}>{c.lead.h2}</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+            {c.lead.body}
+          </p>
+        </section>
+
+        <section className={sectionCls}>
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+            {/* Photo stacks above the text on mobile, sits left on desktop. */}
             <div className="lg:col-span-5">
-              <figure className="surface mx-auto max-w-sm overflow-hidden p-2.5 lg:ml-auto">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.15rem] bg-muted">
-                  <Image
-                    src="/choaib-mouhrach-pic.png"
-                    alt="Choaib Mouhrach"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="flex items-baseline justify-between gap-3 px-2.5 pt-3.5 pb-1.5">
-                  <span className="font-medium">Choaib Mouhrach</span>
-                  <span className="text-sm text-muted-foreground">
-                    {t("hero.founderRole")}
-                  </span>
-                </figcaption>
-              </figure>
+              <Image
+                src={c.who.photo.src}
+                alt={c.who.photo.alt}
+                width={c.who.photo.width}
+                height={c.who.photo.height}
+                loading="lazy"
+                sizes="(min-width: 1024px) 420px, 100vw"
+                className="h-auto w-full max-w-sm rounded-2xl border border-border"
+              />
+            </div>
+            <div className="lg:col-span-7">
+              <h2 className={h2Cls}>{c.who.h2}</h2>
+              <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+                {c.who.body}
+              </p>
             </div>
           </div>
         </section>
 
-        {/* About Rizon */}
-        <section className="mt-24 md:mt-32 cntr">
-          <div className="bg-tint py-20 md:py-28">
-            <div className="container">
-              <div className="max-w-3xl">
-                <Eyebrow>{t("aboutRizon.eyebrow")}</Eyebrow>
-                <h2 className="mt-6 text-4xl font-semibold tracking-tight text-balance md:text-5xl">
-                  {t("aboutRizon.title")}
-                </h2>
-                <p className="mt-8 text-lg leading-relaxed text-foreground/80">
-                  {t("aboutRizon.p1")}
-                </p>
-                <p className="mt-5 text-lg leading-relaxed text-foreground/80">
-                  {t("aboutRizon.p2")}
-                </p>
-                <p className="mt-5 text-lg leading-relaxed text-foreground/80">
-                  {t("aboutRizon.p3")}
-                </p>
-              </div>
-
-              <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {proofKeys.map((key) => (
-                  <li
-                    key={key}
-                    className="flex items-start gap-3 text-foreground/85"
-                  >
-                    <Check
-                      size={19}
-                      className="mt-1 shrink-0 text-primary"
-                      aria-hidden
-                    />
-                    <span className="font-medium">
-                      {t(`proofPoints.${key}`)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* How we build */}
-        <section className="container mt-24 md:mt-32 cntr">
-          <div className="max-w-2xl">
-            <Eyebrow>{t("howWeBuild.eyebrow")}</Eyebrow>
-            <h2 className="mt-6 text-4xl font-semibold tracking-tight text-balance md:text-5xl">
-              {t("howWeBuild.titlePrefix")}{" "}
-              <span className="mark">{t("howWeBuild.titleHighlight")}</span>
-            </h2>
-          </div>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {principleKeys.map((key) => {
-              const Icon = principleIcons[key];
-              return (
-                <div key={key} className="surface p-7 md:p-8">
-                  <span className="inline-flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon size={20} strokeWidth={1.75} aria-hidden />
-                  </span>
-                  <h3 className="mt-6 text-xl font-semibold tracking-tight">
-                    {t(`howWeBuild.principles.${key}.title`)}
-                  </h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">
-                    {t(`howWeBuild.principles.${key}.body`)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* What we've built */}
-        <section className="container mt-24 md:mt-32 cntr">
-          <div className="max-w-2xl">
-            <Eyebrow>{t("capabilitiesSection.eyebrow")}</Eyebrow>
-            <h2 className="mt-6 text-4xl font-semibold tracking-tight text-balance md:text-5xl">
-              {t("capabilitiesSection.title")}
-            </h2>
-          </div>
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {capabilityIndexes.map((idx) => (
-              <li key={idx} className="surface flex items-center gap-3 p-5">
-                <Check
-                  size={19}
-                  className="shrink-0 text-primary"
-                  aria-hidden
-                />
-                <span className="font-medium">
-                  {t(`capabilitiesSection.items.${idx}`)}
-                </span>
+        <section className={sectionCls}>
+          <h2 className={h2Cls}>{c.how.h2}</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+            {c.how.intro}
+          </p>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+            {c.how.items.map((item) => (
+              <li key={item.title}>
+                <IconCard icon={item.icon} title={item.title}>
+                  {item.body}
+                </IconCard>
               </li>
             ))}
           </ul>
         </section>
 
-        {/* CTA */}
-        <section className="container mt-24 md:mt-32 cntr">
-          <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 text-primary-foreground md:px-14 md:py-20">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -right-16 -top-20 size-64 rounded-full bg-highlight/25 blur-3xl"
-            />
-            <div className="relative max-w-2xl">
-              <h2 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">
-                {t("cta.title")}
-              </h2>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-primary-foreground/80">
-                {t("cta.description")}
-              </p>
-              <Button
-                size="lg"
-                className="mt-8 bg-background text-foreground hover:bg-background/90"
-                nativeButton={false}
-                render={
-                  <Link
-                    href="https://cal.com/rizon.agency-cvbkll/30min"
-                    target="_blank"
-                    rel="noreferrer"
-                    data-umami-event={AnalyticsEvent.BookCall}
-                    data-umami-event-location="about"
-                  />
-                }
-              >
-                {t("cta.button")} <ArrowRight size={16} aria-hidden />
-              </Button>
-            </div>
-          </div>
+        <section className={sectionCls}>
+          <h2 className={h2Cls}>{c.believe.h2}</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+            {c.believe.body}
+          </p>
         </section>
+
+        <section className={sectionCls}>
+          <h2 className={h2Cls}>{c.proof.h2}</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+            {c.proof.line}
+          </p>
+          <div className="mt-10">
+            <LogoStrip />
+          </div>
+          <Link
+            href="/case-studies"
+            className="mt-10 inline-flex items-center gap-1.5 font-medium text-primary"
+          >
+            {c.proof.cta} <ArrowRight size={16} aria-hidden />
+          </Link>
+        </section>
+
+        <CTABand
+          h2={c.cta.h2}
+          line={c.cta.line}
+          action={
+            <Button
+              size="lg"
+              variant="secondary"
+              nativeButton={false}
+              render={
+                <Link
+                  href="https://cal.com/rizon.agency-cvbkll/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-umami-event={AnalyticsEvent.BookCall}
+                  data-umami-event-location="about"
+                />
+              }
+            >
+              Book a free 30-min discovery call{" "}
+              <ArrowRight size={16} aria-hidden />
+            </Button>
+          }
+        />
       </main>
       <Footer />
     </>

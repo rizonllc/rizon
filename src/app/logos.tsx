@@ -21,6 +21,25 @@ const companies: { name: string; src: StaticImageData; size?: string }[] = [
   },
 ];
 
+// The bare logo row, reused wherever a page needs its own heading around it.
+export const LogoStrip = () => (
+  <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+    {companies.map(({ name, src, size = "h-10 md:h-12" }, i) => (
+      <Fragment key={name}>
+        {/* Row break: the last two logos sit on their own line. */}
+        {i === 4 && <li aria-hidden className="h-0 basis-full" />}
+        <li>
+          <Image
+            src={src}
+            alt={name}
+            className={`${size} w-auto object-contain`}
+          />
+        </li>
+      </Fragment>
+    ))}
+  </ul>
+);
+
 export const Logos = async () => {
   const t = getT("logos");
   return (
@@ -28,21 +47,9 @@ export const Logos = async () => {
       <h2 className="text-center text-lg text-muted-foreground">
         {t("title")}
       </h2>
-      <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-        {companies.map(({ name, src, size = "h-10 md:h-12" }, i) => (
-          <Fragment key={name}>
-            {/* Row break: the last two logos sit on their own line. */}
-            {i === 4 && <li aria-hidden className="h-0 basis-full" />}
-            <li>
-              <Image
-                src={src}
-                alt={name}
-                className={`${size} w-auto object-contain`}
-              />
-            </li>
-          </Fragment>
-        ))}
-      </ul>
+      <div className="mt-10">
+        <LogoStrip />
+      </div>
     </section>
   );
 };
