@@ -338,6 +338,13 @@
       }
     }
   },
+  "serviceLanding": {
+    "ctaPrimary": "Kostenloses 30-Minuten-Erstgespräch buchen",
+    "ctaSecondary": "Unsere Projekte ansehen",
+    "steps": ["Discovery", "Umfang & Plan", "Wöchentliche Sprints", "Launch & Übergabe"],
+    "seeAllCases": "Alle Fallstudien ansehen",
+    "trustPlaceholder": "Kundennamen"
+  },
   "serviceDetail": {
     "eyebrow": "Rizon-Leistungen",
     "heroCta": "Sprechen wir über Ihre Plattform",

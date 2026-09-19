@@ -338,6 +338,13 @@
       }
     }
   },
+  "serviceLanding": {
+    "ctaPrimary": "Réserver un appel découverte gratuit de 30 min",
+    "ctaSecondary": "Voir nos réalisations",
+    "steps": ["Découverte", "Périmètre & plan", "Sprints hebdomadaires", "Lancement & remise"],
+    "seeAllCases": "Voir toutes les études de cas",
+    "trustPlaceholder": "Noms de clients"
+  },
   "serviceDetail": {
     "eyebrow": "Services Rizon",
     "heroCta": "Parlons de votre plateforme",

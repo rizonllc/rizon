@@ -12,7 +12,12 @@ import { alternatives } from "@/lib/alternatives";
 import { posts } from "@/lib/posts";
 import { StatBlock } from "@/components/stat-block";
 import { getServiceBySlug, services } from "@/lib/services";
+import { ServiceLanding } from "@/components/service-landing";
+import { blankServices, getBlankService } from "@/lib/blank-services";
 import { Footer } from "../../footer";
+import { Logos } from "../../logos";
+import { Hero } from "@/components/hero";
+import heroImage from "@/assets/hero.jpg";
 
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -25,7 +30,12 @@ const BASE_URL = "https://rizon.agency";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    services.map((service) => ({ locale, slug: service.slug })),
+    [
+      ...new Set([
+        ...services.map((service) => service.slug),
+        ...blankServices.map((service) => service.slug),
+      ]),
+    ].map((slug) => ({ locale, slug })),
   );
 }
 
@@ -37,6 +47,26 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
+  const blank = getBlankService(slug);
+  if (blank) {
+    const tNav = await getTranslations({
+      locale: locale as Locale,
+      namespace: "nav",
+    });
+    const path = `/services/${blank.slug}`;
+    const title = l(blank.metaTitle, locale as Locale);
+    const description = l(blank.metaDescription, locale as Locale);
+    return {
+      title: title || `${tNav(`serviceItems.${blank.key}.title`)} | Rizon`,
+      description: description || undefined,
+      alternates: {
+        canonical: localizedUrl(path, locale),
+        languages: languagesFor(path),
+      },
+      // ponytail: noindex until the copy is written; remove then.
+      ...(title ? {} : { robots: { index: false, follow: false } }),
+    };
+  }
   const service = getServiceBySlug(slug);
   if (!service) return { title: "Service not found | Rizon" };
   const path = `/services/${service.slug}`;
@@ -83,6 +113,14 @@ export default async function ServiceDetailPage({
   const { locale, slug } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const blank = getBlankService(slug);
+  if (blank)
+    return (
+      <>
+        <ServiceLanding content={blank} locale={locale as Locale} />
+        <Footer />
+      </>
+    );
   const t = await getTranslations("serviceDetail");
   const service = getServiceBySlug(slug);
   if (!service) notFound();
@@ -138,22 +176,15 @@ export default async function ServiceDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main>
-        <section className="container cntr pt-24 md:pt-28">
-          <Breadcrumb items={crumbs} />
-          <div className="mt-10 max-w-4xl">
-            <span className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-primary">
-              <span className="h-px w-8 bg-primary" aria-hidden />
-              {t("eyebrow")}
-            </span>
-            <h1 className="mt-6 text-5xl font-semibold tracking-tight leading-[1.02] text-balance md:text-6xl">
-              {l(service.h1, locale as Locale)}
-            </h1>
-            <p className="mt-7 max-w-3xl text-xl leading-relaxed text-muted-foreground text-pretty">
-              {l(service.heroSub, locale as Locale)}
-            </p>
+        <Hero
+          eyebrow={<Breadcrumb items={crumbs} />}
+          headline={local(service.h1)}
+          headlineClassName="text-[clamp(1.875rem,5vw,3.25rem)] leading-[1.1]"
+          sub={local(service.heroSub)}
+          image={heroImage}
+          actions={
             <Button
               size="lg"
-              className="mt-9"
               nativeButton={false}
               render={
                 <Link
@@ -167,8 +198,9 @@ export default async function ServiceDetailPage({
             >
               {t("heroCta")} <ArrowRight size={16} aria-hidden />
             </Button>
-          </div>
-        </section>
+          }
+        />
+        <Logos />
         <section className="container cntr mt-24 md:mt-32">
           <div className="grid grid-cols-1 gap-12 border-t border-border pt-10 lg:grid-cols-12">
             <div className="lg:col-span-4">

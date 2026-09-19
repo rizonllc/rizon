@@ -338,6 +338,13 @@
       }
     }
   },
+  "serviceLanding": {
+    "ctaPrimary": "Book a free 30-min discovery call",
+    "ctaSecondary": "See our work",
+    "steps": ["Discovery", "Scope & plan", "Weekly sprints", "Launch & handover"],
+    "seeAllCases": "See all case studies",
+    "trustPlaceholder": "Client names"
+  },
   "serviceDetail": {
     "eyebrow": "Rizon services",
     "heroCta": "Discuss your platform",

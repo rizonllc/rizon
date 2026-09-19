@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { IconCard } from "@/components/icon-card";
 import { SectionHeader } from "@/components/section-header";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 
@@ -51,24 +52,13 @@ export const WhyUs = () => {
             <RevealItem
               key={key}
               as="article"
-              className={`bg-primary/5 rounded-lg flex flex-col p-7 md:p-8${
-                index === reasonKeys.length - 1 ? " md:col-span-2" : ""
-              }`}
+              className={
+                index === reasonKeys.length - 1 ? "md:col-span-2" : undefined
+              }
             >
-              <div className="flex items-center justify-between">
-                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon size={20} strokeWidth={1.75} aria-hidden />
-                </span>
-                <span className="font-mono text-sm tabular-nums text-muted-foreground/50">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="mt-6 text-xl font-semibold tracking-tight text-primary">
-                {t(`reasons.${key}.title`)}
-              </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+              <IconCard icon={Icon} title={t(`reasons.${key}.title`)}>
                 {t(`reasons.${key}.description`)}
-              </p>
+              </IconCard>
             </RevealItem>
           );
         })}
