@@ -1,22 +1,23 @@
 import type { MetadataRoute } from "next";
-import { routing } from "@/i18n/routing";
-import { languagesFor, localizedUrl } from "@/i18n/hreflang";
 import { projects } from "@/lib/projects";
-import { posts, getLocalesForPost } from "@/lib/posts";
+import { posts } from "@/lib/posts";
 import { alternatives } from "@/lib/alternatives";
 import { services } from "@/lib/services";
 import { productLabs } from "@/lib/product-labs";
 
+const BASE = "https://rizon.agency";
+
 type ChangeFreq = MetadataRoute.Sitemap[number]["changeFrequency"];
 
-type LocalizedRoute = {
+type Route = {
   path: string;
   priority: number;
   changeFrequency: ChangeFreq;
+  lastModified?: Date;
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const localizedRoutes: LocalizedRoute[] = [
+  const routes: Route[] = [
     { path: "/", priority: 1, changeFrequency: "weekly" },
     { path: "/services", priority: 0.8, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
@@ -33,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as ChangeFreq,
     })),
     ...projects.map((p) => ({
-      path: `/work/${p.slug}`,
+      path: `/case-studies/${p.slug}`,
       priority: 0.7,
       changeFrequency: "monthly" as ChangeFreq,
     })),
@@ -44,41 +45,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  const localizedEntries: MetadataRoute.Sitemap = localizedRoutes.flatMap(
-    (r) => {
-      return routing.locales.map((locale) => ({
-        url: localizedUrl(r.path, locale),
-        lastModified: new Date(),
-        changeFrequency: r.changeFrequency,
-        priority: r.priority,
-        alternates: { languages: languagesFor(r.path) },
-      }));
-    },
-  );
-
-  const blogIndexLanguages = languagesFor("/blog");
-  const blogIndexEntries: MetadataRoute.Sitemap = routing.locales.map(
-    (locale) => ({
-      url: localizedUrl("/blog", locale),
-      lastModified: new Date(),
-      changeFrequency: "weekly" as ChangeFreq,
-      priority: 0.8,
-      alternates: { languages: blogIndexLanguages },
-    }),
-  );
-
-  const blogPostEntries: MetadataRoute.Sitemap = posts.flatMap((post) => {
-    const availableLocales = getLocalesForPost(post.slug);
-    const path = `/blog/${post.slug}`;
-    const languages = languagesFor(path, availableLocales);
-    return availableLocales.map((locale) => ({
-      url: localizedUrl(path, locale),
-      lastModified: new Date(post.date),
-      changeFrequency: "monthly" as ChangeFreq,
+  const entries: MetadataRoute.Sitemap = [
+    ...routes,
+    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as ChangeFreq },
+    ...posts.map((post) => ({
+      path: `/blog/${post.slug}`,
       priority: 0.6,
-      alternates: { languages },
-    }));
-  });
+      changeFrequency: "monthly" as ChangeFreq,
+      lastModified: new Date(post.date),
+    })),
+  ].map(({ path, priority, changeFrequency, ...r }) => ({
+    url: `${BASE}${path === "/" ? "" : path}`,
+    lastModified: new Date(),
+    changeFrequency,
+    priority,
+    ...r,
+  }));
 
-  return [...localizedEntries, ...blogIndexEntries, ...blogPostEntries];
+  return entries;
 }

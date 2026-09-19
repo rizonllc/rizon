@@ -1,8 +1,8 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
+import { getT } from "@/lib/t";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { BlogThumbnail } from "@/components/blog-thumbnail";
 import type { Post } from "@/types";
@@ -19,9 +19,8 @@ type BlogCardProps = {
 };
 
 export const BlogCard = ({ post }: BlogCardProps) => {
-  const format = useFormatter();
-  const t = useTranslations("blogPage");
-  const formatted = format.dateTime(new Date(post.date), {
+  const t = getT("blogPage");
+  const formatted = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",

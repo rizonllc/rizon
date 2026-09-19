@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { ArrowRight, Check, Minus, Plus, type LucideIcon } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { IconCard } from "@/components/icon-card";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 

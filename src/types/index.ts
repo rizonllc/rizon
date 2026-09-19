@@ -1,5 +1,4 @@
 import type { StaticImageData } from "next/image";
-import type { MaybeLocalized } from "@/lib/l10n";
 
 export type Post = {
   slug: string;
@@ -17,11 +16,11 @@ export type Post = {
 
 export type Project = {
   slug: string;
-  title: MaybeLocalized<string>;
+  title: string;
   link?: string;
-  description: MaybeLocalized<string>;
-  problem: MaybeLocalized<string>;
-  solution: MaybeLocalized<string>;
+  description: string;
+  problem: string;
+  solution: string;
   year: string;
   preview: string;
   tech: string[];
@@ -35,20 +34,20 @@ export type GalleryImage = {
 };
 
 export type ComparisonRow = {
-  dimension: MaybeLocalized<string>;
-  rizon: MaybeLocalized<string>;
-  them: MaybeLocalized<string>;
+  dimension: string;
+  rizon: string;
+  them: string;
 };
 
 export type Faq = {
-  question: MaybeLocalized<string>;
-  answer: MaybeLocalized<string>;
+  question: string;
+  answer: string;
 };
 
 // A quotable, extractable figure with a primary-source citation (GEO / AI-search).
 export type CitedStat = {
   value: string; // the headline figure or term, e.g. "SCORM 1.2" or "IMSCC"
-  label: MaybeLocalized<string>; // what it means, in one sentence
+  label: string; // what it means, in one sentence
   source: string; // the primary source's name
   sourceUrl: string; // outbound link to that primary source
 };
@@ -56,17 +55,17 @@ export type CitedStat = {
 export type Alternative = {
   slug: string;
   competitor: string;
-  category: MaybeLocalized<string>;
-  metaTitle: MaybeLocalized<string>;
-  metaDescription: MaybeLocalized<string>;
-  heroHeadline: MaybeLocalized<string>;
-  heroSub: MaybeLocalized<string>;
-  intro: MaybeLocalized<string[]>;
-  whoThisIsFor: MaybeLocalized<string>;
-  whyLeave: { title: MaybeLocalized<string>; body: MaybeLocalized<string> }[];
-  whereTheyWin: { title: MaybeLocalized<string>; body: MaybeLocalized<string> }[];
+  category: string;
+  metaTitle: string;
+  metaDescription: string;
+  heroHeadline: string;
+  heroSub: string;
+  intro: string[];
+  whoThisIsFor: string;
+  whyLeave: { title: string; body: string }[];
+  whereTheyWin: { title: string; body: string }[];
   comparison: ComparisonRow[];
-  migration: MaybeLocalized<string>;
+  migration: string;
   faqs: Faq[];
   stat?: CitedStat;
   keywords: string[];
@@ -75,25 +74,25 @@ export type Alternative = {
 };
 
 export type ServiceSection = {
-  heading: MaybeLocalized<string>;
-  body: MaybeLocalized<string>;
+  heading: string;
+  body: string;
 };
 
 export type ServicePage = {
   slug: string;
-  title: MaybeLocalized<string>;
-  metaTitle: MaybeLocalized<string>;
-  metaDescription: MaybeLocalized<string>;
-  h1: MaybeLocalized<string>;
-  heroSub: MaybeLocalized<string>;
-  targetKeyword: MaybeLocalized<string>;
-  whoWeWorkWith: { audience: MaybeLocalized<string>; description: MaybeLocalized<string> }[];
-  problemsWeSolve: { problem: MaybeLocalized<string>; solution: MaybeLocalized<string> }[];
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  heroSub: string;
+  targetKeyword: string;
+  whoWeWorkWith: { audience: string; description: string }[];
+  problemsWeSolve: { problem: string; solution: string }[];
   whatWeBuild: ServiceSection[];
-  process: { step: MaybeLocalized<string>; detail: MaybeLocalized<string> }[];
-  included: MaybeLocalized<string[]>;
-  costBand: MaybeLocalized<string>;
-  outcomes: MaybeLocalized<string>;
+  process: { step: string; detail: string }[];
+  included: string[];
+  costBand: string;
+  outcomes: string;
   faqs: Faq[];
   stat?: CitedStat;
   relatedAlternativeSlugs?: string[];

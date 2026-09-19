@@ -1,7 +1,5 @@
 import { BadgeCheck, Blocks, Code, Palette, RefreshCw, Wrench, ClipboardList, Database, GraduationCap, Link2, LogIn, ShieldCheck, KeyRound, Phone, Plug, Rocket, Repeat, TrendingUp, Workflow, type LucideIcon } from "lucide-react";
 import type { StaticImageData } from "next/image";
-import type { MaybeLocalized } from "./l10n";
-import choiceLearning from "@/assets/companies/choice-learning.webp";
 
 // Landing-page structure for the service pages. Every string is empty until the
 // copy is written; the template shows a [placeholder] for anything empty.
@@ -20,43 +18,43 @@ export type ServiceLanding = {
   slug: string;
   key: ServiceKey;
   title?: string; // breadcrumb + serviceType; falls back to nav.serviceItems title
-  metaTitle: MaybeLocalized<string>; // [Service] Company | Rizon
-  metaDescription: MaybeLocalized<string>; // benefit + "Book a free 30-min call"
-  h1: MaybeLocalized<string>; // < 11 words
-  subhead: MaybeLocalized<string>; // one sentence, ownership/benefit first
-  trustLine: MaybeLocalized<string>; // "Trusted by ... , X, Y, and more."
-  heroAlt: MaybeLocalized<string>;
+  metaTitle: string; // [Service] Company | Rizon
+  metaDescription: string; // benefit + "Book a free 30-min call"
+  h1: string; // < 11 words
+  subhead: string; // one sentence, ownership/benefit first
+  trustLine: string; // "Trusted by ... , X, Y, and more."
+  heroAlt: string;
   heroTags?: string[]; // pills under the trust line
   heroStats?: {
     before?: string;
     highlight: string;
     after?: string;
-    label: MaybeLocalized<string>;
+    label: string;
   }[]; // cards over the hero image
-  problem: { h2: MaybeLocalized<string>; body: MaybeLocalized<string> };
-  agitate: { h2: MaybeLocalized<string>; body: MaybeLocalized<string> };
+  problem: { h2: string; body: string };
+  agitate: { h2: string; body: string };
   solution: {
-    h2: MaybeLocalized<string>;
-    body: MaybeLocalized<string>;
+    h2: string;
+    body: string;
     features: {
-      feature: MaybeLocalized<string>;
-      benefit: MaybeLocalized<string>;
+      feature: string;
+      benefit: string;
       icon?: LucideIcon;
       titleHref?: string; // makes the feature title a link
       links?: { text: string; href: string }[]; // texts must appear in benefit, in order
     }[]; // 5
   };
   howWeWork: {
-    h2: MaybeLocalized<string>; // "How we [build/migrate/etc.]"
-    steps: { title: MaybeLocalized<string>; body: MaybeLocalized<string>; icon: LucideIcon }[];
+    h2: string; // "How we [build/migrate/etc.]"
+    steps: { title: string; body: string; icon: LucideIcon }[];
   };
   cost: {
-    h2: MaybeLocalized<string>; // "How much does [service] cost?"
-    answer: MaybeLocalized<string>; // 40-60 words
-    support: MaybeLocalized<string>;
+    h2: string; // "How much does [service] cost?"
+    answer: string; // 40-60 words
+    support: string;
   };
   proof: {
-    h2: MaybeLocalized<string>;
+    h2: string;
     // Cards come from lib/projects by slug unless title/description/image are given.
     cases: {
       slug: string;
@@ -68,12 +66,12 @@ export type ServiceLanding = {
     }[];
   };
   faqs: {
-    question: MaybeLocalized<string>;
-    answer: MaybeLocalized<string>;
+    question: string;
+    answer: string;
     link?: { text: string; href: string }; // text must appear in answer
   }[]; // 4-6
-  faqH2: MaybeLocalized<string>;
-  finalCta: { h2: MaybeLocalized<string>; line: MaybeLocalized<string> };
+  faqH2: string;
+  finalCta: { h2: string; line: string };
 };
 
 const landing = (slug: string, key: ServiceKey): ServiceLanding => ({
@@ -256,20 +254,8 @@ const lti: ServiceLanding = {
     support:
       "What moves the price: the number of target platforms (one LMS versus many), which LTI Advantage services you need (sign-on only, or grades and deep linking too), whether you're building a new tool or fixing an existing integration, and whether you're migrating from LTI 1.1. A single-platform sign-on sits at the low end; full multi-platform LTI Advantage sits higher.",
   },
-  proof: {
-    h2: "Integrations we've built",
-    // ponytail: placeholder card; swap in real EdEHR copy, image and URL.
-    cases: [
-      {
-        slug: "choice-learning-edehr",
-        href: "/case-studies/choice-learning-edehr",
-        title: "Choice Learning EdEHR",
-        description: "LTI integration connecting Choice Learning's EdEHR to learning platforms.",
-        image: choiceLearning,
-        contain: true,
-      },
-    ],
-  },
+  // ponytail: no LTI case study page yet; the proof section is hidden while empty.
+  proof: { h2: "Integrations we've built", cases: [] },
   faqH2: "LTI integration, answered",
   faqs: [
     {
@@ -727,11 +713,8 @@ const ltiMigration: ServiceLanding = {
     support:
       "What moves the price: how many target platforms you support, which LTI Advantage services you need (sign-on, grade passback, deep linking), the complexity of your existing 1.1 integration, and whether the migration has to happen with zero downtime for live customers.",
   },
-  proof: {
-    h2: "LTI work we've done",
-    // ponytail: same placeholder card as the LTI page; swap in real EdEHR copy, image and URL.
-    cases: lti.proof.cases,
-  },
+  // ponytail: no LTI case study page yet; the proof section is hidden while empty.
+  proof: { h2: "LTI work we've done", cases: [] },
   faqH2: "LTI 1.1 to 1.3 migration, answered",
   faqs: [
     {

@@ -1,6 +1,6 @@
+import { getT } from "@/lib/t";
 import { ArrowRight } from "lucide-react";
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
@@ -9,10 +9,7 @@ import {
 } from "@/components/breadcrumb";
 import { Hero } from "@/components/hero";
 import { getProjectBySlug } from "@/lib/projects";
-import { l } from "@/lib/l10n";
-import { localizedUrl } from "@/i18n/hreflang";
 import { AnalyticsEvent } from "@/lib/analytics";
-import type { Locale } from "@/i18n/routing";
 import type { ServiceLanding as Content } from "@/lib/blank-services";
 import {
   CaseStudyCards,
@@ -22,7 +19,7 @@ import {
   ProblemAgitateSolution,
   ProcessSteps,
 } from "@/components/service-sections";
-import { Logos } from "@/app/[locale]/logos";
+import { Logos } from "@/app/logos";
 import heroImage from "@/assets/hero.jpg";
 
 const BASE_URL = "https://rizon.agency";
@@ -33,18 +30,15 @@ const ph = (value: string, label: string) => value || `[${label}]`;
 
 export const ServiceLanding = async ({
   content,
-  locale,
 }: {
   content: Content;
-  locale: Locale;
 }) => {
-  const t = await getTranslations({ locale, namespace: "serviceLanding" });
-  const tNav = await getTranslations({ locale, namespace: "nav" });
-  const tDetail = await getTranslations({ locale, namespace: "serviceDetail" });
-  const local = (v: Parameters<typeof l<string>>[0]) => l(v, locale);
+  const t = getT("serviceLanding");
+  const tNav = getT("nav");
+  const tDetail = getT("serviceDetail");
   const title = content.title ?? tNav(`serviceItems.${content.key}.title`);
   const path = `/services/${content.slug}`;
-  const url = localizedUrl(path, locale);
+  const url = `https://rizon.agency${path}`;
 
   const crumbs: Crumb[] = [
     { name: tDetail("breadcrumbs.home"), href: "/" },
@@ -52,8 +46,8 @@ export const ServiceLanding = async ({
     { name: title, href: path },
   ];
   const faqs = content.faqs.map((f) => ({
-    question: local(f.question),
-    answer: local(f.answer),
+    question: f.question,
+    answer: f.answer,
     link: f.link,
   }));
 
@@ -65,7 +59,7 @@ export const ServiceLanding = async ({
         "@id": `${url}#service`,
         name: title,
         serviceType: title,
-        description: local(content.metaDescription) || undefined,
+        description: content.metaDescription || undefined,
         url,
         provider: { "@id": `${BASE_URL}/#org` },
         areaServed: "Worldwide",
@@ -115,10 +109,10 @@ export const ServiceLanding = async ({
       <main>
         <Hero
           eyebrow={<Breadcrumb items={crumbs} />}
-          headline={ph(local(content.h1), "H1: the service, under 11 words")}
+          headline={ph(content.h1, "H1: the service, under 11 words")}
           // Short H1s get the Hero's full-size default; long ones scale down.
           headlineClassName={
-            local(content.h1).split(" ").length > 5
+            content.h1.split(" ").length > 5
               ? "text-[clamp(1.875rem,3vw,3.25rem)] leading-[1.1]"
               : undefined
           }
@@ -130,16 +124,16 @@ export const ServiceLanding = async ({
                 {st.after}
               </>
             ),
-            label: local(st.label),
+            label: st.label,
           }))}
           sub={ph(
-            local(content.subhead),
+            content.subhead,
             "Subhead: one sentence, ownership first",
           )}
           image={heroImage}
-          imageAlt={local(content.heroAlt)}
+          imageAlt={content.heroAlt}
           tags={content.heroTags}
-          note={local(content.trustLine) || undefined}
+          note={content.trustLine || undefined}
           actions={
             <>
               {cta("service-hero")}
@@ -157,19 +151,19 @@ export const ServiceLanding = async ({
         <Logos />
         <ProblemAgitateSolution
           problem={{
-            h2: ph(local(content.problem.h2), "Problem H2"),
-            body: ph(local(content.problem.body), "Problem paragraph"),
+            h2: ph(content.problem.h2, "Problem H2"),
+            body: ph(content.problem.body, "Problem paragraph"),
           }}
           agitate={{
-            h2: ph(local(content.agitate.h2), "Agitate H2"),
-            body: ph(local(content.agitate.body), "Agitate paragraph"),
+            h2: ph(content.agitate.h2, "Agitate H2"),
+            body: ph(content.agitate.body, "Agitate paragraph"),
           }}
           solution={{
-            h2: ph(local(content.solution.h2), "Solution H2"),
-            body: ph(local(content.solution.body), "Solution paragraph"),
+            h2: ph(content.solution.h2, "Solution H2"),
+            body: ph(content.solution.body, "Solution paragraph"),
             features: content.solution.features.map((f, i) => ({
-              feature: ph(local(f.feature), `Feature ${i + 1}`),
-              benefit: ph(local(f.benefit), `Benefit ${i + 1}`),
+              feature: ph(f.feature, `Feature ${i + 1}`),
+              benefit: ph(f.benefit, `Benefit ${i + 1}`),
               icon: f.icon,
               titleHref: f.titleHref,
               links: f.links,
@@ -177,41 +171,41 @@ export const ServiceLanding = async ({
           }}
         />
         <ProcessSteps
-          h2={ph(local(content.howWeWork.h2), "How we [build/migrate/etc.]")}
+          h2={ph(content.howWeWork.h2, "How we [build/migrate/etc.]")}
           steps={content.howWeWork.steps.map((s) => ({
             ...s,
-            title: local(s.title),
-            body: local(s.body),
+            title: s.title,
+            body: s.body,
           }))}
         />
         <CostAEO
-          h2={ph(local(content.cost.h2), "How much does [service] cost?")}
-          answer={ph(local(content.cost.answer), "Answer-first, 40 to 60 words")}
-          support={ph(local(content.cost.support), "What moves the price")}
+          h2={ph(content.cost.h2, "How much does [service] cost?")}
+          answer={ph(content.cost.answer, "Answer-first, 40 to 60 words")}
+          support={ph(content.cost.support, "What moves the price")}
         />
         <CaseStudyCards
-          h2={ph(local(content.proof.h2), "Platforms we've built")}
+          h2={ph(content.proof.h2, "Platforms we've built")}
           allHref="/case-studies"
           allLabel={t("seeAllCases")}
           cases={content.proof.cases.flatMap((c) => {
             const p = getProjectBySlug(c.slug);
-            const title = c.title ?? (p && l(p.title, locale));
+            const title = c.title ?? (p && p.title);
             const image = c.image ?? p?.preview;
             if (!title || !image) return [];
             return {
               href: c.href,
               title,
-              description: c.description ?? (p ? l(p.description, locale) : ""),
+              description: c.description ?? (p ? p.description : ""),
               image,
               alt: `${title} screenshot`,
               contain: c.contain,
             };
           })}
         />
-        <FAQAccordion h2={ph(local(content.faqH2), "FAQ H2")} faqs={faqs} />
+        <FAQAccordion h2={ph(content.faqH2, "FAQ H2")} faqs={faqs} />
         <CTABand
-          h2={ph(local(content.finalCta.h2), "Reassurance headline")}
-          line={ph(local(content.finalCta.line), "No pitch, no obligation")}
+          h2={ph(content.finalCta.h2, "Reassurance headline")}
+          line={ph(content.finalCta.line, "No pitch, no obligation")}
           action={cta("service-final-cta")}
         />
       </main>

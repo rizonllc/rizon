@@ -1,5 +1,4 @@
 import createMDX from "@next/mdx";
-import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -15,8 +14,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Locales were removed; send old /fr, /es, /de URLs to the English page.
+      { source: "/:locale(fr|es|de)/:path*", destination: "/:path*", permanent: true },
+      { source: "/:locale(fr|es|de)", destination: "/", permanent: true },
       { source: "/work/wavalid", destination: "/products/wavalid", permanent: true },
-      { source: "/:locale(fr|es|de)/work/wavalid", destination: "/:locale/products/wavalid", permanent: true },
+      { source: "/work/:slug", destination: "/case-studies/:slug", permanent: true },
+      // ponytail: no case-studies index yet; send it to the home work section.
+      { source: "/case-studies", destination: "/#work", permanent: false },
     ];
   },
 };
@@ -43,6 +47,4 @@ const withMDX = createMDX({
   },
 });
 
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
-
-export default withNextIntl(withMDX(nextConfig));
+export default withMDX(nextConfig);

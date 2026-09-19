@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export type Crumb = { name: string; href: string };
