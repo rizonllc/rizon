@@ -35,7 +35,8 @@
       "statFees": "Platform fees. You keep every dollar you earn.",
       "statOwnership": "Code ownership. The platform is yours to keep.",
       "statLiveDay": "Day",
-      "statLiveLabel": "Your platform goes live and stays live"
+      "statLiveLabel": "Your platform goes live and stays live",
+      "tags": ["Custom e-learning platforms", "School & university portals", "Corporate training", "Platform upgrades"]
     },
     "whyUs": {
       "label": "Why us",

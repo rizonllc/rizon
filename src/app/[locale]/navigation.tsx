@@ -8,6 +8,7 @@ import { LogoWithText } from "@/components/logo";
 import { AnalyticsEvent } from "@/lib/analytics";
 import { MobileNav } from "./mobile-nav";
 import { LocaleSwitcher } from "./locale-switcher";
+import { PhoneIcon } from "lucide-react";
 
 const linkDefs = [
   { key: "home", href: "/#home", id: "home", isPage: false },
@@ -88,11 +89,7 @@ export const Navigation = () => {
         scrolled ? "border-border" : "border-transparent"
       }`}
     >
-      <div
-        className={
-          scrolled ? "container cntr" : "px-6 sm:px-10 lg:px-16"
-        }
-      >
+      <div className={scrolled ? "container cntr" : "px-6 sm:px-10 lg:px-16"}>
         <div className="flex h-16 items-center justify-between gap-8">
           <Link
             href="/#home"
@@ -146,6 +143,7 @@ export const Navigation = () => {
                 />
               }
             >
+              <PhoneIcon size={12} />
               {t("bookACall")}
             </Button>
           </div>

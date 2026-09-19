@@ -35,7 +35,8 @@
       "statFees": "Frais de plateforme. Vous gardez chaque euro que vous gagnez.",
       "statOwnership": "Propriété du code. La plateforme est à vous.",
       "statLiveDay": "Jour",
-      "statLiveLabel": "Votre plateforme est en ligne et le reste"
+      "statLiveLabel": "Votre plateforme est en ligne et le reste",
+      "tags": ["Plateformes e-learning sur mesure", "Portails écoles & universités", "Formation en entreprise", "Mises à niveau de plateformes"]
     },
     "whyUs": {
       "label": "Pourquoi nous",

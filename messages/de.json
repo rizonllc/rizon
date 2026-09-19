@@ -35,7 +35,8 @@
       "statFees": "Plattformgebühren. Sie behalten jeden Euro, den Sie verdienen.",
       "statOwnership": "Code-Eigentum. Die Plattform gehört Ihnen.",
       "statLiveDay": "Tag",
-      "statLiveLabel": "Ihre Plattform geht live und bleibt live"
+      "statLiveLabel": "Ihre Plattform geht live und bleibt live",
+      "tags": ["Individuelle E-Learning-Plattformen", "Schul- & Hochschulportale", "Firmentrainings", "Plattform-Upgrades"]
     },
     "whyUs": {
       "label": "Warum wir",

@@ -35,7 +35,8 @@
       "statFees": "Cuotas de plataforma. Te quedas con cada euro que ganas.",
       "statOwnership": "Propiedad del código. La plataforma es tuya.",
       "statLiveDay": "Día",
-      "statLiveLabel": "Tu plataforma está en línea y se mantiene"
+      "statLiveLabel": "Tu plataforma está en línea y se mantiene",
+      "tags": ["Plataformas e-learning a medida", "Portales para escuelas y universidades", "Formación corporativa", "Actualizaciones de plataformas"]
     },
     "whyUs": {
       "label": "Por qué nosotros",

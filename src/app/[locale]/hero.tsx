@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { AnalyticsEvent } from "@/lib/analytics";
 import heroImage from "@/assets/hero.jpg";
 import { Layers2Icon, PhoneIcon } from "lucide-react";
@@ -73,6 +74,18 @@ export const Hero = () => {
               <PhoneIcon />
             </Button>
           </motion.div>
+          <motion.ul
+            {...fade(0.74)}
+            className="mt-8 flex flex-wrap gap-2"
+          >
+            {(t.raw("tags") as string[]).map((tag) => (
+              <li key={tag}>
+                <Badge variant="outline" className="h-auto px-3 py-1 text-sm">
+                  {tag}
+                </Badge>
+              </li>
+            ))}
+          </motion.ul>
         </div>
 
         <motion.div
