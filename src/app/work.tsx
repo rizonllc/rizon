@@ -5,24 +5,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/lib/projects";
+import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/section-header";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 
 export const Work = () => {
   const t = getT("work");
+  const allButton = (
+    <Button
+      variant="outline"
+      size="sm"
+      nativeButton={false}
+      render={<Link href="/case-studies" />}
+    >
+      {t("allCaseStudies")}
+      <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden />
+    </Button>
+  );
   return (
     <section id="work" className="container mt-32 md:mt-40 cntr">
       <Reveal>
-        <SectionHeader
-          label={t("label")}
-          title={
-            <>
-              {t("titlePrefix")}{" "}
-              <span className="text-primary italic">{t("titleHighlight")}</span>
-            </>
-          }
-          description={t("description")}
-        />
+        <div className="flex items-start justify-between gap-6">
+          <SectionHeader
+            label={t("label")}
+            title={
+              <>
+                {t("titlePrefix")}{" "}
+                <span className="text-primary italic">
+                  {t("titleHighlight")}
+                </span>
+              </>
+            }
+            description={t("description")}
+          />
+          {/* Offset = label pill + gap, so the button sits on the title line. */}
+          <div className="hidden shrink-0 md:mt-16 md:block lg:mt-[4.5rem]">
+            {allButton}
+          </div>
+        </div>
       </Reveal>
 
       <RevealGroup
@@ -86,6 +106,8 @@ export const Work = () => {
           );
         })}
       </RevealGroup>
+
+      <div className="mt-8 md:hidden">{allButton}</div>
     </section>
   );
 };

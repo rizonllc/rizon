@@ -5,6 +5,8 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { alternatives } from "@/lib/alternatives";
 import { productLabs } from "@/lib/product-labs";
 import { AnalyticsEvent } from "@/lib/analytics";
+import { caseStudiesIndex } from "@/lib/case-studies-index";
+import { isCaseVisible } from "@/lib/case-study-links";
 
 const navLinkDefs = [
   { key: "home", href: "/#home" },
@@ -23,6 +25,12 @@ const serviceLinks = [
   { key: "woocommerceMoodle", slug: "woocommerce-to-moodle" },
 ] as const;
 
+// First four listed case studies, in hub order.
+const footerCases = caseStudiesIndex.sections
+  .flatMap((sec) => sec.cards)
+  .filter((card) => isCaseVisible(card.study.slug))
+  .slice(0, 4);
+
 const socials = [
   {
     name: "LinkedIn",
@@ -38,139 +46,163 @@ export const Footer = async () => {
     <footer className="mt-32 bg-primary text-primary-foreground md:mt-40">
       <div className="container cntr">
         <div className="grid grid-cols-1 gap-x-12 gap-y-12 py-16 lg:grid-cols-12 md:py-20">
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <Link href="/" className="inline-block">
               <LogoWithText size={120} />
             </Link>
-            <p className="mt-5 max-w-sm text-lg leading-relaxed text-primary-foreground/80 text-pretty">
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-primary-foreground/80 text-pretty">
               {tFooter("tagline")}
             </p>
+            <div className="mt-8">
+              <div className="flex items-center gap-2">
+                {socials.map((social) => (
+                  <Link
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    data-umami-event={AnalyticsEvent.OutboundSocial}
+                    data-umami-event-network={social.name.toLowerCase()}
+                    className="flex size-10 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground/80 transition-colors hover:border-primary-foreground/60 hover:text-primary-foreground"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden
+                      className="size-4"
+                    >
+                      <path d={social.path} />
+                    </svg>
+                  </Link>
+                ))}
+              </div>
+              <a
+                href="mailto:contact@rizon.agency"
+                data-umami-event={AnalyticsEvent.EmailClick}
+                className="mt-5 inline-block text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+              >
+                contact@rizon.agency
+              </a>
+            </div>
           </div>
 
-          <nav className="lg:col-span-2" aria-label={tFooter("explore")}>
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
-              {tFooter("explore")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {navLinkDefs.map((link) => (
-                <li key={link.key}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-                    {...(link.key === "getInTouch"
-                      ? {
-                          "data-umami-event": AnalyticsEvent.ContactCta,
-                          "data-umami-event-location": "footer",
-                        }
-                      : {})}
-                  >
-                    {link.key === "getInTouch" ||
-                    link.key === "howWeWork" ||
-                    link.key === "whyUsShort"
-                      ? tFooter(link.key)
-                      : tNav(link.key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-3">
+            <nav aria-label={tFooter("explore")}>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+                {tFooter("explore")}
+              </h2>
+              <ul className="mt-5 space-y-3">
+                {navLinkDefs.map((link) => (
+                  <li key={link.key}>
+                    <Link
+                      href={link.href}
+                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                      {...(link.key === "getInTouch"
+                        ? {
+                            "data-umami-event": AnalyticsEvent.ContactCta,
+                            "data-umami-event-location": "footer",
+                          }
+                        : {})}
+                    >
+                      {link.key === "getInTouch" ||
+                      link.key === "howWeWork" ||
+                      link.key === "whyUsShort"
+                        ? tFooter(link.key)
+                        : tNav(link.key)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <nav className="lg:col-span-2" aria-label={tFooter("services")}>
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
-              {tFooter("services")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {serviceLinks.map((link) => (
-                <li key={link.key}>
-                  <Link
-                    href={`/services/${link.slug}`}
-                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-                  >
-                    {tFooter(`serviceLinks.${link.key}`)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <nav aria-label={tFooter("services")}>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+                {tFooter("services")}
+              </h2>
+              <ul className="mt-5 space-y-3">
+                {serviceLinks.map((link) => (
+                  <li key={link.key}>
+                    <Link
+                      href={`/services/${link.slug}`}
+                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                    >
+                      {tFooter(`serviceLinks.${link.key}`)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <nav className="lg:col-span-2" aria-label={tFooter("compare")}>
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
-              {tFooter("compare")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {alternatives.slice(0, 4).map((alternative) => (
-                <li key={alternative.slug}>
+            <nav aria-label={tFooter("caseStudies")}>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+                {tFooter("caseStudies")}
+              </h2>
+              <ul className="mt-5 space-y-3">
+                <li>
                   <Link
-                    href={`/alternatives/${alternative.slug}`}
-                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-                  >
-                    {alternative.competitor}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/lms-alternatives"
-                  className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-                >
-                  {tFooter("allAlternatives")}
-                </Link>
-              </li>
-            </ul>
-          </nav>
-
-          <nav className="lg:col-span-2" aria-label={tFooter("products")}>
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
-              {tFooter("products")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {productLabs.map((product) => (
-                <li key={product.slug}>
-                  <Link
-                    href={`/products/${product.slug}`}
+                    href="/case-studies"
                     className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
                   >
-                    {product.name}
+                    {tFooter("allCaseStudies")}
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </nav>
+                {footerCases.map((card) => (
+                  <li key={card.study.slug}>
+                    <Link
+                      href={`/case-studies/${card.study.slug}`}
+                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                    >
+                      {card.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <div className="lg:col-span-1">
-            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
-              {tFooter("follow")}
-            </h2>
-            <div className="mt-5 flex items-center gap-2">
-              {socials.map((social) => (
-                <Link
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  data-umami-event={AnalyticsEvent.OutboundSocial}
-                  data-umami-event-network={social.name.toLowerCase()}
-                  className="flex size-10 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground/80 transition-colors hover:border-primary-foreground/60 hover:text-primary-foreground"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden
-                    className="size-4"
+            <nav aria-label={tFooter("compare")}>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+                {tFooter("compare")}
+              </h2>
+              <ul className="mt-5 space-y-3">
+                {alternatives.slice(0, 4).map((alternative) => (
+                  <li key={alternative.slug}>
+                    <Link
+                      href={`/alternatives/${alternative.slug}`}
+                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                    >
+                      {alternative.competitor}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/lms-alternatives"
+                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
                   >
-                    <path d={social.path} />
-                  </svg>
-                </Link>
-              ))}
-            </div>
-            <a
-              href="mailto:contact@rizon.agency"
-              data-umami-event={AnalyticsEvent.EmailClick}
-              className="mt-5 inline-block text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-            >
-              contact@rizon.agency
-            </a>
+                    {tFooter("allAlternatives")}
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+            <nav aria-label={tFooter("products")}>
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+                {tFooter("products")}
+              </h2>
+              <ul className="mt-5 space-y-3">
+                {productLabs.map((product) => (
+                  <li key={product.slug}>
+                    <Link
+                      href={`/products/${product.slug}`}
+                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                    >
+                      {product.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
 

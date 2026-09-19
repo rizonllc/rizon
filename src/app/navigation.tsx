@@ -35,7 +35,7 @@ const linkDefs = [
   { key: "process", href: "/#how-we-work", id: "how-we-work", isPage: false },
   { key: "services", href: "/services", id: "services", isPage: true },
   { key: "about", href: "/about", id: "about", isPage: true },
-  { key: "work", href: "/#work", id: "work", isPage: false },
+  { key: "caseStudies", href: "/case-studies", id: "case-studies", isPage: true },
   { key: "blog", href: "/blog", id: "blog", isPage: true },
 ] as const;
 
@@ -112,6 +112,10 @@ export const Navigation = () => {
       ? pathname.startsWith(link.href)
       : pathname === "/" && activeId === link.id;
 
+  // Only the home and services pages open with the full-bleed hero; every other
+  // page keeps the nav in its contained (scrolled) layout from the start.
+  const hasHero = pathname === "/" || pathname.startsWith("/services");
+
   // The hero no longer sits behind the nav, so it never needs the white state.
   const overHero = false;
 
@@ -128,7 +132,11 @@ export const Navigation = () => {
         scrolled ? "border-border" : "border-transparent"
       }`}
     >
-      <div className={scrolled ? "container cntr" : "px-6 sm:px-10 lg:px-16"}>
+      <div
+        className={
+          scrolled || !hasHero ? "container cntr" : "px-6 sm:px-10 lg:px-16"
+        }
+      >
         <div className="flex h-16 items-center justify-between gap-8">
           <Link
             href="/#home"

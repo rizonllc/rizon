@@ -6,6 +6,7 @@
     "services": "Services",
     "about": "About",
     "work": "Work",
+    "caseStudies": "Case studies",
     "blog": "Blog",
     "bookACall": "Book a call",
     "servicesMenu": { "title": "Everything we build", "description": "Custom LMS platforms, Moodle and Canvas plugins, LTI tools and migrations. See the full list and how we work.", "cta": "View all services" },
@@ -36,6 +37,8 @@
       "woocommerceMoodle": "WooCommerce to Moodle"
     },
     "products": "Products",
+    "caseStudies": "Case studies",
+    "allCaseStudies": "All case studies",
     "follow": "Follow",
     "allAlternatives": "All alternatives",
     "getInTouch": "Get In Touch",
@@ -266,7 +269,8 @@
     "label": "Selected work",
     "titlePrefix": "What we have been",
     "titleHighlight": "building",
-    "description": "A few platforms we have shipped recently. Real products, in production, doing real work."
+    "description": "A few platforms we have shipped recently. Real products, in production, doing real work.",
+    "allCaseStudies": "All case studies"
   },
   "logos": {
     "title": "Trusted by teams running their own learning platforms"
