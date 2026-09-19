@@ -19,6 +19,7 @@ type Route = {
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes: Route[] = [
     { path: "/", priority: 1, changeFrequency: "weekly" },
+    { path: "/case-studies", priority: 0.8, changeFrequency: "monthly" as ChangeFreq },
     { path: "/services", priority: 0.8, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/lms-alternatives", priority: 0.8, changeFrequency: "monthly" },
@@ -31,6 +32,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...alternatives.map((a) => ({
       path: `/alternatives/${a.slug}`,
       priority: 0.8,
+      changeFrequency: "monthly" as ChangeFreq,
+    })),
+    ...["choice-learning", "center-for-neurodivergence", "cloud-sds"].map((slug) => ({
+      path: `/case-studies/${slug}`,
+      priority: 0.7,
       changeFrequency: "monthly" as ChangeFreq,
     })),
     ...projects.map((p) => ({

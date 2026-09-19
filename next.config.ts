@@ -19,8 +19,6 @@ const nextConfig: NextConfig = {
       { source: "/:locale(fr|es|de)", destination: "/", permanent: true },
       { source: "/work/wavalid", destination: "/products/wavalid", permanent: true },
       { source: "/work/:slug", destination: "/case-studies/:slug", permanent: true },
-      // ponytail: no case-studies index yet; send it to the home work section.
-      { source: "/case-studies", destination: "/#work", permanent: false },
     ];
   },
 };
