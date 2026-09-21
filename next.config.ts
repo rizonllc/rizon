@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
       // Locales were removed; send old /fr, /es, /de URLs to the English page.
       { source: "/:locale(fr|es|de)/:path*", destination: "/:path*", permanent: true },
       { source: "/:locale(fr|es|de)", destination: "/", permanent: true },
+      { source: "/lms-alternatives", destination: "/alternatives", permanent: true },
+      { source: "/alternatives/:slug(canvas|learndash|blackboard)", destination: "/alternatives", permanent: true },
       { source: "/work/wavalid", destination: "/products/wavalid", permanent: true },
       { source: "/work/:slug", destination: "/case-studies/:slug", permanent: true },
     ];

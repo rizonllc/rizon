@@ -7,6 +7,7 @@
     "about": "About",
     "work": "Work",
     "caseStudies": "Case studies",
+    "alternatives": "Alternatives",
     "blog": "Blog",
     "bookACall": "Book a call",
     "servicesMenu": { "title": "Everything we build", "description": "Custom LMS platforms, Moodle and Canvas plugins, LTI tools and migrations. See the full list and how we work.", "cta": "View all services" },
@@ -263,7 +264,9 @@
     "title": "The platform you use should not dictate the product you can sell.",
     "description": "Honest comparisons for teams deciding whether to keep, configure, or replace their current LMS.",
     "readComparison": "Read the comparison",
-    "browseAll": "Browse all LMS alternatives"
+    "browseAll": "Browse all LMS alternatives",
+    "selectorTeaser": "Not sure which fits?",
+    "selectorLink": "Take the free 5-question LMS selector"
   },
   "work": {
     "label": "Selected work",

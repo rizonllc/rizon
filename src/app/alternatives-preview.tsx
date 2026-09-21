@@ -43,9 +43,18 @@ export const AlternativesPreview = async () => {
           </article>
         ))}
       </div>
+      <p className="mt-8 text-muted-foreground">
+        {t("selectorTeaser")}{" "}
+        <Link
+          href="/alternatives/which-lms-is-right-for-you"
+          className="font-medium text-primary underline underline-offset-4"
+        >
+          {t("selectorLink")}
+        </Link>
+      </p>
       <Link
-        href="/lms-alternatives"
-        className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+        href="/alternatives"
+        className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
       >
         {t("browseAll")}{" "}
         <ArrowRight

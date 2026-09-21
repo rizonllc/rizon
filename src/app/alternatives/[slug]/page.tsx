@@ -10,6 +10,11 @@ import {
   type Crumb,
 } from "@/components/breadcrumb";
 import { alternatives, getAlternativeBySlug } from "@/lib/alternatives";
+import { getAlternativePage } from "@/lib/alternative-pages";
+import {
+  AlternativePage as AlternativeLanding,
+  alternativeMetadata,
+} from "@/components/alternative-page";
 import { posts } from "@/lib/posts";
 import { getServiceBySlug } from "@/lib/services";
 import { StatBlock } from "@/components/stat-block";
@@ -32,6 +37,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const landing = getAlternativePage(slug);
+  if (landing) return alternativeMetadata(landing);
   const alternative = getAlternativeBySlug(slug);
 
   if (!alternative) return { title: "Alternative not found — Rizon" };
@@ -77,6 +84,8 @@ export default async function AlternativePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const landing = getAlternativePage(slug);
+  if (landing) return <AlternativeLanding a={landing} />;
   const t = getT("alternativeDetail");
   const alternative = getAlternativeBySlug(slug);
   if (!alternative) notFound();
@@ -89,7 +98,7 @@ export default async function AlternativePage({
   const url = `${BASE_URL}/alternatives/${slug}`;
   const crumbs: Crumb[] = [
     { name: t("breadcrumbs.home"), href: "/" },
-    { name: t("breadcrumbs.alternatives"), href: "/lms-alternatives" },
+    { name: t("breadcrumbs.alternatives"), href: "/alternatives" },
     { name: alternative.competitor, href: `/alternatives/${slug}` },
   ];
   const relatedPosts = posts.filter((post) =>
@@ -413,7 +422,7 @@ export default async function AlternativePage({
         <section className="container cntr mt-20">
           <div className="flex flex-wrap gap-x-6 gap-y-3">
             <Link
-              href="/lms-alternatives"
+              href="/alternatives"
               className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
             >
               {t("footerLinks.browseAll")}{" "}

@@ -23,6 +23,7 @@ const linkDefs = [
   { key: "services", href: "/services", id: "services", isPage: true },
   { key: "about", href: "/about", id: "about", isPage: true },
   { key: "caseStudies", href: "/case-studies", id: "case-studies", isPage: true },
+  { key: "alternatives", href: "/alternatives", id: "alternatives", isPage: true },
   { key: "blog", href: "/blog", id: "blog", isPage: true },
 ] as const;
 

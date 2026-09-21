@@ -177,7 +177,7 @@ export const Footer = async () => {
                 ))}
                 <li>
                   <Link
-                    href="/lms-alternatives"
+                    href="/alternatives"
                     className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
                   >
                     {tFooter("allAlternatives")}
