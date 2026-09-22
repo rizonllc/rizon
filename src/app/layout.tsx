@@ -12,6 +12,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Navigation } from "./navigation";
 import { Providers } from "@/components/providers";
+import { ScrollButtons } from "@/components/scroll-buttons";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -97,6 +98,7 @@ export default function RootLayout({
         <Providers>
           <Navigation />
           {children}
+          <ScrollButtons />
         </Providers>
         <SpeedInsights />
         <Analytics />

@@ -9,6 +9,8 @@
     "caseStudies": "Case studies",
     "blog": "Blog",
     "getInTouch": "Get in touch",
+    "scrollToTop": "Scroll to top",
+    "scrollToBottom": "Scroll to bottom",
     "servicesMenu": { "title": "Everything we build", "description": "Custom LMS platforms, Moodle and Canvas plugins, LTI tools and migrations. See the full list and how we work.", "cta": "View all services" },
     "serviceItems": {
       "customLms": { "title": "Custom LMS Development", "description": "Learning platforms built from scratch around how you teach" },
