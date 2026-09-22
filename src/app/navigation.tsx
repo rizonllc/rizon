@@ -130,10 +130,8 @@ export const Navigation = () => {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
-        overHero
-          ? "border-transparent"
-          : "border-border bg-background/85 backdrop-blur-md"
-      } ${overHero ? "pt-3 sm:pt-5" : ""}`}
+        overHero ? "" : "bg-background/85 backdrop-blur-md"
+      } ${scrolled ? "border-border" : "border-transparent"} ${overHero ? "pt-3 sm:pt-5" : ""}`}
     >
       <div className="container cntr">
         <div className="flex h-16 items-center justify-between gap-8">
