@@ -13,6 +13,9 @@ import { getAuthorBySlug } from "@/lib/authors";
 import { Breadcrumb, breadcrumbJsonLd, type Crumb } from "@/components/breadcrumb";
 import { BlogThumbnail } from "@/components/blog-thumbnail";
 import { TableOfContents } from "@/components/table-of-contents";
+import { HeadingAnchor } from "@/components/heading-anchor";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 import { CodeBlock } from "@/components/code-block";
 import { getPostHeadings, slugify, textOf } from "@/lib/toc";
 import type { ComponentProps } from "react";
@@ -68,18 +71,23 @@ export async function generateMetadata({
 }
 
 // Give every `##` and `###` an id so the table of contents can link to it,
+// plus a hover hash that copies a link to the section,
 // and render fenced code through <CodeBlock> for the copy button.
+function linkedHeading(Tag: "h2" | "h3") {
+  return function LinkedHeading({ children, className, ...props }: ComponentProps<"h2">) {
+    const id = slugify(textOf(children));
+    return (
+      <Tag id={id} className={cn("group relative", className)} {...props}>
+        <HeadingAnchor id={id} />
+        {children}
+      </Tag>
+    );
+  };
+}
+
 const mdxComponents = {
-  h2: ({ children, ...props }: ComponentProps<"h2">) => (
-    <h2 id={slugify(textOf(children))} {...props}>
-      {children}
-    </h2>
-  ),
-  h3: ({ children, ...props }: ComponentProps<"h3">) => (
-    <h3 id={slugify(textOf(children))} {...props}>
-      {children}
-    </h3>
-  ),
+  h2: linkedHeading("h2"),
+  h3: linkedHeading("h3"),
   pre: CodeBlock,
 };
 
@@ -250,8 +258,13 @@ export default async function BlogPostPage({
 
           {headings.length > 1 && (
             <aside className="hidden lg:block">
-              <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4">
-                <TableOfContents headings={headings} title={t("onThisPage")} />
+              {/* Base UI pins the scroll area to position: relative, so a wrapper does the sticking. */}
+              <div className="sticky top-28">
+                <ScrollArea className="h-[calc(100vh-8rem)]">
+                  <div className="pr-4 pb-4">
+                    <TableOfContents headings={headings} title={t("onThisPage")} />
+                  </div>
+                </ScrollArea>
               </div>
             </aside>
           )}

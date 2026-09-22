@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import type { TocHeading } from "@/lib/toc";
 
 // A heading counts as "current" once its top passes this line (px from viewport top).
 const ACTIVE_OFFSET = 128;
+// Matches the subsection expand transition (duration-300).
+const EXPAND_DURATION = 300;
+// Room kept around the highlighted link when auto-scrolling the list (px).
+const SCROLL_MARGIN = 48;
 
 type Section = { heading: TocHeading; children: TocHeading[] };
 
@@ -30,6 +34,7 @@ function scrollToHeading(event: MouseEvent<HTMLAnchorElement>, id: string) {
 export function TableOfContents({ headings, title }: { headings: TocHeading[]; title: string }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const sections = useMemo(() => toSections(headings), [headings]);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const elements = headings
@@ -66,6 +71,25 @@ export function TableOfContents({ headings, title }: { headings: TocHeading[]; t
     };
   }, [headings]);
 
+  // Keep the highlighted link visible when the list is taller than its scroll area.
+  // Measured after the subsection expand transition so the link has its final position.
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const nav = navRef.current;
+      const viewport = nav?.closest<HTMLElement>("[data-slot=scroll-area-viewport]");
+      const link = nav?.querySelector<HTMLElement>('[aria-current="location"]');
+      if (!viewport || !link) return;
+      const view = viewport.getBoundingClientRect();
+      const rect = link.getBoundingClientRect();
+      if (rect.top < view.top + SCROLL_MARGIN) {
+        viewport.scrollBy({ top: rect.top - view.top - SCROLL_MARGIN, behavior: "smooth" });
+      } else if (rect.bottom > view.bottom - SCROLL_MARGIN) {
+        viewport.scrollBy({ top: rect.bottom - view.bottom + SCROLL_MARGIN, behavior: "smooth" });
+      }
+    }, EXPAND_DURATION);
+    return () => clearTimeout(timeout);
+  }, [activeId]);
+
   if (headings.length === 0) return null;
 
   const activeSection = sections.find(
@@ -73,10 +97,10 @@ export function TableOfContents({ headings, title }: { headings: TocHeading[]; t
   );
 
   return (
-    <nav aria-label={title}>
+    <nav ref={navRef} aria-label={title}>
       <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground/60">{title}</p>
       <ol className="mt-5 space-y-1">
-        {sections.map((section, index) => {
+        {sections.map((section) => {
           const isOpen = section === activeSection;
           const isCurrent = section.heading.id === activeId;
           return (
@@ -86,20 +110,11 @@ export function TableOfContents({ headings, title }: { headings: TocHeading[]; t
                 aria-current={isCurrent ? "location" : undefined}
                 onClick={(event) => scrollToHeading(event, section.heading.id)}
                 className={cn(
-                  "group flex gap-3 py-1.5 text-sm leading-snug transition-colors duration-200",
+                  "block py-1.5 text-sm leading-snug transition-colors duration-200",
                   isOpen ? "font-medium text-foreground" : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <span
-                  aria-hidden
-                  className={cn(
-                    "mt-px shrink-0 font-mono text-xs tabular-nums transition-colors duration-200",
-                    isOpen ? "text-primary" : "text-muted-foreground/50 group-hover:text-muted-foreground",
-                  )}
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>{section.heading.text}</span>
+                {section.heading.text}
               </a>
 
               {section.children.length > 0 && (
@@ -110,7 +125,7 @@ export function TableOfContents({ headings, title }: { headings: TocHeading[]; t
                   )}
                 >
                   <div className="min-h-0 overflow-hidden" inert={!isOpen}>
-                    <ol className="ml-[0.4rem] mt-1 mb-2 border-l border-border">
+                    <ol className="mt-1 mb-2 border-l border-border">
                       {section.children.map((child) => {
                         const isActive = child.id === activeId;
                         return (
@@ -120,7 +135,7 @@ export function TableOfContents({ headings, title }: { headings: TocHeading[]; t
                               aria-current={isActive ? "location" : undefined}
                               onClick={(event) => scrollToHeading(event, child.id)}
                               className={cn(
-                                "-ml-px block border-l py-1 pl-5 text-[0.8125rem] leading-snug transition-colors duration-200",
+                                "-ml-px block border-l py-1 pl-4 text-[0.8125rem] leading-snug transition-colors duration-200",
                                 isActive
                                   ? "border-primary text-foreground"
                                   : "border-transparent text-muted-foreground hover:border-foreground/30 hover:text-foreground",

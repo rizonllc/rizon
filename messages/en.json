@@ -581,7 +581,9 @@
     "blog": "Blog",
     "onThisPage": "On this page",
     "copyCode": "Copy code",
-    "copied": "Copied"
+    "copied": "Copied",
+    "copyLink": "Copy link to this section",
+    "linkCopied": "Link copied"
   },
   "notFound": {
     "label": "Not found",
