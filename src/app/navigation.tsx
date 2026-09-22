@@ -22,7 +22,6 @@ import {
   BlocksIcon,
   GraduationCapIcon,
   LayersIcon,
-  PhoneIcon,
   PlugIcon,
   PuzzleIcon,
   ShoppingCartIcon,
@@ -254,8 +253,7 @@ export const Navigation = () => {
                 />
               }
             >
-              <PhoneIcon size={12} />
-              {t("bookACall")}
+              {t("getInTouch")}
             </Button>
           </div>
 

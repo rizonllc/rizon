@@ -126,7 +126,7 @@ export const MobileNav = ({ activeId, overHero }: Props) => {
               />
             }
           >
-            {t("bookACall")}
+            {t("getInTouch")}
           </Button>
         </div>
       </SheetContent>
