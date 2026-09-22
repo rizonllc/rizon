@@ -13,6 +13,7 @@ import { getAuthorBySlug } from "@/lib/authors";
 import { Breadcrumb, breadcrumbJsonLd, type Crumb } from "@/components/breadcrumb";
 import { BlogThumbnail } from "@/components/blog-thumbnail";
 import { TableOfContents } from "@/components/table-of-contents";
+import { CodeBlock } from "@/components/code-block";
 import { getPostHeadings, slugify, textOf } from "@/lib/toc";
 import type { ComponentProps } from "react";
 
@@ -66,7 +67,8 @@ export async function generateMetadata({
   };
 }
 
-// Give every `##` and `###` an id so the table of contents can link to it.
+// Give every `##` and `###` an id so the table of contents can link to it,
+// and render fenced code through <CodeBlock> for the copy button.
 const mdxComponents = {
   h2: ({ children, ...props }: ComponentProps<"h2">) => (
     <h2 id={slugify(textOf(children))} {...props}>
@@ -78,6 +80,7 @@ const mdxComponents = {
       {children}
     </h3>
   ),
+  pre: CodeBlock,
 };
 
 function formatDate(dateStr: string) {

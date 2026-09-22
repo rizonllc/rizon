@@ -182,14 +182,6 @@
     margin: 0;
   }
 
-  .prose :where(pre) {
-    border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
-    border-radius: 0.75rem;
-    background: oklch(0.12 0.01 70);
-    padding: 1.25rem 1.35rem;
-    overflow-x: auto;
-  }
-
   .prose :where(pre code) {
     display: grid;
     min-width: max-content;
@@ -213,4 +205,22 @@
     :where(pre code)
   )::after {
   content: "" !important;
+}
+
+/* Unlayered so it beats @tailwindcss/typography's dark `pre` default. */
+.prose :where(pre) {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #24292f;
+  padding: 1.25rem 1.35rem;
+  overflow-x: auto;
+}
+
+/* Inside <CodeBlock> the wrapper owns the border and rounding. */
+.prose :where(.code-block pre) {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 1rem 1.25rem;
 }

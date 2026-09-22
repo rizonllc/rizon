@@ -579,7 +579,9 @@
     "nextPost": "Next post",
     "home": "Home",
     "blog": "Blog",
-    "onThisPage": "On this page"
+    "onThisPage": "On this page",
+    "copyCode": "Copy code",
+    "copied": "Copied"
   },
   "notFound": {
     "label": "Not found",
