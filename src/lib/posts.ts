@@ -1,5 +1,5 @@
 import type { Post } from "@/types";
-import type { ComponentType } from "react";
+import type { MDXContent } from "mdx/types";
 import cheatingExamsCover from "@/assets/blog/cheating-online-exams-what-actually-works.png";
 import canvasBreachCover from "@/assets/blog/canvas-breach-student-data-security.png";
 import ltiMigrationBreachCover from "@/assets/blog/migrating-from-lti-1-1-to-lti-1-3-a-practical-guide-for-tool-builders.png";
@@ -457,7 +457,7 @@ export function getPostBySlug(slug: string): Post | undefined {
 }
 
 export async function getPostContent(slug: string) {
-  const contentLoaders: Record<string, () => Promise<{ default: ComponentType }>> = {
+  const contentLoaders: Record<string, () => Promise<{ default: MDXContent }>> = {
     "connect-woocommerce-to-moodle-with-edwiser-bridge": () => import("@/content/blog/connect-woocommerce-to-moodle-with-edwiser-bridge.mdx"),
     "lms-reporting-and-analytics-what-you-actually-need": () => import("@/content/blog/lms-reporting-and-analytics-what-you-actually-need.mdx"),
     "moodle-5-0-release-notes-and-upgrade-guide": () => import("@/content/blog/moodle-5-0-release-notes-and-upgrade-guide.mdx"),

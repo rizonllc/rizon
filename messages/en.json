@@ -578,7 +578,8 @@
     "alternative": "{name} alternative",
     "nextPost": "Next post",
     "home": "Home",
-    "blog": "Blog"
+    "blog": "Blog",
+    "onThisPage": "On this page"
   },
   "notFound": {
     "label": "Not found",
