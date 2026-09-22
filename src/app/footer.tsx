@@ -42,17 +42,21 @@ export const Footer = async () => {
   const tNav = getT("nav");
   const tFooter = getT("footer");
   return (
-    <footer className="mt-32 bg-primary text-primary-foreground md:mt-40">
+    <footer className="mt-32 md:mt-40">
       <div className="container cntr">
-        <div className="grid grid-cols-1 gap-x-12 gap-y-12 py-16 lg:grid-cols-12 md:py-20">
-          <div className="lg:col-span-4">
-            <Link href="/" className="inline-block">
-              <LogoWithText size={120} />
-            </Link>
-            <p className="mt-5 max-w-md text-lg leading-relaxed text-primary-foreground/80 text-pretty">
-              {tFooter("tagline")}
-            </p>
-            <div className="mt-8">
+        <div className="py-16 md:py-20">
+          <div className="flex flex-col gap-8 pb-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+            <div>
+              <Link href="/" className="inline-block text-primary">
+                <LogoWithText size={120} />
+              </Link>
+
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">
+                {tFooter("tagline")}
+              </p>
+            </div>
+
+            <div className="shrink-0">
               <div className="flex items-center gap-2">
                 {socials.map((social) => (
                   <Link
@@ -63,7 +67,7 @@ export const Footer = async () => {
                     aria-label={social.name}
                     data-umami-event={AnalyticsEvent.OutboundSocial}
                     data-umami-event-network={social.name.toLowerCase()}
-                    className="flex size-10 items-center justify-center rounded-full border border-primary-foreground/30 text-primary-foreground/80 transition-colors hover:border-primary-foreground/60 hover:text-primary-foreground"
+                    className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -79,16 +83,16 @@ export const Footer = async () => {
               <a
                 href="mailto:contact@rizon.agency"
                 data-umami-event={AnalyticsEvent.EmailClick}
-                className="mt-5 inline-block text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                className="mt-5 inline-block text-[15px] text-muted-foreground transition-colors hover:text-foreground"
               >
                 contact@rizon.agency
               </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 pt-12 sm:grid-cols-3 lg:grid-cols-5">
             <nav aria-label={tFooter("explore")}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {tFooter("explore")}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -96,7 +100,7 @@ export const Footer = async () => {
                   <li key={link.key}>
                     <Link
                       href={link.href}
-                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                      className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                       {...(link.key === "getInTouch"
                         ? {
                             "data-umami-event": AnalyticsEvent.ContactCta,
@@ -116,7 +120,7 @@ export const Footer = async () => {
             </nav>
 
             <nav aria-label={tFooter("services")}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {tFooter("services")}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -124,7 +128,7 @@ export const Footer = async () => {
                   <li key={link.key}>
                     <Link
                       href={`/services/${link.slug}`}
-                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                      className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {tFooter(`serviceLinks.${link.key}`)}
                     </Link>
@@ -134,14 +138,14 @@ export const Footer = async () => {
             </nav>
 
             <nav aria-label={tFooter("caseStudies")}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {tFooter("caseStudies")}
               </h2>
               <ul className="mt-5 space-y-3">
                 <li>
                   <Link
                     href="/case-studies"
-                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                    className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {tFooter("allCaseStudies")}
                   </Link>
@@ -150,7 +154,7 @@ export const Footer = async () => {
                   <li key={card.study.slug}>
                     <Link
                       href={`/case-studies/${card.study.slug}`}
-                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                      className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {card.title}
                     </Link>
@@ -160,7 +164,7 @@ export const Footer = async () => {
             </nav>
 
             <nav aria-label={tFooter("compare")}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {tFooter("compare")}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -168,7 +172,7 @@ export const Footer = async () => {
                   <li key={alternative.slug}>
                     <Link
                       href={`/alternatives/${alternative.slug}`}
-                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                      className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {alternative.competitor}
                     </Link>
@@ -177,7 +181,7 @@ export const Footer = async () => {
                 <li>
                   <Link
                     href="/lms-alternatives"
-                    className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                    className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {tFooter("allAlternatives")}
                   </Link>
@@ -186,7 +190,7 @@ export const Footer = async () => {
             </nav>
 
             <nav aria-label={tFooter("products")}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {tFooter("products")}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -194,7 +198,7 @@ export const Footer = async () => {
                   <li key={product.slug}>
                     <Link
                       href={`/products/${product.slug}`}
-                      className="text-[15px] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                      className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {product.name}
                     </Link>
@@ -205,13 +209,13 @@ export const Footer = async () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-4 border-t border-primary-foreground/20 py-6 sm:flex-row sm:items-center">
-          <p className="text-sm text-primary-foreground/70">
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-border py-6 sm:flex-row sm:items-center">
+          <p className="text-sm text-muted-foreground">
             {tFooter("copyright", { year: new Date().getFullYear() })}
           </p>
           <Link
             href="/legal"
-            className="text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             {tFooter("terms")}
           </Link>
