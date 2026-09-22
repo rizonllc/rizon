@@ -69,35 +69,36 @@
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.216 0.006 56.043); /* dark #130002-ish */
-  --card: oklch(0.985 0.004 106.5); /* warm-50 #faf9f4 */
+  --card: oklch(0.99 0 0); /* near-white, neutral */
   --card-foreground: oklch(0.216 0.006 56.043);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.216 0.006 56.043);
   --primary: oklch(0.488 0.243 264.376); /* brand blue #1447E6 */
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.955 0.008 95); /* warm-100 #f4f0e1 */
+  --secondary: oklch(0.965 0 0); /* neutral gray-100 */
   --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.955 0.008 95);
-  --muted-foreground: oklch(0.55 0.02 60); /* beige-500-ish */
+  --muted: oklch(0.965 0 0);
+  --muted-foreground: oklch(0.5 0 0); /* neutral gray-500 */
   --accent: oklch(0.955 0.03 55); /* rust-50 #fff3ed */
   --accent-foreground: oklch(0.216 0.006 56.043);
   --destructive: oklch(0.637 0.237 25.331); /* red-500 #fb3748 */
-  --border: oklch(0.905 0.006 60); /* beige-300 #e0dbd7 */
-  --input: oklch(0.86 0.008 60); /* beige-400 #bbb6b3 */
+  --border: oklch(0.9 0 0); /* neutral gray-300 */
+  --input: oklch(0.86 0 0); /* neutral gray-400 */
   --ring: oklch(0.708 0.164 38.5);
+  --shadow-color: 30 30 35; /* neutral ink for box-shadow rgb() mixes */
   --chart-1: oklch(0.708 0.164 38.5); /* rust */
   --chart-2: oklch(0.62 0.19 255); /* azure #4269ef */
   --chart-3: oklch(0.72 0.16 165); /* green #1fc16b */
   --chart-4: oklch(0.78 0.16 70); /* yellow/orange */
   --chart-5: oklch(0.64 0.2 300); /* purple #7d52f4 */
   --radius: 0.75rem;
-  --sidebar: oklch(0.985 0.004 106.5);
+  --sidebar: oklch(0.99 0 0);
   --sidebar-foreground: oklch(0.216 0.006 56.043);
   --sidebar-primary: oklch(0.708 0.164 38.5);
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.955 0.03 55);
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-  --sidebar-border: oklch(0.905 0.006 60);
+  --sidebar-border: oklch(0.9 0 0);
   --sidebar-ring: oklch(0.708 0.164 38.5);
 }
 
@@ -126,12 +127,12 @@
 }
 
 @layer components {
-  /* A warm card that lifts off the paper with a soft, warm-tinted shadow. */
+  /* A clean card that lifts off the page with a soft, neutral shadow. */
   .surface {
     @apply rounded-2xl border border-border bg-card;
     box-shadow:
-      0 1px 2px rgb(var(--shadow-color) / 0.05),
-      0 14px 34px -14px rgb(var(--shadow-color) / 0.14);
+      0 1px 2px rgb(var(--shadow-color) / 0.04),
+      0 14px 34px -14px rgb(var(--shadow-color) / 0.1);
   }
   .surface-hover {
     transition:
