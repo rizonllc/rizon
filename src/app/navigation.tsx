@@ -165,7 +165,11 @@ export const Navigation = () => {
                   {link.key === "services" ? (
                     <>
                       <NavigationMenuTrigger
-                        className={`${linkClass(link)} h-auto rounded-none bg-transparent hover:bg-transparent focus:bg-transparent data-popup-open:bg-transparent`}
+                        className={`${linkClass(link)} h-auto rounded-none bg-transparent ${
+                          overHero
+                            ? "hover:bg-white/10 focus:bg-white/10 data-popup-open:bg-white/10 data-popup-open:hover:bg-white/15 data-open:bg-white/10 data-open:hover:bg-white/15 data-open:focus:bg-white/10"
+                            : "hover:bg-muted focus:bg-muted data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted"
+                        }`}
                       >
                         {t(link.key)}
                       </NavigationMenuTrigger>
