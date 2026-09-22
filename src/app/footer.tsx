@@ -1,7 +1,6 @@
 import { getT } from "@/lib/t";
 import Link from "next/link";
 import { LogoWithText } from "@/components/logo";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { alternatives } from "@/lib/alternatives";
 import { productLabs } from "@/lib/product-labs";
 import { AnalyticsEvent } from "@/lib/analytics";
@@ -210,15 +209,12 @@ export const Footer = async () => {
           <p className="text-sm text-primary-foreground/70">
             {tFooter("copyright", { year: new Date().getFullYear() })}
           </p>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/legal"
-              className="text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
-            >
-              {tFooter("terms")}
-            </Link>
-            <ThemeToggle />
-          </div>
+          <Link
+            href="/legal"
+            className="text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+          >
+            {tFooter("terms")}
+          </Link>
         </div>
       </div>
     </footer>
