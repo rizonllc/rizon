@@ -112,31 +112,31 @@ export const Navigation = () => {
       ? pathname.startsWith(link.href)
       : pathname === "/" && activeId === link.id;
 
-  // Only the home and services pages open with the full-bleed hero; every other
-  // page keeps the nav in its contained (scrolled) layout from the start.
-  const hasHero = pathname === "/" || pathname.startsWith("/services");
-
-  // The hero no longer sits behind the nav, so it never needs the white state.
-  const overHero = false;
+  // Home and services pages open with the same full-bleed image card; the
+  // nav floats white over it until scrolled.
+  const overHero =
+    (pathname === "/" || pathname.startsWith("/services")) && !scrolled;
 
   const linkClass = (link: (typeof linkDefs)[number]) =>
     `px-4 py-2 text-[13px] font-medium tracking-tight transition-colors duration-200 focus-visible:outline-none ${
-      isActive(link)
-        ? "text-foreground"
-        : "text-muted-foreground hover:text-foreground focus-visible:text-foreground"
+      overHero
+        ? isActive(link)
+          ? "text-white"
+          : "text-white/70 hover:text-white focus-visible:text-white"
+        : isActive(link)
+          ? "text-foreground"
+          : "text-muted-foreground hover:text-foreground focus-visible:text-foreground"
     }`;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b bg-background/85 backdrop-blur-md transition-colors duration-300 ${
-        scrolled ? "border-border" : "border-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
+        overHero
+          ? "border-transparent"
+          : "border-border bg-background/85 backdrop-blur-md"
+      } ${overHero ? "pt-3 sm:pt-5" : ""}`}
     >
-      <div
-        className={
-          scrolled || !hasHero ? "container cntr" : "px-6 sm:px-10 lg:px-16"
-        }
-      >
+      <div className="container cntr">
         <div className="flex h-16 items-center justify-between gap-8">
           <Link
             href="/#home"

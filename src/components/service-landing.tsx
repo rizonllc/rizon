@@ -132,7 +132,6 @@ export const ServiceLanding = async ({ content }: { content: Content }) => {
           image={heroImage}
           imageAlt={content.heroAlt}
           tags={content.heroTags}
-          note={content.trustLine || undefined}
           actions={
             <>
               {cta("service-hero")}
@@ -141,6 +140,7 @@ export const ServiceLanding = async ({ content }: { content: Content }) => {
                 variant="outline"
                 nativeButton={false}
                 render={<Link href="/#work" />}
+                className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
               >
                 {t("ctaSecondary")}
               </Button>
