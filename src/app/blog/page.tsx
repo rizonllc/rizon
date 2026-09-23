@@ -40,7 +40,8 @@ export default async function BlogPage() {
     <>
       <main>
         <section className="container cntr pt-32 md:pt-40 ">
-          <SectionHeader label={t("eyebrow")} title={t("title")} />
+          {/* TODO: confirm H1 wording — this page had no <h1> before; reusing the existing blogPage.title copy as the page's H1 */}
+          <SectionHeader as="h1" label={t("eyebrow")} title={t("title")} />
         </section>
 
         <section className="container cntr mt-16 ">

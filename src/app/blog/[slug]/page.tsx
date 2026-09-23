@@ -210,7 +210,7 @@ export default async function BlogPostPage({
               </div>
             </section>
 
-            {author && <section className="mt-16"><div className="flex gap-5 border-y border-border py-8"><Image src={author.avatar} alt="" width={56} height={56} className="size-14 rounded-full" /><div><p className="text-sm font-medium">{t("writtenBy", { name: author.name })}</p><p className="mt-1 text-sm text-muted-foreground">{author.role}</p><p className="mt-3 leading-relaxed text-muted-foreground">{author.bio}</p></div></div></section>}
+            {author && <section className="mt-16"><div className="flex gap-5 border-y border-border py-8">{/* TODO: review alt text */}<Image src={author.avatar} alt={author.name} width={56} height={56} className="size-14 rounded-full" /><div><p className="text-sm font-medium">{t("writtenBy", { name: author.name })}</p><p className="mt-1 text-sm text-muted-foreground">{author.role}</p><p className="mt-3 leading-relaxed text-muted-foreground">{author.bio}</p></div></div></section>}
 
             {(relatedServices.length > 0 || relatedAlternatives.length > 0 || relatedPosts.length > 0) && (
               <section className="mt-20">

@@ -12,6 +12,56 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    // NOTE: Content-Security-Policy is intentionally shipped as
+    // "Content-Security-Policy-Report-Only" for now. In this mode the
+    // browser evaluates the policy and reports violations to the console
+    // (and via `report-uri`/`report-to` if configured) but does NOT block
+    // anything. Nothing on the site can break from this header as shipped.
+    // TODO: after monitoring the browser console (and ideally wiring up a
+    // report endpoint) for false positives across all page types — home,
+    // blog/MDX posts, case studies with embedded media, contact form —
+    // rename this to `Content-Security-Policy` to start enforcing it.
+    const csp = [
+      "default-src 'self'",
+      // Next.js injects inline bootstrap scripts and hashes them, but
+      // 'unsafe-inline' is kept here as a safety net for third-party
+      // scripts (Vercel Analytics/Speed Insights, self-hosted Umami) that
+      // may inject inline snippets. Tighten to nonces/hashes once verified.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://analytics.rizon.agency",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' data: https:",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "connect-src 'self' https://vitals.vercel-insights.com https://analytics.rizon.agency",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join("; ");
+
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value: csp,
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Locales were removed; send old /fr, /es, /de URLs to the English page.

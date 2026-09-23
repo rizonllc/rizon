@@ -6,6 +6,7 @@ type SectionHeaderProps = {
   description?: string;
   className?: string;
   variant?: "default" | "primary";
+  as?: "h1" | "h2";
 };
 
 export const SectionHeader = ({
@@ -14,6 +15,7 @@ export const SectionHeader = ({
   description,
   className = "",
   variant = "default",
+  as: Heading = "h2",
 }: SectionHeaderProps) => {
   const isPrimary = variant === "primary";
 
@@ -34,9 +36,9 @@ export const SectionHeader = ({
         />
         {label}
       </span>
-      <h2 className="mt-6 text-4xl font-semibold tracking-tight leading-[1.05] text-balance md:text-5xl lg:text-6xl">
+      <Heading className="mt-6 text-4xl font-semibold tracking-tight leading-[1.05] text-balance md:text-5xl lg:text-6xl">
         {title}
-      </h2>
+      </Heading>
       {description && (
         <p
           className={`mt-5 max-w-xl text-base leading-relaxed text-pretty md:text-lg ${
