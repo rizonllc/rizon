@@ -3,6 +3,7 @@ import type { CaseStudy } from "@/components/case-study-page";
 // Copy for /case-studies/cloud-sds.
 export const cloudSds: CaseStudy = {
   slug: "cloud-sds",
+  // TODO: metaTitle is 28 chars (<30) — expand, e.g.: "Cloud SDS: LTI Zoom Integration Case Study | Rizon"
   metaTitle: "Cloud SDS Case Study | Rizon",
   metaDescription:
     "How Rizon built a Zoom integration for Cloud SDS via LTI, bringing live video sessions directly into their learning platform.",

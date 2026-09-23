@@ -21,7 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = getT("seo.home");
   const path = "/";
   return {
+    // TODO: seo.home.title (messages/en.json) is 25 chars (<30) — expand, e.g.: "Rizon - Custom E-Learning Platforms"
     title: t("title"),
+    // TODO: seo.home.description (messages/en.json) is 199 chars (>155) — shorten, e.g.: "Launch your online learning platform without vendor lock-in. Own 100% of your code, no templates, no revenue sharing."
     description: t("description"),
     alternates: {
       canonical: path,

@@ -183,6 +183,7 @@ export const alternatives: Alternative[] = [
     competitor: "Kajabi",
     category: "Course platform",
     metaTitle: "Kajabi Alternative for an Owned Course Platform | Rizon",
+    // TODO: metaDescription is 160 chars (>155) — shorten, e.g.: "A Kajabi alternative for education businesses that need a dedicated learning product, tailored member flows, and technical control."
     metaDescription: "A Kajabi alternative for education businesses that need a dedicated learning product, tailored member flows, and control of their technical roadmap, end to end.",
     heroHeadline: "When your education business needs more than an all-in-one box.",
     heroSub: "For the established creator who needs learning, membership, and commerce to work their own way, Rizon builds a platform you control.",
@@ -213,6 +214,7 @@ export const alternatives: Alternative[] = [
     competitor: "Docebo",
     category: "Corporate LMS",
     metaTitle: "Docebo Alternative for Custom Enterprise Training | Rizon",
+    // TODO: metaDescription is 156 chars (>155) — shorten, e.g.: "A Docebo alternative for companies that need a training product built around their operations, data model, and employee experience."
     metaDescription: "A Docebo alternative for companies that need a training product built around their operations, data model, and employee or customer experience, and roadmap.",
     heroHeadline: "For training programmes that cannot live inside a vendor template.",
     heroSub: "For the enterprise training owner with specialised workflows and a real product requirement, Rizon builds a custom platform around the work.",

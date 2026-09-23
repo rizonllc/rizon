@@ -79,6 +79,7 @@ export const services: ServicePage[] = [
     slug: "corporate-training-platform",
     title: "Corporate Training Platform Development",
     metaTitle: "Corporate Training Platform Development | Rizon",
+    // TODO: metaDescription is 156 chars (>155) — shorten, e.g.: "Corporate training platform development for L&D teams that need training tied to their own roles, SSO, compliance, and reporting."
     metaDescription: "Corporate training platform development for L&D teams that need training tied to their own roles, SSO, compliance evidence, reporting, and employee systems.",
     h1: "Corporate training platform development that works with the company you actually run.",
     heroSub: "For L&D and HR leads who need training records, role-based access, and reporting connected to their organisation, we build the platform around the work.",
@@ -134,6 +135,7 @@ export const services: ServicePage[] = [
     slug: "course-platform-for-creators",
     title: "Custom Course Platform for Creators",
     metaTitle: "Custom Course Platform for Creators | Rizon",
+    // TODO: metaDescription is 166 chars (>155) — shorten, e.g.: "A custom course platform for creators who have outgrown template software and need full control of payments, experience, and roadmap."
     metaDescription: "A custom course platform for creators who have outgrown template course software and need full control of payments, learner experience, branding, and product roadmap.",
     h1: "A custom course platform for creators who have outgrown the template.",
     heroSub: "For established course creators who need their checkout, member experience, and learning flow to match the business they have built, we make the platform yours.",
@@ -185,6 +187,7 @@ export const services: ServicePage[] = [
     slug: "school-student-portal-development",
     title: "School & Student Portal Development",
     metaTitle: "School Student Portal Development | Rizon",
+    // TODO: metaDescription is 160 chars (>155) — shorten, e.g.: "School student portal development for institutions that need one tailored place for students, parents, teachers, and grades."
     metaDescription: "School student portal development for institutions that need one tailored place for students, parents, teachers, learning, grades, data, and essential services.",
     h1: "School student portal development for an institution that wants one front door.",
     heroSub: "For school and university IT leaders whose learners, parents, teachers, and staff keep crossing between disconnected systems, we build the portal around the institution.",

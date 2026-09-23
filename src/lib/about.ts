@@ -9,6 +9,7 @@ import {
 // Copy for /about.
 export const about = {
   metaTitle: "About Rizon: Custom LMS & LTI Development | Rizon",
+  // TODO: metaDescription is 178 chars (>155) — shorten, e.g.: "Rizon is a custom LMS and LTI development studio for education and training providers. Book a free 30-min call."
   metaDescription:
     "Rizon is a custom LMS and LTI development studio. We build learning platforms for education and training providers. You work directly with the developer. Book a free 30-min call.",
   h1: "About Rizon",

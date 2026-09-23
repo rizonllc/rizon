@@ -4,6 +4,7 @@ import type { CaseStudy } from "@/components/case-study-page";
 export const choiceLearning: CaseStudy = {
   slug: "choice-learning",
   metaTitle: "Choice Learning (EdEHR) Case Study | Rizon",
+  // TODO: metaDescription is 157 chars (>155) — shorten, e.g.: "How Rizon finished a stalled EdEHR platform, upgraded its LTI integration to 1.3, and now serves 1,200 students per quarter."
   metaDescription:
     "How Rizon finished a stalled EdEHR platform, upgraded its LTI integration to 1.3, and now serves 1,200 students per quarter. LTI, Moodle, and migration work.",
   name: "Choice Learning",

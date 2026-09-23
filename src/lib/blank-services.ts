@@ -89,6 +89,7 @@ const landing = (slug: string, key: ServiceKey): ServiceLanding => ({
 const customLms: ServiceLanding = {
   ...landing("custom-lms-development", "customLms"),
   metaTitle: "Custom LMS Development Company | Rizon",
+  // TODO: metaDescription is 164 chars (>155) — shorten, e.g.: "Custom LMS development for education and training providers. We build platforms you fully own, with no license fees or limits."
   metaDescription:
     "Custom LMS development for education and training providers. We build learning platforms you fully own, with no license fees and no limits. Book a free 30-min call.",
   h1: "Custom LMS Development",
@@ -186,6 +187,7 @@ const lti: ServiceLanding = {
   ...landing("lti-development", "lti"),
   title: "LTI Integration & Development",
   metaTitle: "LTI Integration & Development Services | Rizon",
+  // TODO: metaDescription is 178 chars (>155) — shorten, e.g.: "LTI integration and development for tools and LMS platforms. We build LTI 1.3 integrations that connect cleanly to Canvas and Moodle."
   metaDescription:
     "LTI integration and development for tools and LMS platforms. We build LTI 1.3 integrations that connect cleanly to Canvas, Moodle, and any compliant LMS. Book a free 30-min call.",
   h1: "LTI Integration & Development",
@@ -278,6 +280,7 @@ const lti: ServiceLanding = {
 const moodle: ServiceLanding = {
   ...landing("moodle-development", "moodle"),
   metaTitle: "Moodle Development Services | Rizon",
+  // TODO: metaDescription is 189 chars (>155) — shorten, e.g.: "Moodle development, customization, and integration for training providers and institutions. Custom plugins, themes, and builds."
   metaDescription:
     "Moodle development, customization, and integration for training providers and institutions. Custom plugins, themes, and builds from a team that knows Moodle deeply. Book a free 30-min call.",
   h1: "Moodle Development",
@@ -369,6 +372,7 @@ const canvas: ServiceLanding = {
   ...landing("canvas-development", "canvas"),
   title: "Canvas LMS Development",
   metaTitle: "Canvas LMS Development & Integration Services | Rizon",
+  // TODO: metaDescription is 185 chars (>155) — shorten, e.g.: "Canvas LMS development, LTI integrations, and custom apps built on the Canvas API, for institutions and EdTech companies."
   metaDescription:
     "Canvas LMS development, LTI integrations, and custom apps built on the Canvas API. We build tools that work inside Canvas for institutions and EdTech companies. Book a free 30-min call.",
   h1: "Canvas LMS Development",
@@ -456,6 +460,7 @@ const moodlePlugin: ServiceLanding = {
   ...landing("moodle-plugin-development", "moodlePlugin"),
   title: "Custom Moodle Plugin Development",
   metaTitle: "Custom Moodle Plugin Development | Rizon",
+  // TODO: metaDescription is 191 chars (>155) — shorten, e.g.: "Custom Moodle plugin development: we build and maintain plugins that add exactly the functionality your Moodle site needs."
   metaDescription:
     "Custom Moodle plugin development: we build and maintain plugins that add exactly the functionality your Moodle site needs, without the risk of unmaintained downloads. Book a free 30-min call.",
   h1: "Custom Moodle Plugin Development",
@@ -542,7 +547,9 @@ const moodlePlugin: ServiceLanding = {
 const canvasPlugin: ServiceLanding = {
   ...landing("canvas-plugin-development", "canvasPlugin"),
   title: "Canvas Plugin Development",
+  // TODO: metaTitle is 65 chars (>60) — shorten, e.g.: "Canvas Plugin Development: Custom Apps & Tools | Rizon"
   metaTitle: "Canvas Plugin Development: Custom Canvas LMS Apps & Tools | Rizon",
+  // TODO: metaDescription is 171 chars (>155) — shorten, e.g.: "Canvas doesn't use plugins like Moodle. It extends through LTI apps and the API. We build custom Canvas LMS tools instead."
   metaDescription:
     "Canvas doesn't use plugins like Moodle. It extends through LTI apps and the API. We build custom Canvas LMS tools that do what a \"plugin\" would. Book a free 30-min call.",
   h1: "Canvas Plugin Development",
@@ -635,6 +642,7 @@ const ltiMigration: ServiceLanding = {
   ...landing("lti-1-1-to-1-3-migration", "ltiMigration"),
   title: "LTI 1.1 to 1.3 Migration",
   metaTitle: "LTI 1.1 to 1.3 Migration: Upgrade to LTI Advantage | Rizon",
+  // TODO: metaDescription is 181 chars (>155) — shorten, e.g.: "LTI 1.1 is deprecated. We migrate your tool to LTI 1.3 and LTI Advantage: secure launch, grade passback, deep linking."
   metaDescription:
     "LTI 1.1 is deprecated. We migrate your tool to LTI 1.3 and LTI Advantage without breaking existing connections: secure launch, grade passback, deep linking. Book a free 30-min call.",
   h1: "LTI 1.1 to 1.3 Migration",
@@ -728,7 +736,9 @@ const ltiMigration: ServiceLanding = {
 const woocommerceMoodle: ServiceLanding = {
   ...landing("woocommerce-to-moodle", "woocommerceMoodle"),
   title: "WooCommerce to Moodle Integration",
+  // TODO: metaTitle is 68 chars (>60) — shorten, e.g.: "WooCommerce to Moodle: Sell Courses, Auto-Enroll | Rizon"
   metaTitle: "WooCommerce to Moodle Integration: Sell Courses, Auto-Enroll | Rizon",
+  // TODO: metaDescription is 195 chars (>155) — shorten, e.g.: "Connect WooCommerce to Moodle so a course purchase creates the account and enrolls the buyer automatically, built to fit your setup."
   metaDescription:
     "Connect WooCommerce to Moodle so a course purchase creates the account and enrolls the buyer automatically, built to fit your setup, beyond what off-the-shelf bridges do. Book a free 30-min call.",
   h1: "WooCommerce to Moodle Integration",

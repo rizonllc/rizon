@@ -4,6 +4,7 @@ import type { CaseStudy } from "@/components/case-study-page";
 export const rizonLms: CaseStudy = {
   slug: "rizon-lms",
   metaTitle: "Rizon LMS: Custom LMS Development | Rizon",
+  // TODO: metaDescription is 169 chars (>155) — shorten, e.g.: "A full-featured LMS for universities and training institutions: multi-course, auto-graded quizzes, analytics, and multi-role dashboards."
   metaDescription:
     "A full-featured LMS for universities and training institutions: multi-course, auto-graded quizzes, analytics, and multi-role dashboards. Custom LMS development by Rizon.",
   name: "Rizon LMS",

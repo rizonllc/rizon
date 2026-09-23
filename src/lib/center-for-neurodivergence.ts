@@ -5,6 +5,7 @@ import type { CaseStudy } from "@/components/case-study-page";
 export const centerForNeurodivergence: CaseStudy = {
   slug: "center-for-neurodivergence",
   metaTitle: "The Center for Neurodivergence Case Study | Rizon",
+  // TODO: metaDescription is 171 chars (>155) — shorten, e.g.: "How Rizon built a custom e-learning platform for parents of neurodivergent children: structured courses with clinical oversight and multi-center licensing."
   metaDescription:
     "How Rizon built a custom e-learning platform for parents of neurodivergent children: structured courses with clinical oversight from therapists and multi-center licensing.",
   name: "The Center for Neurodivergence",
