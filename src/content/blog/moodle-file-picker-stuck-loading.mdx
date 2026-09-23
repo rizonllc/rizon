@@ -8,7 +8,7 @@ The Moodle.org thread ["Upgrade to 5.2 has broken file uploads where the box now
 
 The file picker is not just a form field. It depends on Moodle JavaScript, AJAX endpoints, repository plugins, sessions, draft file areas, server upload settings, permissions, and theme templates. A Moodle page can look normal while the file picker fails in the background.
 
-That is why "the site loads" is not enough evidence. You need to inspect the request behind the spinner.
+That is why "the site loads" is not enough evidence. You need to inspect the request behind the spinner. This is usually the last thing left broken after an otherwise clean upgrade — see the [Moodle 5.1 to 5.2 upgrade guide](/blog/moodle-5-2-upgrade-guide) for the full sequence that gets you here with fewer surprises.
 
 ## First fix: purge all caches
 

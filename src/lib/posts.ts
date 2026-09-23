@@ -24,6 +24,22 @@ import ferpaEdtechCover from "@/assets/blog/ferpa-edtech-compliance.svg";
 
 export const posts: Post[] = [
   {
+    slug: "moodle-5-2-upgrade-guide",
+    title: "Moodle 5.1 to 5.2 Upgrade Guide",
+    description:
+      "The Moodle 5.1 to 5.2 upgrade rarely goes smoothly on the first try. Here's the public directory, router, Composer, plugin compatibility, and cache-purge sequence that makes it boring.",
+    date: "2026-09-23",
+    readTime: "9 min read",
+    category: "Moodle",
+    relatedServiceSlugs: ["moodle-development"],
+    relatedPostSlugs: [
+      "moodle-file-picker-stuck-loading",
+      "moodle-router-not-correctly-configured",
+      "moodle-5-2-shared-hosting",
+    ],
+    authorSlug: "choaib-mouhrach",
+  },
+  {
     slug: "connect-woocommerce-to-moodle-with-edwiser-bridge",
     title: "How to Connect WooCommerce to Moodle With Edwiser Bridge",
     description:
@@ -450,6 +466,7 @@ export async function getPostContent(slug: string) {
     "connect-woocommerce-to-moodle-with-edwiser-bridge": () => import("@/content/blog/connect-woocommerce-to-moodle-with-edwiser-bridge.mdx"),
     "lms-reporting-and-analytics-what-you-actually-need": () => import("@/content/blog/lms-reporting-and-analytics-what-you-actually-need.mdx"),
     "moodle-5-0-release-notes-and-upgrade-guide": () => import("@/content/blog/moodle-5-0-release-notes-and-upgrade-guide.mdx"),
+    "moodle-5-2-upgrade-guide": () => import("@/content/blog/moodle-5-2-upgrade-guide.mdx"),
     "moodle-router-not-correctly-configured": () => import("@/content/blog/moodle-router-not-correctly-configured.mdx"),
     "moodle-5-2-windows-install": () => import("@/content/blog/moodle-5-2-windows-install.mdx"),
     "moodle-vendor-directory-not-found": () => import("@/content/blog/moodle-vendor-directory-not-found.mdx"),

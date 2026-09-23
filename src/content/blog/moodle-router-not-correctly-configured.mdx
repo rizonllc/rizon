@@ -8,7 +8,7 @@ In the Moodle.org thread ["Moodle 5.2: router is not correctly configured"](http
 
 Moodle's router is a front controller. It lets Moodle serve URLs that do not correspond to a physical PHP file on disk. Moodle's [router documentation](https://docs.moodle.org/502/en/Configuring_the_Router) says the router lives at `r.php` and is used when a request does not map to a real file.
 
-That matters more in Moodle 5.x because Moodle 5.1 introduced the `public` directory structure. Public web requests should enter through `moodle/public`, while internal code and configuration sit outside the web root. The router is part of making that model work.
+That matters more in Moodle 5.x because Moodle 5.1 introduced the `public` directory structure. Public web requests should enter through `moodle/public`, while internal code and configuration sit outside the web root. The router is part of making that model work. If you're mid-upgrade and this is one of several issues you're hitting, the [Moodle 5.1 to 5.2 upgrade guide](/blog/moodle-5-2-upgrade-guide) walks through the full sequence, including the router step.
 
 ## Start with the document root
 

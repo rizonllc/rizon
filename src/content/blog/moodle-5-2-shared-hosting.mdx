@@ -4,7 +4,7 @@ Moodle 5.2 can run on shared hosting only if the host gives you enough control o
 
 The Moodle.org forum demand is loud here. ["Shared Hosting problem [resolved]"](https://moodle.org/mod/forum/discuss.php?d=470266) has 77 replies, ["Further discussions on shared hosting"](https://moodle.org/mod/forum/discuss.php?d=470526) has 34, and there are separate threads about GoDaddy, Hostinger, cPanel, subfolders, document roots, and routing. The pain is not imaginary. Moodle 5.x changed what "just upload it to public_html" means.
 
-The exact symptoms people report are painfully concrete: `/admin/index.php` returns 404, Moodle says the root directory must not be publicly accessible, or `config.php` complains that `$CFG->wwwroot` should not end in `/public`. Those messages all point back to the same tension: the public folder should be the published folder, but `/public` should not become part of the visible Moodle URL.
+The exact symptoms people report are painfully concrete: `/admin/index.php` returns 404, Moodle says the root directory must not be publicly accessible, or `config.php` complains that `$CFG->wwwroot` should not end in `/public`. Those messages all point back to the same tension: the public folder should be the published folder, but `/public` should not become part of the visible Moodle URL. For the rest of the upgrade beyond hosting, see the [Moodle 5.1 to 5.2 upgrade guide](/blog/moodle-5-2-upgrade-guide).
 
 ## Why Moodle 5.x is harder on shared hosting
 

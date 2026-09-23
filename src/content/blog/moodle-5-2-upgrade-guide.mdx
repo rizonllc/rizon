@@ -1,0 +1,221 @@
+## The short version
+
+The Moodle 5.1 to 5.2 upgrade looks simple. It rarely is. Treat it as a controlled deployment, not a file swap: confirm server requirements, point the web root at `public`, get the router forwarding correctly, install Composer dependencies, verify plugin compatibility, and purge caches after the upgrade completes. Do those five things and the upgrade is boring, which is the goal.
+
+Most "mysterious" failures after moving to 5.2 come from the same five places every time:
+
+- The `public` directory, introduced in Moodle 5.1
+- The router, which now sits in front of every request
+- Missing Composer dependencies
+- Plugins that expect old paths or class names
+- Caches that never got purged after the upgrade
+
+## Why the Moodle 5.1 to 5.2 upgrade trips people up
+
+The moodle.org upgrade forums are full of the same 5.x symptoms: router checks failing, menus disappearing, images going missing, upload boxes spinning forever, question bank errors, and `Class "Mustache_Engine" not found`. These are not separate bugs. They cluster around one shift.
+
+Moodle 5.1 moved the web-accessible code under `public`. The router became part of every request. Moodle 5.2 then raised the floor again: PHP 8.3, higher database minimums, and a stricter upgrade path that only accepts Moodle 4.4 or later as a starting point.
+
+One recurring report is `Class "Mustache_Engine" not found` right after the 5.1 to 5.2 move. That traces back to a theme or plugin, not core: Moodle 5.2 uses namespaced Mustache classes, and a plugin still calling the old class name will throw this even though the core upgrade itself succeeded. Treat it as a plugin problem, not a database problem, and see [what to check when Moodle 5.2 says the router is not correctly configured](/blog/moodle-router-not-correctly-configured) if the same upgrade also broke routing.
+
+The old habit was to unzip new code over the old folder. That shortcut breaks 5.x sites, because it leaves stale files under paths Moodle no longer reads from.
+
+## Before you touch production
+
+Work through three columns before you start: server, code, and data. Prove each one on a copy of production first, not on the live site.
+
+| Area | What to confirm | Why it matters |
+| --- | --- | --- |
+| PHP | 8.3 or a newer supported version | The environment check blocks the upgrade or exposes missing extensions |
+| Database | PostgreSQL 16, MySQL 8.4, MariaDB 10.11, or another supported version | Older engines stop the upgrade early |
+| Web root | The site points to `moodle/public` | Serving the whole directory breaks 5.x and fails security checks |
+| Router | The server forwards non-file routes to `r.php` | Routed screens and status checks depend on it |
+| Composer | Dependencies exist in `vendor` | Moodle 5.1+ checks for them on boot |
+| Plugins | Every plugin is 5.2-compatible and in the right path | Old paths cause missing menus and fatal errors |
+| Caches | Caches get purged after the upgrade | Missing features often need a manual purge |
+
+## Step 1: confirm the upgrade path and server requirements
+
+Go to **Site administration > Server > Environment**, switch the target version to 5.2, and clear every warning before you start.
+
+Moodle 5.2 needs an upgrade source of 4.4 or later. If you are on 4.3 or older, upgrade to a supported version in between first, then move to 5.2. Do not skip the documented path.
+
+| Requirement | Moodle 5.2 minimum |
+| --- | --- |
+| Upgrade source | Moodle 4.4 or later |
+| PHP | 8.3.0 or later supported PHP |
+| MariaDB | 10.11.0 |
+| MySQL | 8.4 |
+| PostgreSQL | 16 |
+| Microsoft SQL Server | 2019 |
+| `max_input_vars` | At least 5000 |
+| Architecture | 64-bit only |
+
+Treat the release notes as the source of truth over a hosting dashboard, which can show a valid PHP version while still missing key extensions. Check specifically for `sodium`, `intl`, `mbstring`, `soap`, and `fileinfo`.
+
+## Step 2: back up the three things that matter
+
+Back up the Moodle code, the `moodledata` directory, and the database. Files alone are not a rollback plan: course files live in `moodledata` and the learning records live in the database. You need all three, or a failed upgrade has no way back.
+
+Back up in maintenance mode or during a quiet window, and let cron finish before you start. Always test the upgrade on a copy first, not on the live site.
+
+## Step 3: replace the code cleanly
+
+Do not copy 5.2 files over the old directory. Move the old code aside, unpack the new release, and copy back only what belongs.
+
+```bash
+mv moodle moodle.backup
+tar xvzf moodle-latest-5.2.tgz
+cp moodle.backup/config.php moodle/
+```
+
+Then move your custom plugins into the new tree, after confirming compatibility. Because 5.1 added the public directory, many plugins now belong inside `public`:
+
+```bash
+cp -pr moodle.backup/theme/mytheme moodle/public/theme/mytheme
+cp -pr moodle.backup/mod/mymod moodle/public/mod/mymod
+```
+
+If you deploy from Git, check out the correct stable branch or tag instead, and apply the same plugin-path rule.
+
+## Step 4: treat plugin compatibility as a launch blocker
+
+A plugin folder that copies over cleanly is not proof that it works. For every non-core plugin, confirm the 5.2-compatible release, then test the specific workflow it touches.
+
+| Plugin area | Failure you might see |
+| --- | --- |
+| Theme | Invisible menus, broken drawers, missing file picker |
+| Course format | Course errors, sections not rendering, editing controls gone |
+| Question type | Question bank errors or quiz editing failures |
+| Repository | File picker hangs or external sources vanish |
+| Enrolment / payment | Users lose access to courses they paid for |
+| Reports / local plugins | Admin pages throw class or namespace errors |
+
+If you see `Class "Mustache_Engine" not found`, suspect a plugin or theme that still calls the old class name. Patch it on staging or remove it before you rerun the upgrade.
+
+## Step 5: point the web server at the public directory
+
+This causes more broken 5.x upgrades than anything else. For Moodle 5.1 and later, the web root must point at `public`, not at the parent code folder. If your install lives at `/var/www/moodle`, serve `/var/www/moodle/public`.
+
+Apache:
+
+```apache
+DocumentRoot /var/www/moodle/public
+<Directory /var/www/moodle/public>
+    AllowOverride None
+    Require all granted
+</Directory>
+```
+
+Nginx:
+
+```nginx
+root /var/www/moodle/public;
+```
+
+On cPanel or shared hosting, you may not be able to edit virtual hosts at all. Moodle suggests a configurable document root, a symlink to `public`, or a location alias as workarounds. If your host offers none of those, the problem is the host, not Moodle — see [whether Moodle 5.2 can run on shared hosting at all](/blog/moodle-5-2-shared-hosting) before you spend more time on it.
+
+## Step 6: configure the router before judging the upgrade
+
+The router sends non-file requests through `r.php`. Without it configured, some routes return 404, some assets look missing, and the environment status report will flag the router as misconfigured.
+
+Apache:
+
+```apache
+FallbackResource /r.php
+```
+
+Nginx:
+
+```nginx
+try_files $uri $uri/ /r.php$is_args$args;
+```
+
+OpenLiteSpeed and cPanel `.htaccess` setups often need rewrite rules instead of `FallbackResource`. If the check shows a `.php`-looking route returning 404 instead of a redirect, PHP-FPM usually handled the missing PHP path before Apache got the chance to fall back to `r.php`. The full diagnosis for that specific failure is in [Moodle 5.2 router is not correctly configured](/blog/moodle-router-not-correctly-configured).
+
+## Step 7: install Composer dependencies
+
+Moodle 5.1+ throws a Composer error when dependencies are missing. Run this from the Moodle root, not from `public`, using the PHP version Moodle will actually run under:
+
+```bash
+composer install --no-dev --classmap-authoritative
+```
+
+If you have no Composer or shell access, ask your host to run it, or build the release elsewhere and upload the full tree including `vendor`. See [what to do when Moodle says the Composer vendor directory was not found](/blog/moodle-vendor-directory-not-found) for the longer version of this fix.
+
+## Step 8: run the upgrade and purge caches
+
+For a production site, use the CLI. It avoids browser, proxy, and timeout limits that the web-based upgrader is subject to.
+
+```bash
+php admin/cli/upgrade.php
+```
+
+Then purge caches by hand: **Site administration > Development > Purge all caches**. Missing features after an otherwise clean upgrade often need this manual step — a file picker that will not load is the most common example, and it's covered in detail in [why the Moodle file picker gets stuck loading after an upgrade](/blog/moodle-file-picker-stuck-loading).
+
+## Step 9: test the workflows users actually touch
+
+The upgrade is not done when the dashboard loads. Test the things that generate support tickets.
+
+| Workflow | What to test |
+| --- | --- |
+| Login | Admin, teacher, student, and suspended states |
+| Navigation | Site admin, course pages, drawers, custom menus |
+| Course editing | Add activity, duplicate, edit settings |
+| Files | File picker, drag-and-drop, submission, backup |
+| Cron | Scheduled tasks, ad hoc tasks, completion, messaging |
+| Plugins | Question types, enrolment, payment, themes, reports |
+| Mobile / API | Web services and token-based integrations |
+
+Many bugs only show up in real use: a teacher edits a course, a student submits a file. Test by role, not just by page load.
+
+## Common Moodle 5.2 upgrade errors, and where to look first
+
+| Symptom | First place to check |
+| --- | --- |
+| 404 after upgrade | Web root not pointing to `public` |
+| Router status fails | Router rule, or PHP-FPM handler order |
+| Composer vendor not found | Missing `vendor` dependencies |
+| Menus or theme broken | Plugin/theme path, or caches |
+| File picker stuck loading | Cache, JavaScript, theme, plugin, or AJAX error |
+| Uploads fail | Upload limits, permissions, repository plugin, or session |
+| Question bank errors | Version issue or incompatible question plugin |
+| `Class "Mustache_Engine" not found` | Plugin/theme not compatible with 5.2's Mustache library |
+
+## When to stop and roll back
+
+Roll back in four cases: the database upgrade fails halfway, core tables go missing, the site cannot serve static assets, or a key plugin turns out not to be 5.2-compatible. Do not keep refreshing the installer in production hoping it clears on its own — it will not.
+
+The calm version: restore the last backup, reproduce the failure in staging, fix the root cause, then run the same steps again. If running the rollback-and-retry cycle on a production site isn't something you want to handle alone, [Moodle upgrade and development help](/services/moodle-development) is exactly the kind of work we do.
+
+## FAQ
+
+### Can I upgrade directly from Moodle 5.1 to 5.2?
+
+Yes. Moodle 5.2 supports upgrades from 4.4 or later, so a 5.1 site qualifies. You still need to meet the 5.2 server requirements — PHP 8.3 and the raised database floors — before you start.
+
+### Do I need to move my web root to the public directory?
+
+Yes, if you had not already done it for 5.1. Moodle 5.1 introduced the public directory model, and Moodle 5.2 continues it. Skipping this step is the single most common cause of a broken upgrade.
+
+### Should I run the upgrade in the browser or the CLI?
+
+Use the CLI for production. `php admin/cli/upgrade.php` is more reliable on large sites and avoids browser, proxy, and timeout limits that the web installer can hit on long-running upgrades.
+
+### Why did the upgrade finish but the file picker will not load?
+
+Purge all caches first. If it's still stuck, check browser console errors, AJAX responses, theme overrides, repository plugins, upload limits, and file permissions in that order.
+
+### Is shared hosting enough for a Moodle 5.2 upgrade?
+
+Sometimes. The host has to let you point the domain at `moodle/public`, run a supported PHP and database stack, secure `moodledata` outside the web root, configure the router, and install Composer dependencies. Many low-cost plans fail at least one of those.
+
+## Related Moodle guides
+
+- [Moodle 5.0 Release Notes and Upgrade Guide](/blog/moodle-5-0-release-notes-and-upgrade-guide)
+- [Moodle 5.2 Router Is Not Correctly Configured](/blog/moodle-router-not-correctly-configured)
+- [Moodle File Picker Stuck Loading After Upgrade to 5.2](/blog/moodle-file-picker-stuck-loading)
+- [Moodle Composer Vendor Directory Not Found](/blog/moodle-vendor-directory-not-found)
+- [How to Install Moodle 5.2 on Windows](/blog/moodle-5-2-windows-install)
+- [Can Moodle 5.2 Run on Shared Hosting?](/blog/moodle-5-2-shared-hosting)
+- [How to Connect WooCommerce to Moodle With Edwiser Bridge](/blog/connect-woocommerce-to-moodle-with-edwiser-bridge)
