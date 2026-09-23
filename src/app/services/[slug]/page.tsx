@@ -12,9 +12,11 @@ import {
 import { alternatives } from "@/lib/alternatives";
 import { posts } from "@/lib/posts";
 import { StatBlock } from "@/components/stat-block";
-import { getServiceBySlug, services } from "@/lib/services";
+import { getServiceBySlug } from "@/lib/services";
+import { serviceRoutes } from "@/lib/service-routes";
 import { ServiceLanding } from "@/components/service-landing";
-import { blankServices, getBlankService } from "@/lib/blank-services";
+import { Linked } from "@/components/service-sections";
+import { getBlankService } from "@/lib/blank-services";
 import { Footer } from "../../footer";
 import { Logos } from "../../logos";
 import { Hero } from "@/components/hero";
@@ -25,10 +27,7 @@ import { AnalyticsEvent } from "@/lib/analytics";
 const BASE_URL = "https://rizon.agency";
 
 export function generateStaticParams() {
-  return [...new Set([
-        ...services.map((service) => service.slug),
-        ...blankServices.map((service) => service.slug),
-      ])].map((slug) => ({ slug }));
+  return serviceRoutes.map(({ slug }) => ({ slug }));
 }
 
 export const dynamicParams = false;
@@ -265,6 +264,11 @@ export default async function ServiceDetailPage({
               </article>
             ))}
           </div>
+          {service.builtOn && (
+            <p className="mt-10 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+              <Linked text={service.builtOn.text} links={service.builtOn.links} />
+            </p>
+          )}
         </section>
         <section className="container cntr mt-24 md:mt-32">
           <div className="max-w-3xl">
@@ -371,7 +375,7 @@ export default async function ServiceDetailPage({
                 {relatedAlternatives.map((item) => (
                   <Link
                     key={item.slug}
-                    href={`/alternatives/${item.slug}`}
+                    href={`/lms-alternatives/${item.slug}`}
                     className="group flex items-center justify-between border-b border-border pb-4 text-lg font-medium"
                   >
                     <span>

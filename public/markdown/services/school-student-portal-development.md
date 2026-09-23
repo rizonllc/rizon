@@ -33,6 +33,4 @@ A focused first release is typically **8–12 weeks**, starting with high-volume
 
 ## Related guides
 
-- [Moodle alternative](/alternatives/moodle)
-- [Canvas alternative](/alternatives/canvas)
-- [Blackboard alternative](/alternatives/blackboard)
+- [Moodle alternative](/lms-alternatives/moodle)

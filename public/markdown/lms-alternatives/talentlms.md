@@ -1,6 +1,6 @@
 # TalentLMS alternative for corporate training
 
-**Comparison page:** [/alternatives/talentlms](/alternatives/talentlms)
+**Comparison page:** [/lms-alternatives/talentlms](/lms-alternatives/talentlms)
 **Related service:** [/services/corporate-training-platform](/services/corporate-training-platform)
 
 TalentLMS is often the faster, cheaper move for conventional employee training. A custom build earns its cost when roles, compliance evidence, reporting, and connected systems no longer fit a generic group-and-course model.

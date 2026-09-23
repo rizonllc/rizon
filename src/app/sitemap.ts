@@ -2,8 +2,7 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/lib/projects";
 import { posts } from "@/lib/posts";
 import { alternatives } from "@/lib/alternatives";
-import { services } from "@/lib/services";
-import { productLabs } from "@/lib/product-labs";
+import { serviceRoutes } from "@/lib/service-routes";
 
 const BASE = "https://rizon.agency";
 
@@ -25,13 +24,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/lms-alternatives", priority: 0.8, changeFrequency: "monthly" },
     { path: "/legal", priority: 0.3, changeFrequency: "yearly" },
-    ...services.map((s) => ({
+    // Every indexable /services/[slug] route, from the same registry the page renders.
+    ...serviceRoutes.filter((s) => s.indexable).map((s) => ({
       path: `/services/${s.slug}`,
       priority: 0.8,
       changeFrequency: "monthly" as ChangeFreq,
     })),
     ...alternatives.map((a) => ({
-      path: `/alternatives/${a.slug}`,
+      path: `/lms-alternatives/${a.slug}`,
       priority: 0.8,
       changeFrequency: "monthly" as ChangeFreq,
     })),
@@ -42,11 +42,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...projects.map((p) => ({
       path: `/case-studies/${p.slug}`,
-      priority: 0.7,
-      changeFrequency: "monthly" as ChangeFreq,
-    })),
-    ...productLabs.map((p) => ({
-      path: `/products/${p.slug}`,
       priority: 0.7,
       changeFrequency: "monthly" as ChangeFreq,
     })),

@@ -71,7 +71,7 @@ export const services: ServicePage[] = [
       source: "ADL / SCORM",
       sourceUrl: "https://adlnet.gov/projects/scorm/",
     },
-    relatedAlternativeSlugs: ["moodle", "canvas"],
+    relatedAlternativeSlugs: ["moodle"],
     relatedPostSlugs: ["how-much-does-a-custom-lms-cost-in-2026", "build-vs-buy-an-lms-the-honest-math", "hidden-cost-of-revenue-share-course-platforms", "custom-lms-vs-off-the-shelf-total-cost-of-ownership-over-three-years", "what-actually-drives-the-price-of-an-e-learning-build"],
     keywords: ["custom LMS development", "custom learning management system", "LMS development agency"],
   },
@@ -114,6 +114,10 @@ export const services: ServicePage[] = [
     ],
     included: ["Product discovery and access-model design", "Role and permission modelling", "SSO integration (SAML / OIDC)", "HRIS integration and sync", "Training assignment and completion engine", "Compliance rules and material versioning", "Audit log and exportable evidence store", "Role-scoped reporting and dashboards", "Multi-tenant partner portals (where scoped)", "Automated test suite and CI pipeline", "Deployment infrastructure and runbooks", "Full source code and technical documentation", "Handover training for L&D and operations"],
     costBand: "Corporate training work moves on a small set of decisions: the identity model (SSO, roles, contractors, partners), which HR system is the source of truth, what compliance evidence has to survive an audit, whether partner or multi-tenant training is in scope, and how much historic record migration is required. We scope the reporting questions before estimating, because reporting is where vague requirements become expensive. Once the plan is specific we quote against it and show the assumptions.",
+    builtOn: {
+      text: "Under the hood, this is custom LMS development shaped around your organisation, with LTI development for the content tools and third-party courses your teams already license.",
+      links: [{ text: "custom LMS development", href: "/services/custom-lms-development" }, { text: "LTI development", href: "/services/lti-development" }],
+    },
     outcomes: "Managers get an answer they can act on. Learners receive the training that applies to them. The L&D team stops spending the last afternoon of the month turning exports into evidence.",
     faqs: corporateFaqs,
     stat: {
@@ -161,6 +165,10 @@ export const services: ServicePage[] = [
     ],
     included: ["Product discovery and written scope", "UX and interface design system", "Custom checkout and account flows", "Course, cohort, and membership experience", "Admin operations dashboard", "Payment provider integration", "Email and lifecycle automation integration", "Migration plan, dry run, and cutover", "Reporting and analytics module", "Automated test suite and CI pipeline", "Deployment infrastructure and runbooks", "Full source code and technical documentation", "Launch-week support and handover training"],
     costBand: "The cost of a creator platform follows the shape of the offer. Custom checkout logic, memberships, team purchasing, a migration from an existing catalogue, and a built-in community are the usual drivers, along with how much of the buyer-to-learner handoff has to feel bespoke. We protect the first release by choosing the offer that makes money now, not the hypothetical offer three years away, and quote against that specific plan with the assumptions in the open.",
+    builtOn: {
+      text: "The platform itself is custom LMS development built around your offer. If you sell through WooCommerce and deliver in Moodle today, a WooCommerce to Moodle integration can connect the two while you decide whether to move.",
+      links: [{ text: "custom LMS development", href: "/services/custom-lms-development" }, { text: "WooCommerce to Moodle integration", href: "/services/woocommerce-to-moodle" }],
+    },
     outcomes: "You control the commercial rules, the member experience, and the pace of product changes. More importantly, your support team stops being asked to manually bridge gaps the software should handle.",
     faqs: creatorFaqs,
     stat: {
@@ -212,6 +220,10 @@ export const services: ServicePage[] = [
     ],
     included: ["Product discovery and access-model design", "Role, class, and guardian permission modelling", "SIS integration (PowerSchool, Infinite Campus, Ellucian, custom)", "SSO integration (SAML, OIDC, OneRoster where available)", "Parent, teacher, student, and admin portals", "Gradebook and assignment integration", "Messaging and school-communication flows", "Migration plan for legacy accounts and course data", "Role-scoped reporting and scheduled exports", "Security review aligned with student-data expectations", "Automated test suite and CI pipeline", "Deployment infrastructure and runbooks", "Full source code and technical documentation", "Governance and operations handover"],
     costBand: "The cost of a school portal changes sharply with SIS integration, the number of roles the portal serves, parent access, gradebook requirements, legacy data migration, and whether the portal also replaces an LMS or sits alongside it. We recommend beginning with the student service that causes the most friction, then expanding from a stable base, and quoting against that specific first release rather than a generic range.",
+    builtOn: {
+      text: "The portal is built with custom LMS development or extends the Moodle you already run through Moodle development, and ties sign-in together using the approaches in SSO options for learning platforms.",
+      links: [{ text: "custom LMS development", href: "/services/custom-lms-development" }, { text: "Moodle development", href: "/services/moodle-development" }, { text: "SSO options for learning platforms", href: "/blog/sso-options-for-learning-platforms" }],
+    },
     outcomes: "Students get a clearer path through school life. Teachers and staff spend less time translating between systems. The institution gains a portal it can shape around its own policies instead of asking every department to adapt to a generic product.",
     faqs: schoolFaqs,
     stat: {
@@ -220,7 +232,7 @@ export const services: ServicePage[] = [
       source: "U.S. Dept. of Education",
       sourceUrl: "https://studentprivacy.ed.gov/faq/what-ferpa",
     },
-    relatedAlternativeSlugs: ["moodle", "canvas", "blackboard"],
+    relatedAlternativeSlugs: ["moodle"],
     relatedPostSlugs: ["canvas-breach-student-data-security", "migrating-from-lti-1-1-to-lti-1-3-a-practical-guide-for-tool-builders"],
     keywords: ["school portal development", "student portal development", "custom school LMS"],
   },

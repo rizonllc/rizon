@@ -2,7 +2,6 @@ import { getT } from "@/lib/t";
 import Link from "next/link";
 import { LogoWithText } from "@/components/logo";
 import { alternatives } from "@/lib/alternatives";
-import { productLabs } from "@/lib/product-labs";
 import { AnalyticsEvent } from "@/lib/analytics";
 import { caseStudiesIndex } from "@/lib/case-studies-index";
 import { isCaseVisible } from "@/lib/case-study-links";
@@ -90,7 +89,7 @@ export const Footer = async () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-12 pt-12 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 pt-12 lg:grid-cols-4">
             <nav aria-label={tFooter("explore")}>
               <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {tFooter("explore")}
@@ -168,10 +167,10 @@ export const Footer = async () => {
                 {tFooter("compare")}
               </h2>
               <ul className="mt-5 space-y-3">
-                {alternatives.slice(0, 4).map((alternative) => (
+                {alternatives.map((alternative) => (
                   <li key={alternative.slug}>
                     <Link
-                      href={`/alternatives/${alternative.slug}`}
+                      href={`/lms-alternatives/${alternative.slug}`}
                       className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {alternative.competitor}
@@ -186,24 +185,6 @@ export const Footer = async () => {
                     {tFooter("allAlternatives")}
                   </Link>
                 </li>
-              </ul>
-            </nav>
-
-            <nav aria-label={tFooter("products")}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                {tFooter("products")}
-              </h2>
-              <ul className="mt-5 space-y-3">
-                {productLabs.map((product) => (
-                  <li key={product.slug}>
-                    <Link
-                      href={`/products/${product.slug}`}
-                      className="text-[15px] text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {product.name}
-                    </Link>
-                  </li>
-                ))}
               </ul>
             </nav>
           </div>

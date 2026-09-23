@@ -20,6 +20,7 @@ import {
 } from "@/components/service-sections";
 import { servicesIndex as c } from "@/lib/services-index";
 import { AnalyticsEvent } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
 import heroImage from "@/assets/hero.jpg";
 
 const BOOK_URL = "https://cal.com/rizon.agency-cvbkll/30min";
@@ -128,6 +129,41 @@ export default async function ServicesPage() {
             </ul>
           </section>
         ))}
+        <section className={sectionCls}>
+          <div className="rounded-3xl bg-muted/50 px-6 py-12 md:px-10 md:py-16">
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-3.5 py-1.5 text-sm font-medium text-primary">
+              {c.useCases.label}
+            </span>
+            <h2 className={cn(h2Cls, "mt-5")}>{c.useCases.h2}</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              {c.useCases.line}
+            </p>
+            <ul className="mt-10 grid gap-4 md:grid-cols-3">
+              {c.useCases.items.map(({ slug, icon: Icon, title, body }) => (
+                <li key={slug}>
+                  <Link
+                    href={`/services/${slug}`}
+                    className="surface surface-hover group flex h-full flex-col p-7"
+                  >
+                    <Icon size={22} strokeWidth={1.75} className="text-primary" aria-hidden />
+                    <h3 className="mt-6 text-xl font-semibold tracking-tight">{title}</h3>
+                    <p className="mt-3 flex-1 text-[15px] leading-relaxed text-muted-foreground">
+                      {body}
+                    </p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                      See the solution
+                      <ArrowRight
+                        size={16}
+                        aria-hidden
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
         <FAQAccordion h2={c.faqH2} faqs={c.faqs} />
         <CTABand
           h2={c.cta.h2}

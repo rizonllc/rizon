@@ -1,6 +1,6 @@
 # Docebo alternative for custom enterprise training
 
-**Comparison page:** [/alternatives/docebo](/alternatives/docebo)
+**Comparison page:** [/lms-alternatives/docebo](/lms-alternatives/docebo)
 **Related service:** [/services/corporate-training-platform](/services/corporate-training-platform)
 
 Docebo is credible for organisations that need an enterprise LMS without building one. Custom work is for training that is part of the product: customer education, partner enablement, or proprietary certification joined to account health, entitlement, or renewal data.

@@ -49,7 +49,7 @@ At Rizon, I would rather hand over a small codebase with a clean admin path and 
 
 It wins for standard training delivery, especially where the organisation needs mature features now and can accept the vendor’s model. It may also win when the internal team has no appetite to own a product after launch. Moodle, Canvas, and other established platforms can be strong choices in the right environment; the question is whether their model matches your learner, buyer, and reporting needs.
 
-Read our plain-language assessments of a [Moodle alternative](/alternatives/moodle) and a [Canvas alternative](/alternatives/canvas) when you are comparing fit. Neither page argues that moving is always the answer.
+Read our plain-language assessments of a [Moodle alternative](/lms-alternatives/moodle) and [the other LMS alternatives](/lms-alternatives) when you are comparing fit. Neither page argues that moving is always the answer.
 
 ## Make the decision from a specific trigger
 

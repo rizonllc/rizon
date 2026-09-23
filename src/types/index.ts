@@ -8,7 +8,7 @@ export type Post = {
   readTime: string;
   category: string;
   coverImage?: StaticImageData;
-  relatedServiceSlug?: string;
+  relatedServiceSlugs?: string[];
   relatedAlternativeSlugs?: string[];
   relatedPostSlugs?: string[];
   authorSlug?: string;
@@ -92,6 +92,8 @@ export type ServicePage = {
   process: { step: string; detail: string }[];
   included: string[];
   costBand: string;
+  // In-body paragraph linking down to the capability services this solution is built from.
+  builtOn?: { text: string; links: { text: string; href: string }[] };
   outcomes: string;
   faqs: Faq[];
   stat?: CitedStat;

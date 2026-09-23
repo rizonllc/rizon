@@ -34,6 +34,6 @@ The platform can record attempts, acknowledgements, expiry, certificates, and ma
 
 ## Related guides
 
-- [Docebo alternative](/alternatives/docebo)
-- [TalentLMS alternative](/alternatives/talentlms)
+- [Docebo alternative](/lms-alternatives/docebo)
+- [TalentLMS alternative](/lms-alternatives/talentlms)
 - [Three-year LMS total cost](/blog/custom-lms-vs-off-the-shelf-total-cost-of-ownership-over-three-years)

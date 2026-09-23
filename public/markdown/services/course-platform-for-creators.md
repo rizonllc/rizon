@@ -33,7 +33,7 @@ Available courses, media, and customer records are exported; buying, access, and
 
 ## Related guides
 
-- [Teachable alternative](/alternatives/teachable)
-- [Thinkific alternative](/alternatives/thinkific)
-- [Kajabi alternative](/alternatives/kajabi)
+- [Teachable alternative](/lms-alternatives/teachable)
+- [Thinkific alternative](/lms-alternatives/thinkific)
+- [Kajabi alternative](/lms-alternatives/kajabi)
 - [Revenue-share platform costs](/blog/hidden-cost-of-revenue-share-course-platforms)

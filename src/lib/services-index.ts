@@ -1,11 +1,14 @@
 import {
   Blocks,
+  Briefcase,
   Code,
   GraduationCap,
   Link2,
   Plug,
   RefreshCw,
   Repeat,
+  School,
+  Sparkles,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -91,6 +94,32 @@ export const servicesIndex = {
       body: string;
     }[];
   }[],
+  // Who it's for, as opposed to the capability groups above (what we build).
+  useCases: {
+    label: "Who it's for",
+    h2: "Solutions by use case",
+    line: "Start from the kind of organisation you run. Each solution combines the build, platform, and integration work above for one audience.",
+    items: [
+      {
+        slug: "corporate-training-platform",
+        icon: Briefcase,
+        title: "Corporate Training Platform",
+        body: "For L&D and HR teams: SSO, HRIS sync, compliance evidence, and manager reporting.",
+      },
+      {
+        slug: "course-platform-for-creators",
+        icon: Sparkles,
+        title: "Course Platform for Creators",
+        body: "For course businesses that have outgrown hosted platforms: owned checkout, memberships, and no revenue share.",
+      },
+      {
+        slug: "school-student-portal-development",
+        icon: School,
+        title: "School & Student Portal",
+        body: "For schools and universities: one front door for students, parents, and teachers, connected to your SIS.",
+      },
+    ] satisfies { slug: string; icon: LucideIcon; title: string; body: string }[],
+  },
   cta: {
     h2: "Not sure where your project fits?",
     line: "Tell us what you're working on. In 30 minutes we'll tell you how we'd approach it. No pitch, no pressure.",

@@ -1,6 +1,6 @@
 # Thinkific alternative for custom course products
 
-**Comparison page:** [/alternatives/thinkific](/alternatives/thinkific)
+**Comparison page:** [/lms-alternatives/thinkific](/lms-alternatives/thinkific)
 **Related service:** [/services/course-platform-for-creators](/services/course-platform-for-creators)
 
 Thinkific is a sensible way to validate a course business. A custom platform becomes relevant after demand is proven and cohorts, repeat learners, employer-paid learners, or partnerships keep creating a spreadsheet beside the product.

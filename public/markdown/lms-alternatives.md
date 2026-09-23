@@ -7,26 +7,20 @@ A hosted or open-source LMS is often the right choice. Build custom software whe
 | Platform | Best fit | Why teams consider custom |
 |---|---|---|
 | Moodle | Open-source LMS | See the Moodle comparison for the specific constraint teams run into. |
-| Canvas | Higher-education LMS | See the Canvas comparison for the specific constraint teams run into. |
 | Teachable | Course platform | See the Teachable comparison for the specific constraint teams run into. |
 | Thinkific | Course platform | See the Thinkific comparison for the specific constraint teams run into. |
 | Kajabi | Course platform | See the Kajabi comparison for the specific constraint teams run into. |
 | TalentLMS | Corporate LMS | See the TalentLMS comparison for the specific constraint teams run into. |
-| LearnDash / WordPress LMS | WordPress LMS | See the LearnDash comparison for the specific constraint teams run into. |
 | Docebo | Corporate LMS | See the Docebo comparison for the specific constraint teams run into. |
-| Blackboard Learn | Higher-education LMS | See the Blackboard comparison for the specific constraint teams run into. |
 
 ## Read the comparisons
 
-- [Moodle alternative](https://rizon.agency/alternatives/moodle)
-- [Canvas alternative](https://rizon.agency/alternatives/canvas)
-- [Teachable alternative](https://rizon.agency/alternatives/teachable)
-- [Thinkific alternative](https://rizon.agency/alternatives/thinkific)
-- [Kajabi alternative](https://rizon.agency/alternatives/kajabi)
-- [TalentLMS alternative](https://rizon.agency/alternatives/talentlms)
-- [LearnDash / WordPress LMS alternative](https://rizon.agency/alternatives/learndash)
-- [Docebo alternative](https://rizon.agency/alternatives/docebo)
-- [Blackboard Learn alternative](https://rizon.agency/alternatives/blackboard)
+- [Moodle alternative](https://rizon.agency/lms-alternatives/moodle)
+- [Teachable alternative](https://rizon.agency/lms-alternatives/teachable)
+- [Thinkific alternative](https://rizon.agency/lms-alternatives/thinkific)
+- [Kajabi alternative](https://rizon.agency/lms-alternatives/kajabi)
+- [TalentLMS alternative](https://rizon.agency/lms-alternatives/talentlms)
+- [Docebo alternative](https://rizon.agency/lms-alternatives/docebo)
 
 ## Before deciding
 

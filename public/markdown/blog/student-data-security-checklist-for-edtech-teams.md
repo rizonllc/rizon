@@ -28,7 +28,7 @@ The Canvas breach that a lot of edtech teams watched wasn't a clever attack. It 
 
 Good access control is invisible when it works and career-defining when it doesn't. It's also unglamorous, which is exactly why it gets skipped for a nicer dashboard. I'd rather ship a plainer interface with a permission model I can defend than a beautiful one where a parent can stumble into another family's data.
 
-For the incident that makes this concrete, read [the lesson from the Canvas breach](canvas-breach-student-data-security.md). For the identity layer that decides who someone even is, see [SSO options for learning platforms](sso-options-for-learning-platforms.md). When the platform holds student records, [school and student portal development](/services/school-student-portal-development) designs these boundaries before the first screen, and [a Canvas alternative you control](/alternatives/canvas) exists partly for teams that need that control in their own hands.
+For the incident that makes this concrete, read [the lesson from the Canvas breach](canvas-breach-student-data-security.md). For the identity layer that decides who someone even is, see [SSO options for learning platforms](sso-options-for-learning-platforms.md). When the platform holds student records, [school and student portal development](/services/school-student-portal-development) designs these boundaries before the first screen, and [an LMS alternative you control](/lms-alternatives) exists partly for teams that need that control in their own hands.
 
 ---
 

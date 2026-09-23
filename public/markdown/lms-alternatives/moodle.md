@@ -1,6 +1,6 @@
 # Moodle alternative: a custom LMS you own
 
-**Comparison page:** [/alternatives/moodle](/alternatives/moodle)
+**Comparison page:** [/lms-alternatives/moodle](/lms-alternatives/moodle)
 **Related service:** [/services/school-student-portal-development](/services/school-student-portal-development)
 
 Moodle is capable software. Keep it when your institution has experienced administrators, a disciplined upgrade process, and a requirements set that fits its mature academic feature set. Consider a custom platform when maintenance, plugin compatibility, and Moodle-shaped learner flows have become part of the job.

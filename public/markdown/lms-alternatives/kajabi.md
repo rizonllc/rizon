@@ -1,6 +1,6 @@
 # Kajabi alternative for an owned course platform
 
-**Comparison page:** [/alternatives/kajabi](/alternatives/kajabi)
+**Comparison page:** [/lms-alternatives/kajabi](/lms-alternatives/kajabi)
 **Related service:** [/services/course-platform-for-creators](/services/course-platform-for-creators)
 
 Kajabi's all-in-one approach is valuable until the learning experience becomes distinct enough that one suite decides too much. Do not rebuild because a button is wrong; rebuild when a permanent workaround sits in selling, delivery, or support.

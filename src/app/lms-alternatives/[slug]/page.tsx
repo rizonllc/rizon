@@ -11,7 +11,7 @@ import {
 } from "@/components/breadcrumb";
 import { alternatives, getAlternativeBySlug } from "@/lib/alternatives";
 import { posts } from "@/lib/posts";
-import { getServiceBySlug } from "@/lib/services";
+import { getServiceRoute } from "@/lib/service-routes";
 import { StatBlock } from "@/components/stat-block";
 import { Eyebrow } from "@/components/eyebrow";
 import { Footer } from "../../footer";
@@ -36,7 +36,7 @@ export async function generateMetadata({
 
   if (!alternative) return { title: "Alternative not found — Rizon" };
 
-  const path = `/alternatives/${slug}`;
+  const path = `/lms-alternatives/${slug}`;
   const metaTitle = alternative.metaTitle;
   const metaDescription = alternative.metaDescription;
   return {
@@ -86,17 +86,17 @@ export default async function AlternativePage({
     answer: faq.answer,
   }));
 
-  const url = `${BASE_URL}/alternatives/${slug}`;
+  const url = `${BASE_URL}/lms-alternatives/${slug}`;
   const crumbs: Crumb[] = [
     { name: t("breadcrumbs.home"), href: "/" },
     { name: t("breadcrumbs.alternatives"), href: "/lms-alternatives" },
-    { name: alternative.competitor, href: `/alternatives/${slug}` },
+    { name: alternative.competitor, href: `/lms-alternatives/${slug}` },
   ];
   const relatedPosts = posts.filter((post) =>
     alternative.relatedPostSlugs?.includes(post.slug),
   );
   const relatedService = alternative.relatedServiceSlug
-    ? getServiceBySlug(alternative.relatedServiceSlug)
+    ? getServiceRoute(alternative.relatedServiceSlug)
     : undefined;
   const jsonLd = {
     "@context": "https://schema.org",

@@ -30,7 +30,7 @@ export const AlternativesPreview = async () => {
               {alternative.heroSub}
             </p>
             <Link
-              href={`/alternatives/${alternative.slug}`}
+              href={`/lms-alternatives/${alternative.slug}`}
               className="group mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
             >
               {t("readComparison")}{" "}

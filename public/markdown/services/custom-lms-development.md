@@ -36,7 +36,6 @@ Where the API or standard supports it, yes. Identity, payments, content packages
 
 ## Related guides
 
-- [Moodle alternative](/alternatives/moodle)
-- [Canvas alternative](/alternatives/canvas)
+- [Moodle alternative](/lms-alternatives/moodle)
 - [Custom LMS cost in 2026](/blog/how-much-does-a-custom-lms-cost-in-2026)
 - [Build vs. buy an LMS](/blog/build-vs-buy-an-lms-the-honest-math)

@@ -8,7 +8,7 @@ import { Footer } from "../../footer";
 import { Cta } from "../../cta";
 import { getPostContent, getPostBySlug, posts } from "@/lib/posts";
 import { alternatives } from "@/lib/alternatives";
-import { getServiceBySlug } from "@/lib/services";
+import { getServiceRoute } from "@/lib/service-routes";
 import { getAuthorBySlug } from "@/lib/authors";
 import { Breadcrumb, breadcrumbJsonLd, type Crumb } from "@/components/breadcrumb";
 import { BlogThumbnail } from "@/components/blog-thumbnail";
@@ -122,7 +122,7 @@ export default async function BlogPostPage({
   const next = localizedPosts[(index + 1) % localizedPosts.length];
   const relatedPosts = localizedPosts.filter((item) => post.relatedPostSlugs?.includes(item.slug));
   const relatedAlternatives = alternatives.filter((item) => post.relatedAlternativeSlugs?.includes(item.slug));
-  const relatedService = post.relatedServiceSlug ? getServiceBySlug(post.relatedServiceSlug) : undefined;
+  const relatedServices = (post.relatedServiceSlugs ?? []).flatMap((s) => getServiceRoute(s) ?? []);
   const author = getAuthorBySlug(post.authorSlug ?? "choaib-mouhrach");
 
   const jsonLd = {
@@ -212,14 +212,14 @@ export default async function BlogPostPage({
 
             {author && <section className="mt-16"><div className="flex gap-5 border-y border-border py-8"><Image src={author.avatar} alt="" width={56} height={56} className="size-14 rounded-full" /><div><p className="text-sm font-medium">{t("writtenBy", { name: author.name })}</p><p className="mt-1 text-sm text-muted-foreground">{author.role}</p><p className="mt-3 leading-relaxed text-muted-foreground">{author.bio}</p></div></div></section>}
 
-            {(relatedService || relatedAlternatives.length > 0 || relatedPosts.length > 0) && (
+            {(relatedServices.length > 0 || relatedAlternatives.length > 0 || relatedPosts.length > 0) && (
               <section className="mt-20">
                 <div className="border-t border-border pt-10">
                   <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{t("keepReading")}</span>
                   <h2 className="mt-4 text-3xl font-semibold tracking-tight">{t("nextLinks")}</h2>
                   <div className="mt-7 divide-y divide-border border-y border-border">
-                    {relatedService && <Link href={`/services/${relatedService.slug}`} className="group flex items-center justify-between gap-6 py-5 text-lg font-medium"><span>{relatedService.title}</span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden /></Link>}
-                    {relatedAlternatives.map((item) => <Link key={item.slug} href={`/alternatives/${item.slug}`} className="group flex items-center justify-between gap-6 py-5 text-lg font-medium"><span>{t("alternative", { name: item.competitor })}</span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden /></Link>)}
+                    {relatedServices.map((item) => <Link key={item.slug} href={`/services/${item.slug}`} className="group flex items-center justify-between gap-6 py-5 text-lg font-medium"><span>{item.title}</span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden /></Link>)}
+                    {relatedAlternatives.map((item) => <Link key={item.slug} href={`/lms-alternatives/${item.slug}`} className="group flex items-center justify-between gap-6 py-5 text-lg font-medium"><span>{t("alternative", { name: item.competitor })}</span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden /></Link>)}
                     {relatedPosts.map((item) => <Link key={item.slug} href={`/blog/${item.slug}`} className="group flex items-center justify-between gap-6 py-5 text-lg font-medium"><span>{item.title}</span><ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden /></Link>)}
                   </div>
                 </div>

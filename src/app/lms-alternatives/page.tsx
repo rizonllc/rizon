@@ -62,7 +62,7 @@ export default async function LmsAlternativesPage() {
           itemListElement: alternatives.map((alternative, index) => ({
             "@type": "ListItem",
             position: index + 1,
-            url: `${BASE_URL}/alternatives/${alternative.slug}`,
+            url: `${BASE_URL}/lms-alternatives/${alternative.slug}`,
             name: `${alternative.competitor} ${t("alternativeSuffix")}`,
           })),
         },
@@ -119,7 +119,7 @@ export default async function LmsAlternativesPage() {
                   <tr key={alternative.slug} className="border-t border-border">
                     <th scope="row" className="px-5 py-5 font-medium">
                       <Link
-                        href={`/alternatives/${alternative.slug}`}
+                        href={`/lms-alternatives/${alternative.slug}`}
                         className="underline underline-offset-4 hover:text-primary"
                       >
                         {alternative.competitor}
@@ -154,7 +154,7 @@ export default async function LmsAlternativesPage() {
                   {alternative.heroSub}
                 </p>
                 <Link
-                  href={`/alternatives/${alternative.slug}`}
+                  href={`/lms-alternatives/${alternative.slug}`}
                   className="group mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
                 >
                   {t("readComparison")}{" "}

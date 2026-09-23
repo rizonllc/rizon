@@ -1,6 +1,6 @@
 # Teachable alternative for a custom course platform
 
-**Comparison page:** [/alternatives/teachable](/alternatives/teachable)
+**Comparison page:** [/lms-alternatives/teachable](/lms-alternatives/teachable)
 **Related service:** [/services/course-platform-for-creators](/services/course-platform-for-creators)
 
 Teachable is faster and cheaper for a straightforward course catalogue. A custom platform earns its cost when checkout, bundles, memberships, team purchases, or learner journeys have become recurring operational exceptions.

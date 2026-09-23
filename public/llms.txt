@@ -9,8 +9,6 @@ Rizon builds custom learning platforms for course businesses, schools, and corpo
 - https://rizon.agency/services/course-platform-for-creators — course platforms for creators
 - https://rizon.agency/services/school-student-portal-development — school and student portals
 - https://rizon.agency/lms-alternatives — LMS comparison hub
-- https://rizon.agency/products/rizonvo — RizonVO, Rizon's vertical SaaS product for French used-vehicle dealers
-- https://rizonvo.com — RizonVO live product website
 - https://rizon.agency/blog — engineering and product notes on learning platforms
 - https://rizon.agency/about — founder and agency background
 
