@@ -1,3 +1,4 @@
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Umami } from "@/components/umami";
@@ -13,6 +14,8 @@ import { cn } from "@/lib/utils";
 import { Navigation } from "./navigation";
 import { Providers } from "@/components/providers";
 import { ScrollButtons } from "@/components/scroll-buttons";
+
+const GTM_ID = "GTM-T6BP5H7S";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -94,7 +97,16 @@ export default function RootLayout({
         bricolage.variable,
       )}
     >
+      <GoogleTagManager gtmId={GTM_ID} />
       <body className="min-h-full flex flex-col">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <Providers>
           <Navigation />
           {children}

@@ -28,11 +28,13 @@ const nextConfig: NextConfig = {
       // 'unsafe-inline' is kept here as a safety net for third-party
       // scripts (Vercel Analytics/Speed Insights, self-hosted Umami) that
       // may inject inline snippets. Tighten to nonces/hashes once verified.
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://analytics.rizon.agency",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://analytics.rizon.agency https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: https:",
       "font-src 'self' data: https://fonts.gstatic.com",
-      "connect-src 'self' https://vitals.vercel-insights.com https://analytics.rizon.agency",
+      "connect-src 'self' https://vitals.vercel-insights.com https://analytics.rizon.agency https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
+      // GTM <noscript> fallback iframe.
+      "frame-src https://www.googletagmanager.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",
