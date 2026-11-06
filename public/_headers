@@ -1,0 +1,14 @@
+# NOTE: Content-Security-Policy is intentionally shipped as
+# "Content-Security-Policy-Report-Only" for now. The browser evaluates the policy
+# and reports violations to the console but does NOT block anything.
+# TODO: after monitoring the console for false positives across all page types
+# (home, blog/MDX posts, case studies, contact), rename it to
+# "Content-Security-Policy" to start enforcing.
+/*
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; frame-src https://www.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+
+/_opt/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

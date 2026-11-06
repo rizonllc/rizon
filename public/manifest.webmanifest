@@ -1,0 +1,21 @@
+{
+  "name": "Rizon",
+  "short_name": "Rizon",
+  "description": "Launch your online learning platform without vendor lock-in. We build custom e-learning solutions for course creators, schools, and companies. Own 100% of your code, no templates, no revenue sharing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1447e6",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

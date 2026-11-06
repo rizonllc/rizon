@@ -13,9 +13,11 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# astro / cloudflare
+/dist/
+/.astro/
+/.wrangler/
+.dev.vars
 
 # production
 /build
@@ -33,9 +35,7 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+/public/_opt/

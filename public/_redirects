@@ -1,0 +1,25 @@
+# Locales were removed; send old /fr, /es, /de URLs to the English page.
+/fr / 301
+/es / 301
+/de / 301
+/fr/* /:splat 301
+/es/* /:splat 301
+/de/* /:splat 301
+
+# Non-edtech products were removed.
+/work/wavalid / 301
+/products/rizonvo / 301
+/products/wavalid / 301
+/work/:slug /case-studies/:slug 301
+
+# Alternatives moved under the /lms-alternatives hub; low-demand ones were dropped.
+/alternatives/canvas /lms-alternatives 301
+/alternatives/learndash /lms-alternatives 301
+/alternatives/blackboard /lms-alternatives 301
+/alternatives/teachable /lms-alternatives/teachable 301
+/alternatives/kajabi /lms-alternatives/kajabi 301
+/alternatives/thinkific /lms-alternatives/thinkific 301
+/alternatives/moodle /lms-alternatives/moodle 301
+/alternatives/docebo /lms-alternatives/docebo 301
+/alternatives/talentlms /lms-alternatives/talentlms 301
+/alternatives /lms-alternatives 301
