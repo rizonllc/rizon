@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import type { Metadata } from "@/lib/seo";
+import Image from "@/components/image";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +13,8 @@ import {
   Linked,
   sectionCls,
 } from "@/components/service-sections";
-import { AnalyticsEvent } from "@/lib/analytics";
 import { servicesFor } from "@/lib/case-study-links";
-import { Footer } from "@/app/footer";
+import { Footer } from "@/sections/footer";
 
 type Link_ = { text: string; href: string };
 
@@ -219,7 +217,7 @@ export const CaseStudyPage = ({ c }: { c: CaseStudy }) => {
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {servicesFor(c.slug).map((s) => (
               <li key={s.href}>
-                <Link
+                <a
                   href={s.href}
                   className="group flex items-center justify-between rounded-lg bg-primary/5 p-6 font-semibold text-primary"
                 >
@@ -229,7 +227,7 @@ export const CaseStudyPage = ({ c }: { c: CaseStudy }) => {
                     aria-hidden
                     className="transition-transform group-hover:translate-x-1"
                   />
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -258,12 +256,10 @@ export const CaseStudyPage = ({ c }: { c: CaseStudy }) => {
               variant="secondary"
               nativeButton={false}
               render={
-                <Link
+                <a
                   href={BOOK_URL}
                   target="_blank"
                   rel="noreferrer"
-                  data-umami-event={AnalyticsEvent.BookCall}
-                  data-umami-event-location="case-study-cta"
                 />
               }
             >

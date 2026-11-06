@@ -1,12 +1,8 @@
-"use client";
-
 import { getT } from "@/lib/t";
 import { useState } from "react";
-import Link from "next/link";
 import { Calendar, Check, Copy, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RevealGroup, RevealItem } from "@/components/reveal";
-import { AnalyticsEvent } from "@/lib/analytics";
 import { contact } from "@/lib/contact";
 
 const CAL_LINK = "https://cal.com/rizon.agency-cvbkll/30min";
@@ -53,12 +49,10 @@ export const ContactCards = ({
           <Button
             nativeButton={false}
             render={
-              <Link
+              <a
                 href={CAL_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-umami-event={AnalyticsEvent.BookCall}
-                data-umami-event-location={location}
               />
             }
           >
@@ -81,9 +75,8 @@ export const ContactCards = ({
           <Button
             nativeButton={false}
             render={
-              <Link
+              <a
                 href={MAILTO}
-                data-umami-event={AnalyticsEvent.EmailClick}
               />
             }
           >
@@ -96,7 +89,6 @@ export const ContactCards = ({
             <button
               type="button"
               onClick={copyEmail}
-              data-umami-event={AnalyticsEvent.CopyEmail}
               aria-label={
                 copied ? t("emailCard.copiedLabel") : t("emailCard.copyLabel")
               }

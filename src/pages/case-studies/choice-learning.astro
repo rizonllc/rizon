@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { CaseStudyPage, caseStudyMetadata } from "@/components/case-study-page";
+import { choiceLearning } from "@/lib/choice-learning";
+import { layoutSeo } from "@/lib/seo";
+---
+
+<Layout {...layoutSeo(caseStudyMetadata(choiceLearning))}>
+  <CaseStudyPage c={choiceLearning} />
+</Layout>

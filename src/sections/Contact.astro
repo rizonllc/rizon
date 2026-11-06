@@ -1,0 +1,11 @@
+---
+import { ContactHeader } from "./contact-header";
+import { ContactCards } from "@/components/contact-cards";
+---
+
+<section id="contact" class="container mt-32 md:mt-40 cntr">
+  <ContactHeader />
+  <div class="mt-14">
+    <ContactCards client:visible location="contact-section" />
+  </div>
+</section>

@@ -1,0 +1,9 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AlternativesPage, { generateMetadata } from "@/views/lms-alternatives";
+import { layoutSeo } from "@/lib/seo";
+---
+
+<Layout {...layoutSeo(generateMetadata())}>
+  <AlternativesPage />
+</Layout>

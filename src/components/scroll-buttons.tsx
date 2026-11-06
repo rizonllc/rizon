@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,9 +28,11 @@ export function ScrollButtons() {
     update();
     window.addEventListener("scroll", onChange, { passive: true });
     window.addEventListener("resize", onChange);
+    document.addEventListener("astro:page-load", onChange);
     return () => {
       window.removeEventListener("scroll", onChange);
       window.removeEventListener("resize", onChange);
+      document.removeEventListener("astro:page-load", onChange);
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);

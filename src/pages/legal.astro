@@ -1,0 +1,9 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import LegalPage, { generateMetadata } from "@/views/legal";
+import { layoutSeo } from "@/lib/seo";
+---
+
+<Layout {...layoutSeo(generateMetadata())}>
+  <LegalPage />
+</Layout>

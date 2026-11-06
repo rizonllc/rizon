@@ -1,0 +1,213 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Footer } from "@/sections/footer";
+import { Cta } from "@/sections/cta";
+import Image from "@/components/image";
+import { Breadcrumb, breadcrumbJsonLd, type Crumb } from "@/components/breadcrumb";
+import { BlogThumbnail } from "@/components/blog-thumbnail";
+import { PostToc } from "@/components/post-toc";
+import { getPostBySlug, posts } from "@/lib/posts";
+import { alternatives } from "@/lib/alternatives";
+import { getServiceRoute } from "@/lib/service-routes";
+import { getAuthorBySlug } from "@/lib/authors";
+import { getT } from "@/lib/t";
+import type { TocHeading } from "@/lib/toc";
+
+const BASE_URL = "https://rizon.agency";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("blog");
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { slug } = Astro.params as { slug: string };
+const { entry } = Astro.props;
+const post = getPostBySlug(slug);
+if (!post) throw new Error(`No post metadata for "${slug}" in src/lib/posts.ts`);
+
+const { Content, headings: mdHeadings } = await render(entry);
+const headings: TocHeading[] = mdHeadings
+  .filter((h) => h.depth === 2 || h.depth === 3)
+  .map((h) => ({ id: h.slug, text: h.text, level: h.depth as 2 | 3 }));
+
+const t = getT("blogDetail");
+const index = posts.findIndex((p) => p.slug === slug);
+const next = posts[(index + 1) % posts.length];
+const relatedPosts = posts.filter((item) => post.relatedPostSlugs?.includes(item.slug));
+const relatedAlternatives = alternatives.filter((item) => post.relatedAlternativeSlugs?.includes(item.slug));
+const relatedServices = (post.relatedServiceSlugs ?? []).flatMap((s) => getServiceRoute(s) ?? []);
+const author = getAuthorBySlug(post.authorSlug ?? "choaib-mouhrach");
+
+const path = `/blog/${slug}`;
+const url = `${BASE_URL}${path}`;
+
+const formatDate = (dateStr: string) =>
+  new Date(dateStr).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date,
+  author: author ? { "@type": "Person", name: author.name, url: author.url, sameAs: author.sameAs, jobTitle: author.role } : undefined,
+  publisher: { "@type": "Organization", name: "Rizon", url: BASE_URL },
+  mainEntityOfPage: { "@type": "WebPage", "@id": url },
+};
+
+const crumbs: Crumb[] = [
+  { name: t("home"), href: "/" },
+  { name: t("blog"), href: "/blog" },
+  { name: post.title, href: path },
+];
+
+const linkRow = "group flex items-center justify-between gap-6 py-5 text-lg font-medium";
+const arrow = "transition-transform group-hover:translate-x-1";
+---
+
+<Layout
+  title={`${post.title} — Rizon`}
+  description={post.description}
+  canonical={path}
+  keywords={[post.category, "e-learning", "LMS development", "online learning platform", "custom LMS"]}
+  og={{
+    title: post.title,
+    description: post.description,
+    url: path,
+    type: "article",
+    publishedTime: post.date,
+    authors: ["Rizon"],
+    tags: [post.category, "e-learning", "LMS"],
+    image: `${path}/opengraph-image.png`,
+    imageAlt: post.title,
+  }}
+  twitter={{ title: post.title, description: post.description }}
+  jsonLd={[jsonLd, breadcrumbJsonLd(crumbs)]}
+>
+  <main>
+    <div class="container cntr pt-24 md:pt-28 lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-12">
+      <article class="min-w-0">
+        <section>
+          <Breadcrumb items={crumbs} />
+
+          <a
+            href="/blog"
+            class="group mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft size={15} strokeWidth={1.75} aria-hidden className="transition-transform duration-300 ease-out group-hover:-translate-x-1" />
+            {t("allPosts")}
+          </a>
+
+          <div class="mt-6">
+            <span class="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-primary">
+              <span class="h-px w-8 bg-primary" aria-hidden="true"></span>
+              {post.category}
+            </span>
+            <h1 class="mt-6 text-4xl font-semibold tracking-tight leading-[1.05] text-balance md:text-5xl">{post.title}</h1>
+            <p class="mt-5 font-mono text-sm tabular-nums text-muted-foreground/60">
+              {formatDate(post.date)} · {post.readTime}
+            </p>
+          </div>
+
+          <div class="mt-4 border-t border-border"></div>
+        </section>
+
+        <section class="mt-10">
+          <div class="relative aspect-[16/9] overflow-hidden rounded-xl border border-border bg-muted">
+            <BlogThumbnail title={post.title} />
+          </div>
+        </section>
+
+        <section class="mt-12">
+          <div class="prose max-w-none">
+            <Content />
+          </div>
+        </section>
+
+        {
+          author && (
+            <section class="mt-16">
+              <div class="flex gap-5 border-y border-border py-8">
+                <Image src={author.avatar} alt={author.name} width={56} height={56} className="size-14 rounded-full" />
+                <div>
+                  <p class="text-sm font-medium">{t("writtenBy", { name: author.name })}</p>
+                  <p class="mt-1 text-sm text-muted-foreground">{author.role}</p>
+                  <p class="mt-3 leading-relaxed text-muted-foreground">{author.bio}</p>
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        {
+          (relatedServices.length > 0 || relatedAlternatives.length > 0 || relatedPosts.length > 0) && (
+            <section class="mt-20">
+              <div class="border-t border-border pt-10">
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-primary">{t("keepReading")}</span>
+                <h2 class="mt-4 text-3xl font-semibold tracking-tight">{t("nextLinks")}</h2>
+                <div class="mt-7 divide-y divide-border border-y border-border">
+                  {relatedServices.map((item) => (
+                    <a href={`/services/${item.slug}`} class={linkRow}>
+                      <span>{item.title}</span>
+                      <ArrowRight size={18} className={arrow} aria-hidden />
+                    </a>
+                  ))}
+                  {relatedAlternatives.map((item) => (
+                    <a href={`/lms-alternatives/${item.slug}`} class={linkRow}>
+                      <span>{t("alternative", { name: item.competitor })}</span>
+                      <ArrowRight size={18} className={arrow} aria-hidden />
+                    </a>
+                  ))}
+                  {relatedPosts.map((item) => (
+                    <a href={`/blog/${item.slug}`} class={linkRow}>
+                      <span>{item.title}</span>
+                      <ArrowRight size={18} className={arrow} aria-hidden />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <section class="mt-20">
+          <a href={`/blog/${next.slug}`} class="group relative block border-t border-border py-10">
+            <span
+              class="absolute left-0 -top-px h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-500 ease-out group-hover:scale-x-100"
+              aria-hidden="true"></span>
+            <div class="flex items-center justify-between gap-6">
+              <div>
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground/60">{t("nextPost")}</span>
+                <h3 class="mt-3 text-2xl font-medium tracking-tight text-balance md:text-3xl">{next.title}</h3>
+              </div>
+              <ArrowRight
+                size={28}
+                strokeWidth={1.5}
+                aria-hidden
+                className="shrink-0 -translate-x-2 text-muted-foreground transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-foreground"
+              />
+            </div>
+          </a>
+        </section>
+      </article>
+
+      {
+        headings.length > 1 && (
+          <aside class="hidden lg:block">
+            <PostToc client:load headings={headings} title={t("onThisPage")} />
+          </aside>
+        )
+      }
+    </div>
+
+    <Cta />
+  </main>
+
+  <Footer />
+
+  <script>
+    import "../../scripts/post-interactions";
+  </script>
+</Layout>

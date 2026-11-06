@@ -1,4 +1,4 @@
-import type { StaticImageData } from "next/image";
+import type { ImageMetadata } from "astro";
 
 export type Post = {
   slug: string;
@@ -7,7 +7,7 @@ export type Post = {
   date: string;
   readTime: string;
   category: string;
-  coverImage?: StaticImageData;
+  coverImage?: ImageMetadata;
   relatedServiceSlugs?: string[];
   relatedAlternativeSlugs?: string[];
   relatedPostSlugs?: string[];

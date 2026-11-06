@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export type Crumb = { name: string; href: string };
@@ -31,12 +30,12 @@ export const Breadcrumb = ({ items }: { items: Crumb[] }) => {
                   {item.name}
                 </span>
               ) : (
-                <Link
+                <a
                   href={item.href}
                   className="transition-colors hover:text-foreground"
                 >
                   {item.name}
-                </Link>
+                </a>
               )}
               {!isLast && (
                 <ChevronRight

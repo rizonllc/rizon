@@ -1,0 +1,106 @@
+import { getT } from "@/lib/t";
+import type { Metadata } from "@/lib/seo";
+
+const BASE_URL = "https://rizon.agency";
+
+const t = getT("seo.home");
+
+const path = "/";
+
+export const metadata: Metadata = {
+    // TODO: seo.home.title (messages/en.json) is 25 chars (<30) — expand, e.g.: "Rizon - Custom E-Learning Platforms"
+    title: t("title"),
+    // TODO: seo.home.description (messages/en.json) is 199 chars (>155) — shorten, e.g.: "Launch your online learning platform without vendor lock-in. Own 100% of your code, no templates, no revenue sharing."
+    description: t("description"),
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      title: t("ogTitle"),
+      description: t("ogDescription"),
+      url: path,
+      siteName: "Rizon",
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("twitterTitle"),
+      description: t("twitterDescription"),
+      creator: "@rizon_agency",
+    },
+};
+
+const faqKeys = [
+  "timeline",
+  "involvement",
+  "integrations",
+  "afterLaunch",
+  "scale",
+  "mobile",
+  "ownership",
+] as const;
+
+export function getJsonLd() {
+  const tFaq = getT("homeFaq");
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${BASE_URL}/#org`,
+        name: "Rizon",
+        url: BASE_URL,
+        logo: `${BASE_URL}/android-chrome-512x512.png`,
+        email: "contact@rizon.agency",
+        sameAs: [
+          "https://www.linkedin.com/in/choaib-mouhrach",
+          "https://x.com/rizon_agency",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: "contact@rizon.agency",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${BASE_URL}/#website`,
+        url: BASE_URL,
+        name: "Rizon",
+        publisher: { "@id": `${BASE_URL}/#org` },
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${BASE_URL}/#service`,
+        name: "Rizon",
+        url: BASE_URL,
+        description:
+          "Custom e-learning platform development for course creators, schools, and companies. No vendor lock-in, no monthly fees, 100% code ownership.",
+        serviceType: "Custom Software Development",
+        areaServed: "Worldwide",
+        parentOrganization: { "@id": `${BASE_URL}/#org` },
+        knowsAbout: [
+          "Custom LMS Development",
+          "E-Learning Platform Development",
+          "Learning Management Systems",
+          "Corporate Training Platforms",
+          "School Portal Development",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${BASE_URL}/#faq`,
+        mainEntity: faqKeys.map((key) => ({
+          "@type": "Question",
+          name: tFaq(`items.${key}.question`),
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: tFaq(`items.${key}.answer`),
+          },
+        })),
+      },
+    ],
+  };
+  return jsonLd;
+}

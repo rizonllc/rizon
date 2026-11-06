@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { VoicesHeader } from "@/components/voices-header";
+import { voices } from "@/lib/voices";
+import { VoiceLibrary } from "@/components/voice-library";
+---
+
+<Layout
+  title="Voice demos | Rizon"
+  description="Explore pre-made and professional voice samples."
+  canonical="/voices"
+  noindex
+>
+  <main class="container cntr pb-20 pt-28 md:pb-28 md:pt-36">
+    <VoicesHeader />
+    <VoiceLibrary client:load voices={voices} />
+  </main>
+</Layout>

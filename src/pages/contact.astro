@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { metadata, ContactIntro, ContactJsonLd } from "@/views/contact";
+import { ContactCards } from "@/components/contact-cards";
+import { Footer } from "@/sections/footer";
+import { layoutSeo } from "@/lib/seo";
+---
+
+<Layout {...layoutSeo(metadata)}>
+  <ContactJsonLd />
+  <main>
+    <ContactIntro />
+    <section class="container cntr mt-12 md:mt-16">
+      <ContactCards client:visible location="contact-page" heading="h2" />
+    </section>
+  </main>
+  <Footer />
+</Layout>

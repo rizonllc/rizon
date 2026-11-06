@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AlternativePage, { generateStaticParams, generateMetadata } from "@/views/lms-alternative";
+import { layoutSeo } from "@/lib/seo";
+
+export function getStaticPaths() {
+  return generateStaticParams().map((params) => ({ params }));
+}
+const { slug } = Astro.params as { slug: string };
+---
+
+<Layout {...layoutSeo(generateMetadata({ params: { slug } }))}>
+  <AlternativePage params={{ slug }} />
+</Layout>

@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ServicePage, { generateStaticParams, generateMetadata } from "@/views/service";
+import { layoutSeo } from "@/lib/seo";
+
+export function getStaticPaths() {
+  return generateStaticParams().map((params) => ({ params }));
+}
+const { slug } = Astro.params as { slug: string };
+---
+
+<Layout {...layoutSeo(generateMetadata({ params: { slug } }))}>
+  <ServicePage params={{ slug }} />
+</Layout>

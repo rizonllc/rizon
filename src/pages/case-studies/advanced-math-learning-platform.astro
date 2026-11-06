@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { CaseStudyPage, caseStudyMetadata } from "@/components/case-study-page";
+import { advancedMath } from "@/lib/advanced-math";
+import { layoutSeo } from "@/lib/seo";
+---
+
+<Layout {...layoutSeo(caseStudyMetadata(advancedMath))}>
+  <CaseStudyPage c={advancedMath} />
+</Layout>

@@ -5,7 +5,7 @@ import { choiceLearning } from "./choice-learning";
 import { cloudSds } from "./cloud-sds";
 import { kaiserMath } from "./kaiser-math";
 import { rizonLms } from "./rizon-lms";
-import type { StaticImageData } from "next/image";
+import type { ImageMetadata } from "astro";
 import choiceLogo from "@/assets/companies/choice-learning.webp";
 import cloudSdsLogo from "@/assets/companies/cloudsds.webp";
 import { getProjectBySlug } from "./projects";
@@ -20,7 +20,7 @@ export type IndexCard = {
   result?: string; // shown only for named client work
   // Thumbnail. Screenshots crop to fill; logos (`contain`) sit centered on a tint.
   // No image at all falls back to a title placeholder, so swapping one in needs no layout change.
-  image?: string | StaticImageData;
+  image?: string | ImageMetadata;
   contain?: boolean;
 };
 

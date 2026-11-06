@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { ArrowRight, Check, Minus, Plus, type LucideIcon } from "lucide-react";
-import Link from "next/link";
 import {
   CaseStudyCard,
   type CaseStudyCardProps,
@@ -38,13 +37,13 @@ export const Linked = ({
     if (i < 0) continue;
     out.push(rest.slice(0, i));
     out.push(
-      <Link
+      <a
         key={link.href}
         href={link.href}
         className="text-primary underline underline-offset-4"
       >
         {link.text}
-      </Link>,
+      </a>,
     );
     rest = rest.slice(i + link.text.length);
   }
@@ -105,12 +104,12 @@ export const ProblemAgitateSolution = ({
               icon={icon ?? Check}
               title={
                 f.titleHref ? (
-                  <Link
+                  <a
                     href={f.titleHref}
                     className="underline underline-offset-4"
                   >
                     {f.feature}
-                  </Link>
+                  </a>
                 ) : (
                   f.feature
                 )
@@ -182,12 +181,12 @@ export const CaseStudyCards = ({
           <CaseStudyCard key={c.slug} {...c} heading="h3" />
         ))}
       </ul>
-      <Link
+      <a
         href={allHref}
         className="mt-6 inline-flex items-center gap-1.5 font-medium text-primary"
       >
         {allLabel} <ArrowRight size={16} aria-hidden />
-      </Link>
+      </a>
     </section>
   );
 
@@ -253,11 +252,11 @@ export const RelatedWork = ({
   label: string;
 }) => (
   <section className={sectionCls}>
-    <Link
+    <a
       href={href}
       className="inline-flex items-center gap-1.5 text-lg font-medium text-primary"
     >
       {label} <ArrowRight size={18} aria-hidden />
-    </Link>
+    </a>
   </section>
 );

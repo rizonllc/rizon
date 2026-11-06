@@ -593,7 +593,10 @@
     "backToBlog": "Back to the blog",
     "projectTitle": "We couldn't find that project.",
     "projectDescription": "The case study you're after may have been moved or renamed. Head back to see everything we've shipped recently.",
-    "backToWork": "Back to selected work"
+    "backToWork": "Back to selected work",
+    "pageTitle": "We couldn't find that page.",
+    "pageDescription": "The page you're looking for may have been moved or renamed. Head back home, or browse the blog.",
+    "backToHome": "Back to home"
   },
   "legalPage": {
     "back": "Back to home",

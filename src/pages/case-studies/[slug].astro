@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectPage, { generateStaticParams, generateMetadata } from "@/views/case-study";
+import { layoutSeo } from "@/lib/seo";
+
+export function getStaticPaths() {
+  // These slugs have their own dedicated page files in this folder.
+  const dedicated = new Set("advanced-math-learning-platform ai-literacy-lxp center-for-neurodivergence choice-learning cloud-sds kaiser-math-platform rizon-lms".split(" "));
+  return generateStaticParams()
+    .filter(({ slug }) => !dedicated.has(slug))
+    .map((params) => ({ params }));
+}
+const { slug } = Astro.params as { slug: string };
+---
+
+<Layout {...layoutSeo(generateMetadata({ params: { slug } }))}>
+  <ProjectPage params={{ slug }} />
+</Layout>

@@ -1,5 +1,5 @@
-import Image, { type StaticImageData } from "next/image";
-import Link from "next/link";
+import Image from "@/components/image";
+import type { ImageMetadata } from "astro";
 import { ArrowRight } from "lucide-react";
 
 export type CaseStudyCardProps = {
@@ -9,7 +9,7 @@ export type CaseStudyCardProps = {
   result?: string; // shown only for named client work
   // Screenshots crop to fill; logos (`contain`) sit centered on a tint. No image
   // falls back to a title tile, so swapping one in needs no layout change.
-  image?: string | StaticImageData;
+  image?: string | ImageMetadata;
   contain?: boolean;
   services: { title: string; href: string }[];
   heading?: "h2" | "h3";
@@ -53,12 +53,12 @@ export const CaseStudyCard = ({
     <div className="flex flex-1 flex-col p-7 md:p-8">
       <Heading className="text-2xl font-semibold tracking-tight text-primary">
         {/* Stretched link: the whole card is clickable, tags stay separate links. */}
-        <Link
+        <a
           href={`/case-studies/${slug}`}
           className="after:absolute after:inset-0"
         >
           {title}
-        </Link>
+        </a>
       </Heading>
       <p className="mt-3 leading-relaxed text-muted-foreground">{summary}</p>
       {result && (
@@ -70,12 +70,12 @@ export const CaseStudyCard = ({
       <ul className="relative z-10 mt-6 flex flex-wrap gap-2">
         {services.map((s) => (
           <li key={s.href}>
-            <Link
+            <a
               href={s.href}
               className="inline-flex rounded-full border border-border bg-background px-3 py-1 text-sm transition-colors hover:border-primary hover:text-primary"
             >
               {s.title}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>

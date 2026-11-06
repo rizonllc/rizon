@@ -1,12 +1,9 @@
-"use client";
-
 import type { ReactNode } from "react";
-import Image, { type StaticImageData } from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import Image from "@/components/image";
+import type { ImageMetadata } from "astro";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export type HeroStat = { value: ReactNode; label: string };
 
@@ -19,7 +16,7 @@ type HeroProps = {
   actions?: ReactNode;
   tags?: string[];
   note?: ReactNode;
-  image: StaticImageData;
+  image: ImageMetadata | string;
   imageAlt?: string;
   stats?: HeroStat[];
 };
@@ -38,16 +35,6 @@ export const Hero = ({
   imageAlt = "",
   stats,
 }: HeroProps) => {
-  const reduced = useReducedMotion();
-
-  const fade = (delay: number) =>
-    reduced
-      ? {}
-      : {
-          initial: { opacity: 0, y: 40 } as const,
-          animate: { opacity: 1, y: 0 } as const,
-          transition: { duration: 1, delay, ease },
-        };
 
   return (
     <section id={id} className="px-3 pt-3 sm:px-4 sm:pt-4 lg:px-4 lg:pt-4">
@@ -57,7 +44,6 @@ export const Hero = ({
           alt={imageAlt}
           fill
           priority
-          placeholder="blur"
           sizes="100vw"
           className="-z-10 object-cover"
         />
@@ -69,52 +55,46 @@ export const Hero = ({
 
         <div className="container flex flex-1 flex-col items-center justify-center px-6 pt-28 pb-16 text-center sm:px-10 sm:pt-32 lg:px-16 cntr">
           {eyebrow && (
-            <motion.div
-              {...fade(0.1)}
+            <div data-fade style={{ animationDelay: "0.1s" }}
               className="mb-6 **:text-white/70! **:aria-[current]:text-white!"
             >
               {eyebrow}
-            </motion.div>
+            </div>
           )}
 
-          <motion.h1
-            {...fade(0.25)}
+          <h1 data-fade style={{ animationDelay: "0.25s" }}
             className={cn(
               "max-w-3xl text-[2rem] font-semibold leading-[1.08] tracking-tight text-balance text-white sm:max-w-2xl sm:text-5xl sm:leading-[1.05] md:max-w-3xl md:text-6xl lg:max-w-4xl lg:text-7xl lg:leading-[1.02]",
               headlineClassName,
             )}
           >
             {headline}
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            {...fade(0.5)}
+          <p data-fade style={{ animationDelay: "0.5s" }}
             className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-white/75"
           >
             {sub}
-          </motion.p>
+          </p>
 
           {actions && (
-            <motion.div
-              {...fade(0.62)}
+            <div data-fade style={{ animationDelay: "0.62s" }}
               className="mt-10 flex flex-wrap items-center justify-center gap-3"
             >
               {actions}
-            </motion.div>
+            </div>
           )}
 
           {note && (
-            <motion.p
-              {...fade(0.74)}
+            <p data-fade style={{ animationDelay: "0.74s" }}
               className="mt-8 max-w-xl text-sm text-white/60"
             >
               {note}
-            </motion.p>
+            </p>
           )}
 
           {tags && tags.length > 0 && (
-            <motion.div
-              {...fade(0.74)}
+            <div data-fade style={{ animationDelay: "0.74s" }}
               className="mt-8 flex flex-wrap justify-center gap-2"
             >
               {tags.map((tag) => (
@@ -126,13 +106,13 @@ export const Hero = ({
                   {tag}
                 </Badge>
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
       </div>
 
       {stats && stats.length > 0 && (
-        <motion.div {...fade(0.7)} className="container mt-10 cntr">
+        <div data-fade style={{ animationDelay: "0.7s" }} className="container mt-10 cntr">
           <dl className="grid grid-cols-1 border-border sm:grid-cols-3">
             {stats.map((stat, i) => (
               <div
@@ -152,7 +132,7 @@ export const Hero = ({
               </div>
             ))}
           </dl>
-        </motion.div>
+        </div>
       )}
     </section>
   );

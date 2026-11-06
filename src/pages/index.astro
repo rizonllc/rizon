@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { metadata, getJsonLd } from "@/views/home";
+import { layoutSeo } from "@/lib/seo";
+import { Hero } from "@/sections/hero";
+import { Logos } from "@/sections/logos";
+import { WhyUs } from "@/sections/why-us";
+import { HowWeWork } from "@/sections/how-we-work";
+import { Services } from "@/sections/services";
+import { Features } from "@/sections/features";
+import { AlternativesPreview } from "@/sections/alternatives-preview";
+import { Work } from "@/sections/work";
+import { Trust } from "@/sections/trust";
+import { BlogPreview } from "@/sections/blog-preview";
+import { Cta } from "@/sections/cta";
+import { Faq } from "@/sections/faq";
+import { Footer } from "@/sections/footer";
+import Contact from "@/sections/Contact.astro";
+---
+
+<Layout {...layoutSeo(metadata)} jsonLd={[getJsonLd()]}>
+  <div>
+    <Hero />
+    <Logos />
+    <WhyUs />
+    <HowWeWork />
+    <Services client:visible />
+    <Features />
+    <AlternativesPreview />
+    <Work />
+    <Trust />
+    <BlogPreview />
+    <Cta />
+    <Faq client:visible />
+    <Contact />
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,30 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ArrowLeft } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Footer } from "@/sections/footer";
+import { getT } from "@/lib/t";
+
+const t = getT("notFound");
+---
+
+<Layout title="Page not found — Rizon" noindex>
+  <main class="container flex min-h-[70vh] flex-col justify-center pt-32 md:pt-40">
+    <span class="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-primary">
+      <span class="font-mono text-sm tabular-nums">404</span>
+      <span class="h-px w-8 bg-primary" aria-hidden="true"></span>
+      {t("label")}
+    </span>
+    <h1 class="mt-6 max-w-2xl text-4xl font-semibold tracking-tight leading-[1.05] text-balance md:text-5xl">
+      {t("pageTitle")}
+    </h1>
+    <p class="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">{t("pageDescription")}</p>
+    <div class="mt-8">
+      <a href="/" class={buttonVariants()}>
+        <ArrowLeft size={16} strokeWidth={1.75} aria-hidden />
+        {t("backToHome")}
+      </a>
+    </div>
+  </main>
+  <Footer />
+</Layout>

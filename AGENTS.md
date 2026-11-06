@@ -1,8 +1,10 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Stack
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Astro 7 (static output) deployed to Cloudflare Workers via `@astrojs/cloudflare`.
+Pages live in `src/pages` (`.astro`); page bodies are React views in `src/views`,
+sections in `src/sections`, and interactive pieces are hydrated React islands.
+Check the Astro docs (https://docs.astro.build) before changing routing, content
+collections or the Cloudflare adapter config.
 
 # Commits
 

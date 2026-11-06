@@ -1,7 +1,4 @@
-"use client";
-
 import { getT } from "@/lib/t";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { BlogThumbnail } from "@/components/blog-thumbnail";
@@ -27,7 +24,7 @@ export const BlogCard = ({ post }: BlogCardProps) => {
   });
 
   return (
-    <Link
+    <a
       href={`/blog/${post.slug}`}
       className="surface surface-hover group flex h-full flex-col overflow-hidden"
     >
@@ -66,6 +63,6 @@ export const BlogCard = ({ post }: BlogCardProps) => {
           />
         </div>
       </div>
-    </Link>
+    </a>
   );
 };

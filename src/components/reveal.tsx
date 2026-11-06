@@ -1,119 +1,63 @@
-"use client";
+import type { CSSProperties, ReactNode } from "react";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
-
-// Smooth ease-out — visible movement across the full duration,
-// starts with momentum and decelerates into a soft stop.
-const ease = [0.25, 0.46, 0.45, 0.94] as const;
-
-// ── Single element reveal ──
+// Scroll-reveal without client-side React: markup carries data attributes and
+// src/scripts/reveal.ts fades elements in with an IntersectionObserver.
+// Without JS (no `js` class on <html>) everything stays visible.
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
+  /** Transition length in seconds. */
   duration?: number;
+  /** Delay in seconds. */
   delay?: number;
+  /** Starting vertical offset in px. */
   y?: number;
 };
 
-export function Reveal({
-  children,
-  className,
-  duration = 1,
-  delay = 0,
-  y = 48,
-}: RevealProps) {
-  const reduced = useReducedMotion();
-
+export function Reveal({ children, className, duration = 1, delay = 0, y = 48 }: RevealProps) {
   return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration, delay, ease }}
+    <div
+      data-reveal
       className={className}
+      style={{ "--reveal-y": `${y}px`, "--reveal-duration": `${duration}s`, "--reveal-delay": `${delay}s` } as CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
-
-// ── Stagger container ──
 
 type RevealGroupProps = {
   children: ReactNode;
   className?: string;
+  /** Delay between children in seconds. */
   stagger?: number;
   as?: "div" | "ol" | "ul";
 };
 
-export function RevealGroup({
-  children,
-  className,
-  stagger = 0.15,
-  as = "div",
-}: RevealGroupProps) {
-  const reduced = useReducedMotion();
-  const Tag = motion[as];
-
-  const variants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: stagger,
-      },
-    },
-  };
-
+export function RevealGroup({ children, className, stagger = 0.15, as: Tag = "div" }: RevealGroupProps) {
   return (
-    <Tag
-      initial={reduced ? "visible" : "hidden"}
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={variants}
-      className={className}
-    >
+    <Tag data-reveal-group data-stagger={stagger} className={className}>
       {children}
     </Tag>
   );
 }
 
-// ── Stagger child ──
-
 type RevealItemProps = {
   children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   duration?: number;
   y?: number;
   as?: "div" | "li" | "article";
 };
 
-const itemVariants = (y: number, duration: number): Variants => ({
-  hidden: { opacity: 0, y },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration, ease },
-  },
-});
-
-export function RevealItem({
-  children,
-  className,
-  style,
-  duration = 0.9,
-  y = 40,
-  as = "div",
-}: RevealItemProps) {
-  const Tag = motion[as];
-
+export function RevealItem({ children, className, style, duration = 0.9, y = 40, as: Tag = "div" }: RevealItemProps) {
   return (
     <Tag
-      variants={itemVariants(y, duration)}
+      data-reveal-item
       className={className}
-      style={style}
+      style={{ ...style, "--reveal-y": `${y}px`, "--reveal-duration": `${duration}s` } as CSSProperties}
     >
       {children}
     </Tag>

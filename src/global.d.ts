@@ -1,10 +1,10 @@
-declare global {
-  interface Window {
-    // Umami tracker global, present once the tracker script loads.
-    umami?: {
-      track: (eventName: string, eventData?: Record<string, unknown>) => void;
-    };
+/// <reference types="astro/client" />
+
+import "react";
+
+declare module "react" {
+  // Satori's Tailwind prop, used by the OG image templates.
+  interface HTMLAttributes<T> {
+    tw?: string;
   }
 }
-
-export {};

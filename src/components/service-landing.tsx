@@ -1,6 +1,5 @@
 import { getT } from "@/lib/t";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
@@ -10,7 +9,6 @@ import {
 import { Hero } from "@/components/hero";
 import { caseCardProps } from "@/lib/case-studies-index";
 import { casesFor } from "@/lib/case-study-links";
-import { AnalyticsEvent } from "@/lib/analytics";
 import type { ServiceLanding as Content } from "@/lib/blank-services";
 import {
   CaseStudyCards,
@@ -21,8 +19,8 @@ import {
   ProcessSteps,
   RelatedWork,
 } from "@/components/service-sections";
-import { Logos } from "@/app/logos";
-import heroImage from "@/assets/hero.jpg";
+import { Logos } from "@/sections/logos";
+const heroImage = "/hero-home.jpg";
 
 const BASE_URL = "https://rizon.agency";
 const BOOK_URL = "https://cal.com/rizon.agency-cvbkll/30min";
@@ -83,12 +81,10 @@ export const ServiceLanding = async ({ content }: { content: Content }) => {
   };
 
   const bookCall = (location: string) => (
-    <Link
+    <a
       href={BOOK_URL}
       target="_blank"
       rel="noreferrer"
-      data-umami-event={AnalyticsEvent.BookCall}
-      data-umami-event-location={location}
     />
   );
   const cta = (location: string) => (
@@ -139,7 +135,7 @@ export const ServiceLanding = async ({ content }: { content: Content }) => {
                 size="lg"
                 variant="outline"
                 nativeButton={false}
-                render={<Link href="/#work" />}
+                render={<a href="/#work" />}
                 className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
               >
                 {t("ctaSecondary")}
