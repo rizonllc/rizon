@@ -444,7 +444,7 @@ Phases 1–4.*
   coverage. Track which alternatives/service pages gain traction.
 - [ ] **7.3** Refresh winners, expand moving clusters, prune/merge dead pages; re-run Rich
   Results Test after any schema change.
-- [ ] **7.4** Core Web Vitals stay green as content grows (`@vercel/speed-insights`): LCP,
+- [ ] **7.4** Core Web Vitals stay green as content grows (Search Console / CrUX field data): LCP,
   CLS, INP.
 
 ---

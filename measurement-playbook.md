@@ -17,8 +17,6 @@ The Search Console baseline below covers the three months ending 2026-07-19. Rec
 | Click-through rate | 12.5% |
 | Average position | 6 |
 
-The site already sends field-performance data through Vercel Speed Insights in `src/app/layout.tsx`. Keep that instrumentation in place when the layout changes.
-
 ## Monthly review
 
 On the first business day, Choaib checks Search Console for the previous full calendar month and adds one row here. Compare the result with the prior month and the same period last year once enough history exists.
@@ -61,7 +59,7 @@ Use only schema types supported by the page's actual visible content. Do not add
 
 ## Core Web Vitals review
 
-Open Vercel Speed Insights during the same monthly review and look at field data for LCP, CLS, and INP by route. Record the slowest route, the metric at risk, the device split, and the next action.
+Open Search Console's Core Web Vitals report (or CrUX) during the same monthly review and look at field data for LCP, CLS, and INP by route. Record the slowest route, the metric at risk, the device split, and the next action.
 
 | Month | Route | Metric at risk | Device split | Investigation / action | Verified after release? |
 | --- | --- | --- | --- | --- |
